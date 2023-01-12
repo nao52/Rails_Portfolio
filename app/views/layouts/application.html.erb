@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= yield(:title) %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+<head>
+  <title><%= yield(:title) %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8">
+  <%= render 'layouts/rails_default' %>
+</head>
 
-  <body>
-    <div class="container">
+<body>
+  <%= render 'layouts/header' %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'layouts/sidebar' %>
+    </div>
+    <div class="col-md-6">
       <%= yield %>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
