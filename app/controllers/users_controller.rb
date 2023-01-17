@@ -21,6 +21,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def following
+    @user  = User.find(params[:id])
+    @title = "#{@user.name}のフォロー"
+    @users = @user.following
+    render 'show_follow', status: :unprocessable_entity
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    @title = "#{@user.name}のフォロワー"
+    @users = @user.followers
+    render 'show_follow', status: :unprocessable_entity
+  end
+
   private
 
     def user_params

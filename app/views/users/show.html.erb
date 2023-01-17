@@ -7,6 +7,6 @@
   <strong>校種</strong><br>
   <strong>担当教科</strong><br>
   <strong>部活動</strong><br>
-  <strong><a href="#">フォロー(<%= @user.following.count %>)</a></strong><br>
-  <strong><a href="#">フォワー(<%= @user.followers.count %>)</a></strong><br>
+  <%= link_to "フォロー(#{@user.following.count})",   following_user_path(@user) %><br>
+  <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user) %><br>
 </pre>
