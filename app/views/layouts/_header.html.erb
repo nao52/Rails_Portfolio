@@ -1,11 +1,15 @@
 <header>
   <div class="container">
     <%= link_to "Active Teaching", '#' %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "ログイン", login_path %></li>
-        <li><%= link_to "新規登録", signup_path %></li>
-      </ul>
-    </nav>
+    <% if logged_in? %>
+      <%= current_user.name %>でログイン中
+    <% else %>
+      <nav>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "ログイン", login_path %></li>
+          <li><%= link_to "新規登録", signup_path %></li>
+        </ul>
+      </nav>
+    <% end %>
   </div>
 </header>
