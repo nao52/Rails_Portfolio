@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   belongs_to :subject
   validates :subject_id, presence: true
+  belongs_to :club
+  validates :club_id, presence: true
+
   has_many :active_relationships,   class_name:   "Relationship",
                                     foreign_key:  "follower_id",
                                     dependent:    :destroy

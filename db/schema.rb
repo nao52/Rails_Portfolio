@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_18_040710) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_18_045816) do
+  create_table "clubs", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -35,9 +41,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_18_040710) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.bigint "subject_id", null: false
+    t.bigint "club_id", null: false
+    t.index ["club_id"], name: "index_users_on_club_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["subject_id"], name: "index_users_on_subject_id"
   end
 
+  add_foreign_key "users", "clubs"
   add_foreign_key "users", "subjects"
 end
