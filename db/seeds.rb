@@ -17,3 +17,14 @@ following = users[2..80]
 followers = users[21..100]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# subjects_databaseに値をセット
+Subject.create!( name: "国語" )
+Subject.create!( name: "数学" )
+Subject.create!( name: "英語" )
+Subject.create!( name: "社会" )
+Subject.create!( name: "理科" )
+Subject.create!( name: "体育" )
+Subject.create!( name: "家庭科" )
+Subject.create!( name: "音楽" )
+Subject.create!( name: "美術" )
