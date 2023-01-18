@@ -4,9 +4,12 @@
 <pre>
   <strong>プロフィール</strong><br>
   <%= @user.profile %>
-  <strong>校種</strong><br>
-  <strong>担当教科</strong><br>
-  <strong>部活動</strong><br>
+  校種<br>
+  【<%= @user.kinds_of_school.name %>】<br>
+  担当教科<br>
+  【<%= @user.subject.name %>】<br>
+  部活動<br>
+  【<%= @user.club.name %>部】<br>
   <%= link_to "フォロー(#{@user.following.count})",   following_user_path(@user) %><br>
   <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user) %><br>
 </pre>
