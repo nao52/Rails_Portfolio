@@ -1,7 +1,7 @@
 module UsersHelper
 
-  def make_array(array)
-    (array.map { |element| [element.name, element.id] }).insert(0, ["選択してください", nil])
+  def make_select_form(array)
+    array.map { |element| [element.name, element.id] }
   end
 
 end
