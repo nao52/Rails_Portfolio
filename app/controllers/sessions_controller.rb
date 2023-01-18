@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       reset_session
       log_in user
-      redirect_to root_url
+      redirect_to users_url
     else
       # エラーメッセージを作成する
       render 'new', status: :unprocessable_entity
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to root_url, status: :see_other
+    redirect_to login_url, status: :see_other
   end
 
 end
