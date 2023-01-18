@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  include UsersHelper
+
   def index
     @users = User.all
   end
@@ -10,6 +12,9 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @subjects = make_array(Subject.all)
+    @clubs    = make_array(Club.all)
+    @kinds_of_schools = make_array(KindsOfSchool.all)
   end
 
   def create
