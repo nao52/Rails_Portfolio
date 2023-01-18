@@ -1,3 +1,3 @@
 class Subject < ApplicationRecord
-  has_many :users, dependent: :destroy
+  has_many :users
 end

@@ -3,6 +3,8 @@ class User < ApplicationRecord
   validates :subject_id, presence: true
   belongs_to :club
   validates :club_id, presence: true
+  belongs_to :kinds_of_school
+  validates :kinds_of_school_id, presence: true
 
   has_many :active_relationships,   class_name:   "Relationship",
                                     foreign_key:  "follower_id",
