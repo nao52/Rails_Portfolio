@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_061849) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_081845) do
+  create_table "club_posts", charset: "utf8mb3", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "club_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_club_posts_on_club_id"
+    t.index ["user_id", "created_at"], name: "index_club_posts_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_club_posts_on_user_id"
+  end
+
   create_table "clubs", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -66,6 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_061849) do
     t.index ["subject_id"], name: "index_users_on_subject_id"
   end
 
+  add_foreign_key "club_posts", "clubs"
+  add_foreign_key "club_posts", "users"
   add_foreign_key "subject_posts", "subjects"
   add_foreign_key "subject_posts", "users"
   add_foreign_key "users", "clubs"
