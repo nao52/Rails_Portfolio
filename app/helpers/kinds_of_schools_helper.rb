@@ -1,0 +1,2 @@
+module KindsOfSchoolsHelper
+end
