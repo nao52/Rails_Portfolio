@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   end
   resources :relationships,   only: [:create, :destroy]
   resources :subjects,        only: [:index, :show]
+  resources :clubs,           only: [:index, :show]
 end
