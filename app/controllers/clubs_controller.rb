@@ -5,8 +5,8 @@ class ClubsController < ApplicationController
   end
 
   def show
-    @subject = Subject.find(params[:id])
-    @posts = SubjectPost.where(subject_id: params[:id])
+    @club = Club.find(params[:id])
+    @posts = ClubPost.where(club_id: params[:id])
   end
 
 end
