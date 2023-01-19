@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :set_user,       only: [:show, :following, :followers]
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
 
@@ -57,6 +58,11 @@ class UsersController < ApplicationController
     end
 
     # beforeフィルタ
+
+    # idからユーザーを取得
+    def set_user
+      @user  = User.find(params[:id])
+    end
 
     # ログイン済みのユーザーかどうか確認
     def logged_in_user
