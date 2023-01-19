@@ -1,37 +1,12 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, "新規ユーザー登録") %>
+<% provide(:button_text, "新規ユーザー登録") %>
+
 <h1 class="text-center">新規登録</h1>
 
 <div class="row">
   <div>
 
-    <%= form_with(model: @user) do |f| %>
-
-      <%= f.label :name, "名前" %> <br>
-      <%= f.text_field :name, class: 'form-control' %> <br>
-
-      <%= f.label :email, "メールアドレス" %> <br>
-      <%= f.email_field :email, class: 'form-control' %> <br>
-
-      <%= f.label :password, "パスワード" %> <br>
-      <%= f.password_field :password, class: 'form-control' %> <br>
-
-      <%= f.label :password_confirmation, "確認用パスワード" %> <br>
-      <%= f.password_field :password_confirmation, class: 'form-control' %> <br>
-
-      <%= f.label :subject_id, "担当教科" %> <br>
-      <%= f.select :subject_id, make_select_form(Subject.all),  { include_blank: "選択してください" }, class: 'form-control' %> <br>
-      
-      <%= f.label :club_id, "担当部活動" %> <br>
-      <%= f.select :club_id, make_select_form(Club.all), { include_blank: "選択してください" }, class: 'form-control' %> <br>
-
-      <%= f.label :kinds_of_school_id, "校種" %> <br>
-      <%= f.select :kinds_of_school_id, make_select_form(KindsOfSchool.all), { include_blank: "選択してください" }, class: 'form-control' %> <br>
-
-      <%= f.label :profile, "プロフィール(任意)" %> <br>
-      <%= f.text_area :profile, class: 'form-control' %> <br>
-
-      <%= f.submit "新規ユーザー登録", class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'form' %>
 
   </div>
 </div>
