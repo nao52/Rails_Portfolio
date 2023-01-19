@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :relationships,   only: [:create, :destroy]
-  resources :subjects,        only: [:index, :show]
-  resources :clubs,           only: [:index, :show]
+  resources :relationships,     only: [:create, :destroy]
+  resources :subjects,          only: [:index, :show]
+  resources :clubs,             only: [:index, :show]
+  resources :kinds_of_schools,  only: [:index, :show]
 end
