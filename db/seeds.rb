@@ -1,4 +1,4 @@
-# subjects_databaseに値をセット
+# subjects_tableに値をセット
 Subject.create!( name: "国語" )
 Subject.create!( name: "数学" )
 Subject.create!( name: "英語" )
@@ -9,7 +9,7 @@ Subject.create!( name: "家庭科" )
 Subject.create!( name: "音楽" )
 Subject.create!( name: "美術" )
 
-# clubs_databaseに値をセット
+# clubs_tableに値をセット
 Club.create!( name: "野球" )
 Club.create!( name: "サッカー" )
 Club.create!( name: "テニス" )
@@ -26,7 +26,7 @@ Club.create!( name: "料理" )
 Club.create!( name: "英語" )
 Club.create!( name: "JRC" )
 
-# kinds_of_schools_databaseに値をセット
+# kinds_of_schools_tableに値をセット
 KindsOfSchool.create!( name: "私立/中学" )
 KindsOfSchool.create!( name: "私立/高校" )
 KindsOfSchool.create!( name: "私立/中学高校" )
@@ -62,3 +62,13 @@ following = users[2..80]
 followers = users[21..100]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# subject_posts_tableにテストデータをセット
+30.times do |n|
+  user_id = rand(5) + 1
+  user = User.find(user_id)
+  content = "テスト#{n+1}"
+  subject_id = rand(subject_size) + 1
+  user.subject_posts.create!( content:    content,
+                              subject_id: subject_id )
+end
