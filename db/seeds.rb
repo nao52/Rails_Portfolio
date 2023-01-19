@@ -82,3 +82,13 @@ end
   user.club_posts.create!(  content:  content,
                             club_id:  club_id )
 end
+
+# kinds_of_school_posts_tableにテストデータをセット
+30.times do |n|
+  user_id = rand(5) + 1
+  user = User.find(user_id)
+  content = "テスト#{n+1}"
+  kinds_of_school_id = rand(kinds_of_school_size) + 1
+  user.kinds_of_school_posts.create!( content:  content,
+                                      kinds_of_school_id:  kinds_of_school_id )
+end
