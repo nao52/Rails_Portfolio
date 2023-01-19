@@ -72,3 +72,13 @@ followers.each { |follower| follower.follow(user) }
   user.subject_posts.create!( content:    content,
                               subject_id: subject_id )
 end
+
+# club_posts_tableにテストデータをセット
+30.times do |n|
+  user_id = rand(5) + 1
+  user = User.find(user_id)
+  content = "テスト#{n+1}"
+  club_id = rand(club_size) + 1
+  user.club_posts.create!(  content:  content,
+                            club_id:  club_id )
+end

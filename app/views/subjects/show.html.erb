@@ -2,9 +2,4 @@
 
 <h1 class="text-center"><%= @subject.name %></h1>
 
-<% @posts.each do |post| %>
-  <div style="margin: 5px 0; padding: 10px;">
-    投稿者:<%= post.user.name %><br>
-    <%= post.content %>
-  </div>
-<% end %>
+<%= render 'shared/post' %>
