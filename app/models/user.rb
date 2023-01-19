@@ -23,7 +23,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :profile, length: { maximum: 140 }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 8 }
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
 
   # ユーザーをフォローする
   def follow(other_user)
