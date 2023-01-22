@@ -1,5 +1,10 @@
 <% provide(:title, @subject.name) %>
+<% provide(:params_id, "subject_id") %>
 
 <h1 class="text-center"><%= @subject.name %></h1>
+
+<% if logged_in? %>
+  <%= render 'shared/post_form' %>
+<% end %>
 
 <%= render 'shared/post' %>
