@@ -1,0 +1,9 @@
+<li>
+  <%= link_to private_group.name, private_group %>
+  <% unless private_group.detail.nil? %>
+    <div>
+      【グループ説明】
+      <%= private_group.detail %>
+    </div>
+  <% end %>
+</li>
