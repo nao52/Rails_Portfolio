@@ -1,5 +1,5 @@
 class ClubsController < ApplicationController
-  before_action :set_subject,   only: [:show, :members]
+  before_action :set_club,   only: [:show, :members]
 
   def index
     @clubs = Club.all
@@ -16,7 +16,7 @@ class ClubsController < ApplicationController
 
   private
 
-    def set_subject
+    def set_club
       @group = Club.find(params[:id])
     end
 
