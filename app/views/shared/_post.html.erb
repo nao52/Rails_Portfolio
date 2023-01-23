@@ -3,4 +3,7 @@
     投稿者:<%= post.user.name %><br>
     <%= post.content %>
   </div>
+  <% if current_user?(post.user) %>
+    <%= link_to "投稿の削除", post, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+  <% end %>
 <% end %>

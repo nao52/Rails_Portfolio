@@ -11,12 +11,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # 正しいユーザーかどうか確認
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url, status: :see_other) unless current_user?(@user)
-  end
-
   def hello
     render html: "テスト成功！！"
   end
