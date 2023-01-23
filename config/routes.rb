@@ -16,7 +16,11 @@ Rails.application.routes.draw do
       get :members
     end
   end
-  resources :clubs,                   only: [:index, :show]
+  resources :clubs,                   only: [:index, :show] do
+    member do
+      get :members
+    end
+  end
   resources :kinds_of_schools,        only: [:index, :show]
   resources :subject_posts,           only: [:create, :destroy]
   resources :club_posts,              only: [:create, :destroy]

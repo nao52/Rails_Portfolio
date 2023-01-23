@@ -6,7 +6,6 @@ class SubjectsController < ApplicationController
   end
 
   def show
-    @title = @group.name
     @post  = current_user.subject_posts.build if logged_in?
     @posts = SubjectPost.where(subject_id: params[:id])
   end
