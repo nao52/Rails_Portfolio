@@ -92,3 +92,18 @@ end
   user.kinds_of_school_posts.create!( content:  content,
                                       kinds_of_school_id:  kinds_of_school_id )
 end
+
+# private_groups_tableに値をセット
+user = User.first
+3.times do |n|
+  name   = "テストグループ#{n+1}"
+  user.private_groups.create!( name: name )
+end
+
+private_group_size = PrivateGroup.all.size
+private_group_number = private_group_size + 1
+10.times do |n|
+  name   = "テストグループ#{n + private_group_number}"
+  detail = "プライベートグループ(#{n + private_group_number})です。"
+  user.private_groups.create!( name: name, detail: detail )
+end
