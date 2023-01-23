@@ -11,9 +11,21 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships,           only: [:create, :destroy]
-  resources :subjects,                only: [:index, :show]
-  resources :clubs,                   only: [:index, :show]
-  resources :kinds_of_schools,        only: [:index, :show]
+  resources :subjects,                only: [:index, :show] do
+    member do
+      get :members
+    end
+  end
+  resources :clubs,                   only: [:index, :show] do
+    member do
+      get :members
+    end
+  end
+  resources :kinds_of_schools,        only: [:index, :show] do
+    member do
+      get :members
+    end
+  end
   resources :subject_posts,           only: [:create, :destroy]
   resources :club_posts,              only: [:create, :destroy]
   resources :kinds_of_school_posts,   only: [:create, :destroy]

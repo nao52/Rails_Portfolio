@@ -1,10 +1,4 @@
-<% provide(:title, @kinds_of_school.name) %>
+<% provide(:title, @group.name) %>
 <% provide(:params_id, "kinds_of_school_id") %>
 
-<h1 class="text-center"><%= @kinds_of_school.name %></h1>
-
-<% if logged_in? %>
-  <%= render 'shared/post_form' %>
-<% end %>
-
-<%= render 'shared/post' %>
+<%= render 'shared/group_show' %>

@@ -7,7 +7,7 @@ class ClubPostsController < ApplicationController
     if @post.save
       redirect_back(fallback_location: root_url)
     else
-      @club = Club.find(params[:id])
+      @group = Club.find(params[:id])
       @posts = ClubPost.where(club_id: params[:id])
       render 'clubs/show', status: :unprocessable_entity
     end

@@ -7,7 +7,7 @@ class SubjectPostsController < ApplicationController
     if @post.save
       redirect_back(fallback_location: root_url)
     else
-      @subject = Subject.find(params[:id])
+      @group = Subject.find(params[:id])
       @posts = SubjectPost.where(subject_id: params[:id])
       render 'subjects/show', status: :unprocessable_entity
     end

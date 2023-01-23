@@ -1,13 +1,23 @@
 class ClubsController < ApplicationController
+  before_action :set_club,   only: [:show, :members]
 
   def index
     @clubs = Club.all
   end
 
   def show
-    @club = Club.find(params[:id])
     @post = current_user.club_posts.build if logged_in?
     @posts = ClubPost.where(club_id: params[:id])
   end
+
+  def members
+    @users = @group.users
+  end
+
+  private
+
+    def set_club
+      @group = Club.find(params[:id])
+    end
 
 end
