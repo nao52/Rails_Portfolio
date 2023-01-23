@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resources :clubs,             only: [:index, :show]
   resources :kinds_of_schools,  only: [:index, :show]
   resources :subject_posts,     only: [:create, :destroy]
+  resources :club_posts,        only: [:create, :destroy]
 end

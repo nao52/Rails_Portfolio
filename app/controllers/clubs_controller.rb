@@ -6,6 +6,7 @@ class ClubsController < ApplicationController
 
   def show
     @club = Club.find(params[:id])
+    @post = current_user.club_posts.build if logged_in?
     @posts = ClubPost.where(club_id: params[:id])
   end
 
