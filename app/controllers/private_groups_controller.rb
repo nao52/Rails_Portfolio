@@ -1,7 +1,7 @@
 class PrivateGroupsController < ApplicationController
   before_action :set_private_group,   only: [:show, :members]
-  before_action :logged_in_user,      only: [:new, :create, :edit, :destroy]
-  before_action :correct_user,        only: [:edit, :destroy]
+  before_action :logged_in_user,      only: [:new, :create, :update, :edit, :destroy]
+  before_action :correct_user,        only: [:edit, :update, :destroy]
 
   def index
     @private_groups = PrivateGroup.all
@@ -26,6 +26,14 @@ class PrivateGroupsController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    if @private_group.update(private_group_params)
+      redirect_to private_groups_url
+    else
+      render 'edit', status: :unprocessable_entity
+    end
   end
 
   def destroy
