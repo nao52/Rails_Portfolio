@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_24_034921) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_24_073917) do
   create_table "club_posts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -43,6 +43,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_034921) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "participations", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "private_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["private_group_id"], name: "index_participations_on_private_group_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
   create_table "private_group_posts", charset: "utf8mb3", force: :cascade do |t|
@@ -112,6 +121,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_034921) do
   add_foreign_key "club_posts", "users"
   add_foreign_key "kinds_of_school_posts", "kinds_of_schools"
   add_foreign_key "kinds_of_school_posts", "users"
+  add_foreign_key "participations", "private_groups"
+  add_foreign_key "participations", "users"
   add_foreign_key "private_group_posts", "private_groups"
   add_foreign_key "private_group_posts", "users"
   add_foreign_key "private_groups", "users"

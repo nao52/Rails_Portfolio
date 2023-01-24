@@ -118,3 +118,10 @@ private_group_size = PrivateGroup.all.size
   user.private_group_posts.create!( content:          content,
                                     private_group_id: private_group_id )
 end
+
+# ユーザーのグループ参加状況(participations_table)にテストデータをセット
+groups = PrivateGroup.all
+user1 = User.first
+user2 = User.second
+groups.each { |group| user1.join(group) }
+groups.each { |group| user2.join(group) }

@@ -35,4 +35,5 @@ Rails.application.routes.draw do
   resources :club_posts,              only: [:create, :destroy]
   resources :kinds_of_school_posts,   only: [:create, :destroy]
   resources :private_group_posts,     only: [:create, :destroy]
+  resources :participations,          only: [:create, :destroy]
 end
