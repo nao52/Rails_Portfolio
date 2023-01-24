@@ -109,6 +109,7 @@ private_group_number = private_group_size + 1
 end
 
 # private_group_posts_tableテストデータをセット
+private_group_size = PrivateGroup.all.size
 30.times do |n|
   user_id = rand(5) + 1
   user = User.find(user_id)
