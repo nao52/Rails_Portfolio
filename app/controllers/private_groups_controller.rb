@@ -19,6 +19,7 @@ class PrivateGroupsController < ApplicationController
   def create
     @private_group = current_user.private_groups.build(private_group_params)
     if @private_group.save
+      current_user.join(@private_group)
       redirect_to private_groups_url
     else
       render 'new', status: :unprocessable_entity
