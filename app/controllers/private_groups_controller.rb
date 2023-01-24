@@ -42,7 +42,7 @@ class PrivateGroupsController < ApplicationController
   end
 
   def members
-    # @users = @group.users
+    @users = @group.members
   end
 
   private
