@@ -14,7 +14,8 @@ class PrivateGroupPostsController < ApplicationController
   end
 
   def destroy
-
+    @private_group_post.destroy
+    redirect_back(fallback_location: root_url, status: :see_other)
   end
 
   private
