@@ -7,7 +7,9 @@ class ParticipationsController < ApplicationController
   end
 
   def destroy
-    # group = Participation.find(params[:id]).
+    group = Participation.find(params[:id]).private_group
+    current_user.leave(group)
+    redirect_back(fallback_location: root_url, status: :see_other)
   end
 
 end
