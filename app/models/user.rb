@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_many :kinds_of_school_posts, dependent: :destroy
   has_many :private_groups, dependent: :destroy
   has_many :private_group_posts, dependent: :destroy
+  has_many :participations, dependent: :destroy
+  has_many :joining, through: :participations, source: :private_group
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }
@@ -43,6 +45,21 @@ class User < ApplicationRecord
   # 現在のユーザーが他のユーザーをフォローしていればtrueを返す
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  # グループに参加する
+  def join(private_group)
+    joining << private_group
+  end
+
+  # グループから抜ける
+  def leave(private_group)
+    joining.delete(private_group) unless self == private_group.user
+  end
+
+  # 現在のユーザーがグループに参加していればtrueを返す
+  def joining?(private_group)
+    joining.include?(private_group)
   end
 
 end
