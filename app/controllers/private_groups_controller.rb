@@ -1,7 +1,7 @@
 class PrivateGroupsController < ApplicationController
   before_action :set_private_group,   only: [:show, :members]
-  before_action :logged_in_user,      only: [:new, :create, :destroy]
-  before_action :correct_user,        only: [:destroy]
+  before_action :logged_in_user,      only: [:new, :create, :edit, :destroy]
+  before_action :correct_user,        only: [:edit, :destroy]
 
   def index
     @private_groups = PrivateGroup.all
@@ -25,13 +25,16 @@ class PrivateGroupsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def destroy
     @private_group.destroy
     redirect_back(fallback_location: root_url, status: :see_other)
   end
 
   def members
-    @users = @group.users
+    # @users = @group.users
   end
 
   private
