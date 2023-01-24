@@ -1,6 +1,6 @@
 <li>
   <%= link_to private_group.name, private_group %>
-  <% unless private_group.detail.nil? %>
+  <% if private_group.detail.present? %>
     <div>
       【グループ説明】
       <%= private_group.detail %>
