@@ -1,6 +1,7 @@
 class PrivateGroupsController < ApplicationController
-  before_action :logged_in_user,      only: [:new, :create]
   before_action :set_private_group,   only: [:show, :members]
+  before_action :logged_in_user,      only: [:new, :create, :destroy]
+  before_action :correct_user,        only: [:destroy]
 
   def index
     @private_groups = PrivateGroup.all
@@ -24,6 +25,11 @@ class PrivateGroupsController < ApplicationController
     end
   end
 
+  def destroy
+    @private_group.destroy
+    redirect_back(fallback_location: root_url, status: :see_other)
+  end
+
   def members
     @users = @group.users
   end
@@ -36,5 +42,10 @@ class PrivateGroupsController < ApplicationController
 
     def  private_group_params
       params.require(:private_group).permit(:name, :detail)
+    end
+
+    def correct_user
+      @private_group = current_user.private_groups.find_by(id: params[:id])
+      redirect_to root_url, status: :see_other if @private_group.nil?
     end
 end

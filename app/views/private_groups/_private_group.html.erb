@@ -6,4 +6,9 @@
       <%= private_group.detail %>
     </div>
   <% end %>
+  <% if current_user?(private_group.user) %>
+    <div>
+      <%= link_to "グループの削除", private_group, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
 </li>
