@@ -26,7 +26,13 @@ Rails.application.routes.draw do
       get :members
     end
   end
+  resources :private_groups do
+    member do
+      get :members
+    end
+  end
   resources :subject_posts,           only: [:create, :destroy]
   resources :club_posts,              only: [:create, :destroy]
   resources :kinds_of_school_posts,   only: [:create, :destroy]
+  resources :private_group_posts,     only: [:create, :destroy]
 end

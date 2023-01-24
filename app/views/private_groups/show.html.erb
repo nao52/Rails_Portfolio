@@ -1,0 +1,11 @@
+<% provide(:title, @group.name) %>
+<% provide(:params_id, "private_group_id") %>
+
+<div style="border: solid; padding: 10px;">
+  <h1><%= yield(:title) %></h1>
+  <h3>グループ詳細:<%= @group.detail %></h3>
+</div>
+
+<%= render 'show_link' %>
+
+<%= render 'shared/post' %>

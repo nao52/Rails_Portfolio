@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :subject_posts, dependent: :destroy
   has_many :club_posts, dependent: :destroy
   has_many :kinds_of_school_posts, dependent: :destroy
+  has_many :private_groups, dependent: :destroy
+  has_many :private_group_posts, dependent: :destroy
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }

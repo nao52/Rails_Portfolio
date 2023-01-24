@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_084102) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_24_034921) do
   create_table "club_posts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -43,6 +43,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_084102) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "private_group_posts", charset: "utf8mb3", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "private_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["private_group_id"], name: "index_private_group_posts_on_private_group_id"
+    t.index ["user_id", "created_at"], name: "index_private_group_posts_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_private_group_posts_on_user_id"
+  end
+
+  create_table "private_groups", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.string "detail"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_private_groups_on_user_id"
   end
 
   create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
@@ -92,6 +112,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_084102) do
   add_foreign_key "club_posts", "users"
   add_foreign_key "kinds_of_school_posts", "kinds_of_schools"
   add_foreign_key "kinds_of_school_posts", "users"
+  add_foreign_key "private_group_posts", "private_groups"
+  add_foreign_key "private_group_posts", "users"
+  add_foreign_key "private_groups", "users"
   add_foreign_key "subject_posts", "subjects"
   add_foreign_key "subject_posts", "users"
   add_foreign_key "users", "clubs"
