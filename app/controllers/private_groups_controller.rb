@@ -6,8 +6,16 @@ class PrivateGroupsController < ApplicationController
   end
 
   def show
-    @post  = current_user.subject_posts.build if logged_in?
-    @posts = SubjectPost.where(subject_id: params[:id])
+    # @post  = current_user.subject_posts.build if logged_in?
+    # @posts = SubjectPost.where(subject_id: params[:id])
+  end
+
+  def new
+    @private_group = current_user.private_groups.build if logged_in?
+  end
+
+  def create
+
   end
 
   def members
