@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      @user.image.purge if params[:delete_image]
       redirect_to @user
     else
       render 'edit', status: :unprocessable_entity

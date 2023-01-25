@@ -1,10 +1,14 @@
 <% provide(:title, @user.name) %>
 
 <h1><%= @user.name %></h1>
-<%= image_tag @user.image if @user.image.attached? %>
+<% if @user.image.attached? %>
+  <%= image_tag @user.image %>
+  <%= render 'delete_image' %>
+<% end %>
+
 <% if logged_in? %>
   <p>
-    <%= render 'layouts/admin_btn' %>
+    <%= render 'shared/admin_btn' %>
     <%= render 'follow_form' %>
   </p>
 <% end %>
