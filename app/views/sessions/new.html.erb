@@ -15,6 +15,7 @@
     <% end %>
 
     <p><%= link_to "登録がお済みでない方はこちら！", signup_path %></p>
+    <p><%= render 'guest_login' %></p>
 
     <% if logged_in? %>
     <p><%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete } %></p>

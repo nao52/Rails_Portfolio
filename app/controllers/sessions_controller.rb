@@ -21,4 +21,11 @@ class SessionsController < ApplicationController
     redirect_to login_url, status: :see_other
   end
 
+  def guest_login
+    user = User.first
+    reset_session
+    log_in user
+    users_url
+  end
+
 end

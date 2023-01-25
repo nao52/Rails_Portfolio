@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
   root "application#hello"
-  get     "/signup",  to: "users#new"
-  get     "/login",   to: "sessions#new"
-  post    "/login",   to: "sessions#create"
-  delete  "/logout",  to: "sessions#destroy"
+  get     "/signup",    to: "users#new"
+  get     "/login",     to: "sessions#new"
+  post    "/login",     to: "sessions#create"
+  post    "/guest",      to: "sessions#gest_login"
+  delete  "/logout",    to: "sessions#destroy"
   resources :users do
     member do
       get :following, :followers
