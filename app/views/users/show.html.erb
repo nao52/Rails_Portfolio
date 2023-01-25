@@ -17,11 +17,11 @@
   <strong>プロフィール</strong><br>
   <%= @user.profile %>
   校種<br>
-  【<%= @user.kinds_of_school.name %>】<br>
+  【<%= link_to @user.kinds_of_school.name, @user.kinds_of_school, style: "color: black;" %>】<br>
   担当教科<br>
-  【<%= @user.subject.name %>】<br>
+  【<%= link_to @user.subject.name, @user.subject, style: "color: black;" %>】<br>
   部活動<br>
-  【<%= @user.club.name %>部】<br>
+  【<%= link_to "#{@user.club.name}部", @user.club, style: "color: black;" %>】<br>
   <%= link_to "フォロー(#{@user.following.count})",   following_user_path(@user) %><br>
   <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user) %><br>
 </pre>
