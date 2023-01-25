@@ -1,0 +1,4 @@
+<% provide(:title, "#{@user.name}の所属グループ一覧") %>
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<%= render @groups %>

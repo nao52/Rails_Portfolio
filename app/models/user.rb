@@ -21,6 +21,9 @@ class User < ApplicationRecord
   has_many :private_group_posts, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :joining, through: :participations, source: :private_group
+  has_one_attached :image do |attachable|
+    attachable.variant :display, resize_to_limit: [200, 200]
+  end
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }
@@ -31,6 +34,10 @@ class User < ApplicationRecord
   validates :profile, length: { maximum: 140 }
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
+  validates :image,    content_type:  { in: %w[image/jpeg image/gif image/png],
+                                        message: "形式は「jpeg / gif / png」のいずれかにしてください" },
+                       size:          { less_than: 5.megabytes,
+                                        message: "画像は5MB以下にしてください"}
 
   # ユーザーをフォローする
   def follow(other_user)
