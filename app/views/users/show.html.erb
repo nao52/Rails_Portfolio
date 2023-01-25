@@ -1,6 +1,7 @@
 <% provide(:title, @user.name) %>
 
 <h1><%= @user.name %></h1>
+<%= image_tag @user.image if @user.image.attached? %>
 <% if logged_in? %>
   <p>
     <%= render 'layouts/admin_btn' %>

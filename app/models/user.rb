@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :private_group_posts, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :joining, through: :participations, source: :private_group
+  has_one_attached :image
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }

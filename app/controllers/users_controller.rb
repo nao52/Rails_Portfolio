@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.image.attach(params[:user][:image])
     if @user.save
       redirect_to users_url
     else
@@ -54,7 +55,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :subject_id, :club_id, :kinds_of_school_id)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :subject_id, :club_id, :kinds_of_school_id, :image)
     end
 
     # beforeフィルタ

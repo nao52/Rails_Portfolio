@@ -24,5 +24,11 @@
   <%= f.label :profile, "プロフィール(任意)" %> <br>
   <%= f.text_area :profile, class: 'form-control' %> <br>
 
+  <%= f.label :image, "プロフィール画像(任意)" %> <br>
+  <span class="image">
+    <%= f.file_field :image %>
+  </span>
+  <br>
+
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
