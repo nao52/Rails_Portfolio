@@ -24,4 +24,5 @@
   【<%= link_to "#{@user.club.name}部", @user.club, style: "color: black;" %>】<br>
   <%= link_to "フォロー(#{@user.following.count})",   following_user_path(@user) %><br>
   <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user) %><br>
+  <%= link_to "所属グループ(#{@user.joining.count})", joinings_user_path(@user) %><br>
 </pre>
