@@ -2,6 +2,6 @@
   <hr>
   <div>
     <%= "書籍名:【 #{book.title} 】" %>
-    <%= "内容:#{book.content}" if book.content %>
+    <%= "内容:#{book.content}" if book.content.present? %>
   </div>
 <% end %>
