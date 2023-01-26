@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_25_233020) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_26_014648) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -110,6 +110,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_233020) do
     t.index ["user_id"], name: "index_publishers_on_user_id"
   end
 
+  create_table "reference_books", charset: "utf8mb3", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "publisher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["publisher_id"], name: "index_reference_books_on_publisher_id"
+    t.index ["title"], name: "index_reference_books_on_title"
+    t.index ["user_id"], name: "index_reference_books_on_user_id"
+  end
+
   create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -165,6 +177,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_233020) do
   add_foreign_key "private_group_posts", "users"
   add_foreign_key "private_groups", "users"
   add_foreign_key "publishers", "users"
+  add_foreign_key "reference_books", "publishers"
+  add_foreign_key "reference_books", "users"
   add_foreign_key "subject_posts", "subjects"
   add_foreign_key "subject_posts", "users"
   add_foreign_key "users", "clubs"
