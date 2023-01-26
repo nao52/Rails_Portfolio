@@ -8,6 +8,7 @@ class PublishersController < ApplicationController
 
   def show
     @publisher = Publisher.find(params[:id])
+    @reference_books = @publisher.reference_books
   end
 
   def new

@@ -1,0 +1,7 @@
+<% @reference_books.each do |book| %>
+  <hr>
+  <div>
+    <%= "書籍名:【 #{book.title} 】" %>
+    <%= "内容:#{book.content}" if book.content %>
+  </div>
+<% end %>
