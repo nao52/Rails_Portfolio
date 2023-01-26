@@ -6,9 +6,16 @@ class PublishersController < ApplicationController
   end
 
   def new
+    @publisher = current_user.publishers.build
   end
 
   def create
+    @publisher = current_user.publishers.build(publisher_params)
+    if @publisher.save
+      redirect_to publishers_url
+    else
+      render 'new', status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -16,5 +23,11 @@ class PublishersController < ApplicationController
 
   def update
   end
+
+  private
+
+    def publisher_params
+      params.require(:publisher).permit(:name)
+    end
 
 end
