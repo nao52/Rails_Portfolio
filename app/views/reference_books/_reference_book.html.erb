@@ -3,6 +3,9 @@
   <div>
     <%= "書籍名:【 #{book.title} 】" %>
     <%= "内容:#{book.content}" if book.content.present? %>
+    <% if book.image.attached? %>
+      <%= image_tag book.image %>
+    <% end %>
   </div>
   <% if current_user.admin? %>
     <div>

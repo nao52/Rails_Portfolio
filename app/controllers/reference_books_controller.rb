@@ -15,6 +15,7 @@ class ReferenceBooksController < ApplicationController
 
   def create    
     @reference_book = current_user.reference_books.build(reference_book_params)
+    @reference_book.image.attach(params[:reference_book][:image])
     if @reference_book.save
       redirect_to @reference_book.publisher
     else
@@ -41,7 +42,7 @@ class ReferenceBooksController < ApplicationController
   private
 
     def reference_book_params
-      params.require(:reference_book).permit(:title, :content, :publisher_id)
+      params.require(:reference_book).permit(:title, :content, :publisher_id, :image)
     end
 
     # before フィルタ

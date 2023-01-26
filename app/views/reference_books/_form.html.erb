@@ -12,5 +12,11 @@
   <%= label_tag 'name', "出版社の追加 (出版社が存在しない場合のみ入力してください)" %> <br>
   <%= text_field_tag 'name', nil, class: 'form-control' %> <br>
 
+  <%= f.label :image, "書籍の画像(任意)" %> <br>
+  <span class="image">
+    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+  </span>
+  <br>
+
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
