@@ -9,5 +9,8 @@
   <%= f.label :publisher_id, "出版社" %> <br>
   <%= f.select :publisher_id, make_select_form(Publisher.all),  { include_blank: "未選択" }, class: 'form-control' %> <br>
 
+  <%= label_tag 'name', "出版社の追加 (出版社が存在しない場合のみ入力してください)" %> <br>
+  <%= text_field_tag 'name', nil, class: 'form-control' %> <br>
+
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

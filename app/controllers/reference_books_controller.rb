@@ -10,6 +10,11 @@ class ReferenceBooksController < ApplicationController
   end
 
   def create
+    if params[:name].present? && params[:reference_book][:publisher_id].blank?
+      new_publisher = current_user.publishers.create!(name: params[:name])
+      params[:reference_book][:publisher_id] = new_publisher.id
+    end
+    
     @reference_book = current_user.reference_books.build(reference_book_params)
     if @reference_book.save
       @publisher = Publisher.find(@reference_book.publisher_id)
