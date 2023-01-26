@@ -4,4 +4,9 @@
     <%= "書籍名:【 #{book.title} 】" %>
     <%= "内容:#{book.content}" if book.content.present? %>
   </div>
+  <% if current_user?(book.user) %>
+    <div>
+      <%= link_to "#{book.title}の編集",   edit_reference_book_path(book) %>
+    </div>
+  <% end %>
 <% end %>
