@@ -1,2 +1,6 @@
-<h1>ReferenceBooks#new</h1>
-<p>Find me in app/views/reference_books/new.html.erb</p>
+<% provide(:title, "参考書の追加") %>
+<% provide(:button_text, "参考書を追加") %>
+
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<%= render 'form' %>

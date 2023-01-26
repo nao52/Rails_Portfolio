@@ -1,0 +1,13 @@
+<%= form_with(model: @reference_book) do |f| %>
+
+  <%= f.label :title, "書籍名" %> <br>
+  <%= f.text_field :name, class: 'form-control' %> <br>
+
+  <%= f.label :content, "参考書の内容(任意)" %> <br>
+  <%= f.text_area :content, class: 'form-control' %> <br>
+
+  <%= f.label :publisher_id, "出版社(任意)" %> <br>
+  <%= f.select :publisher_id, make_select_form(Publisher.all),  { include_blank: "未選択" }, class: 'form-control' %> <br>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

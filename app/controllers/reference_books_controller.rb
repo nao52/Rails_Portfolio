@@ -5,6 +5,7 @@ class ReferenceBooksController < ApplicationController
   end
 
   def new
+    @reference_book = current_user.reference_books.build(publisher_id: params[:publisher_id])
   end
 
   def edit

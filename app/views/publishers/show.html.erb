@@ -8,6 +8,10 @@
       <%= link_to "出版社の削除", @publisher, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
     </div>
   <% end %>
+  <br>
+  <div>
+    <%= link_to "参考書の新規登録", new_reference_book_path(publisher_id: @publisher.id) %>
+  </div>
 </div>
 
 <%= render 'reference_books/reference_book' %>
