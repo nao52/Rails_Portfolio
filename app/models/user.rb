@@ -24,6 +24,7 @@ class User < ApplicationRecord
   has_one_attached :image do |attachable|
     attachable.variant :display, resize_to_limit: [200, 200]
   end
+  has_many :publishers
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }
