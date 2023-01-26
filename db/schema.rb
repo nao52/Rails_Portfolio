@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_25_075919) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_25_233020) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -102,6 +102,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_075919) do
     t.index ["user_id"], name: "index_private_groups_on_user_id"
   end
 
+  create_table "publishers", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_publishers_on_user_id"
+  end
+
   create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -156,6 +164,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_075919) do
   add_foreign_key "private_group_posts", "private_groups"
   add_foreign_key "private_group_posts", "users"
   add_foreign_key "private_groups", "users"
+  add_foreign_key "publishers", "users"
   add_foreign_key "subject_posts", "subjects"
   add_foreign_key "subject_posts", "users"
   add_foreign_key "users", "clubs"

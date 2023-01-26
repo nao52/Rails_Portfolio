@@ -1,0 +1,7 @@
+<%= form_with(model: @publisher) do |f| %>
+
+  <%= f.label :name, "出版社名" %> <br>
+  <%= f.text_field :name, class: 'form-control' %> <br>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

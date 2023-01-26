@@ -1,0 +1,7 @@
+<% provide(:title, "出版社一覧") %>
+<h1 class="text-center"><%= yield(:title) %></h1>
+<div class="text-right">
+  <%= link_to "出版社の新規登録", new_publisher_path %>
+</div>
+
+<%= render @publishers %>

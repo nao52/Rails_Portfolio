@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'publishers/index'
+  get 'publishers/new'
+  get 'publishers/edit'
 
   root "application#hello"
   get     "/signup",    to: "users#new"
@@ -36,4 +39,5 @@ Rails.application.routes.draw do
   resources :kinds_of_school_posts,   only: [:create, :destroy]
   resources :private_group_posts,     only: [:create, :destroy]
   resources :participations,          only: [:create, :destroy]
+  resources :publishers
 end
