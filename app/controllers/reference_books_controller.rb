@@ -33,6 +33,11 @@ class ReferenceBooksController < ApplicationController
     end
   end
 
+  def destroy
+    @reference_book.destroy
+    redirect_back(fallback_location: root_url, status: :see_other)
+  end
+
   private
 
     def reference_book_params

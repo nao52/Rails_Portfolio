@@ -4,9 +4,10 @@
     <%= "書籍名:【 #{book.title} 】" %>
     <%= "内容:#{book.content}" if book.content.present? %>
   </div>
-  <% if current_user?(book.user) %>
+  <% if current_user.admin? %>
     <div>
-      <%= link_to "#{book.title}の編集",   edit_reference_book_path(book) %>
+      <%= link_to "編集", edit_reference_book_path(book), class: "btn btn-primary" if current_user?(book.user) %>
+      <%= link_to "削除", book, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
     </div>
   <% end %>
 <% end %>
