@@ -2,5 +2,10 @@
 
 <h1 class="text-center"><%= @publisher.name %></h1>
 <div class="text-right">
-  <%= link_to "#{@publisher.name}の編集", edit_publisher_path %>
+  <% if current_user?(@publisher.user) %>
+    <div>
+      <%= link_to "出版社名の編集", edit_publisher_path, class: "btn btn-primary" %>
+      <%= link_to "出版社の削除", @publisher, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
 </div>
