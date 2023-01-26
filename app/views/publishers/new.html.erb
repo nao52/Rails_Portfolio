@@ -1,2 +1,12 @@
-<h1>Publishers#new</h1>
-<p>Find me in app/views/publishers/new.html.erb</p>
+<% provide(:title, "出版社の追加") %>
+<% provide(:button_text, "出版社を追加") %>
+
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<div class="row">
+  <div>
+
+    <%= render 'form' %>
+
+  </div>
+</div>
