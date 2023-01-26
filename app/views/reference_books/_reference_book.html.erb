@@ -3,10 +3,10 @@
   <div>
     <%= "書籍名:【 #{book.title} 】" %>
     <%= "内容:#{book.content}" if book.content.present? %>
-    <% if book.image.attached? %>
-      <%= image_tag book.image %>
-    <% end %>
   </div>
+  <% if book.image.attached? %>
+    <%= image_tag book.image.variant(:display) %>
+  <% end %>
   <% if current_user.admin? %>
     <div>
       <%= link_to "編集", edit_reference_book_path(book), class: "btn btn-primary" if current_user?(book.user) %>

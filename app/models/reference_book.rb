@@ -2,7 +2,9 @@ class ReferenceBook < ApplicationRecord
   belongs_to :user
   belongs_to :publisher
 
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :display, resize_to_limit: [200, 200]
+  end
 
   validates :user_id,      presence: true
   validates :publisher_id, presence: true
