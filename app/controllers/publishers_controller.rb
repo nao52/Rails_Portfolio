@@ -8,6 +8,7 @@ class PublishersController < ApplicationController
 
   def show
     @publisher = Publisher.find(params[:id])
+    @reference_books = @publisher.reference_books
   end
 
   def new
@@ -35,6 +36,10 @@ class PublishersController < ApplicationController
   end
 
   def destroy
+    unless @publisher.reference_books.empty?
+      # エラーメッセージ
+      redirect_back(fallback_location: root_url)
+    end
     @publisher.destroy
     redirect_to publishers_url, status: :see_other
   end

@@ -40,4 +40,5 @@ Rails.application.routes.draw do
   resources :private_group_posts,     only: [:create, :destroy]
   resources :participations,          only: [:create, :destroy]
   resources :publishers
+  resources :reference_books
 end

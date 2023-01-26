@@ -1,0 +1,22 @@
+<% @reference_books.each do |book| %>
+
+  <hr>
+
+  <div>
+    <%= "書籍名:【 #{book.title} 】" %>
+    <%= "内容:#{book.content}" if book.content.present? %>
+  </div>
+
+  <% if book.image.attached? %>
+    <%= image_tag book.image.variant(:display) %>
+    <%= render 'reference_books/delete_image', book: book %>
+  <% end %>
+
+  <% if current_user.admin? %>
+    <div>
+      <%= link_to "編集", edit_reference_book_path(book), class: "btn btn-primary" if current_user?(book.user) %>
+      <%= link_to "削除", book, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+
+<% end %>

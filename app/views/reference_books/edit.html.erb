@@ -1,0 +1,6 @@
+<% provide(:title, "参考書(#{@reference_book.title})の編集") %>
+<% provide(:button_text, "参考書情報を更新") %>
+
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<%= render 'form' %>
