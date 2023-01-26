@@ -1,0 +1,11 @@
+<% if current_user?(book.user) %>
+  <%= form_with(model: book) do |f| %>
+
+    <div><%= f.hidden_field :title %></div>
+    <div><%= f.hidden_field :content %></div>
+    <div><%= f.hidden_field :publisher_id %></div>
+    <div><%= hidden_field_tag :delete_image, value: true %></div>
+
+    <%= f.submit "画像の削除", class: "btn btn-danger" %>
+  <% end %>
+<% end %>

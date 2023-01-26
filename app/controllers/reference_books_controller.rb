@@ -28,6 +28,7 @@ class ReferenceBooksController < ApplicationController
 
   def update
     if @reference_book.update(reference_book_params)
+      @reference_book.image.purge if params[:delete_image]
       redirect_to @reference_book.publisher
     else
       render 'edit', status: :unprocessable_entity
