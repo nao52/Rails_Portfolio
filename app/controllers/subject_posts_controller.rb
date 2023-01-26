@@ -24,6 +24,9 @@ class SubjectPostsController < ApplicationController
       params.require(:subject_post).permit(:content, :subject_id)
     end
 
+    # before フィルタ
+
+    # 現在のユーザーが作成者であるか確認
     def correct_user
       @subject_post = current_user.subject_posts.find_by(id: params[:id])
       redirect_to root_url, status: :see_other if @subject_post.nil?

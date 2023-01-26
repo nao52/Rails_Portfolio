@@ -1,0 +1,6 @@
+<% provide(:title, @publisher.name) %>
+
+<h1 class="text-center"><%= @publisher.name %></h1>
+<div class="text-right">
+  <%= link_to "#{@publisher.name}の編集", edit_publisher_path %>
+</div>
