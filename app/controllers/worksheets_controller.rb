@@ -19,6 +19,14 @@ class WorksheetsController < ApplicationController
   def edit
   end
 
+  def update
+    if @worksheet.update(worksheet_params)
+      redirect_to worksheets_user_path(current_user)
+    else
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   private
 
     def worksheet_params
