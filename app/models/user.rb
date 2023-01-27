@@ -72,8 +72,4 @@ class User < ApplicationRecord
     joining.include?(private_group)
   end
 
-  def admin?
-    self == User.first
-  end
-
 end

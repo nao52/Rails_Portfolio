@@ -3,8 +3,6 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
 
-  include UsersHelper
-
   def index
     @users = User.all
   end
