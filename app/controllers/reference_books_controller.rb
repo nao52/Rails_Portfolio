@@ -15,8 +15,8 @@ class ReferenceBooksController < ApplicationController
 
   def create    
     @reference_book = current_user.reference_books.build(reference_book_params)
+    @reference_book.image.attach(params[:reference_book][:image])
     if @reference_book.save
-      @reference_book.image.attach(params[:reference_book][:image])
       redirect_to @reference_book.publisher
     else
       render 'new', status: :unprocessable_entity

@@ -1,0 +1,13 @@
+<hr>
+
+<% @worksheets.each do |worksheet| %>
+  <%= "ワークシート名:【#{worksheet.name}】" %> <br>
+  <% if worksheet.detail.present? %>
+    <div style="padding: 10px 0;">
+      ワークシートの説明 <br>
+      <%= worksheet.detail %>
+    </div>
+  <% end %>
+  <%= link_to "【#{worksheet.name}】のダウンロード", rails_blob_path(worksheet.file, disposition: "attachment") %>
+  <hr>
+<% end %>

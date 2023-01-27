@@ -7,6 +7,12 @@ class WorksheetsController < ApplicationController
 
   def create
     @worksheet = current_user.worksheets.build(worksheet_params)
+    @worksheet.file.attach(params[:worksheet][:file])
+    if @worksheet.save
+      redirect_to worksheets_user_path(current_user)
+    else
+      render 'new', status: :unprocessable_entity
+    end
   end
 
   private

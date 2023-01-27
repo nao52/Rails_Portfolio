@@ -56,6 +56,7 @@ class UsersController < ApplicationController
   end
 
   def worksheets
+    @worksheets = @user.worksheets
   end
 
   private
