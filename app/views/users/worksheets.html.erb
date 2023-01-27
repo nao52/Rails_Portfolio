@@ -1,2 +1,6 @@
 <% provide(:title, "#{@user.name}のワークシート一覧") %>
 <h1 class="text-center"><%= yield(:title) %></h1>
+
+<div class="text-right">
+  <%= link_to "新規ワークシートの追加", new_worksheet_path, class: "btn btn-primary" %>
+</div>

@@ -3,7 +3,7 @@ class Worksheet < ApplicationRecord
   validates :user_id, presence: true
 
   has_one_attached :file
-  validates :file, presence: true
+  validates :file, presence: true, content_type: { in: 'application/pdf', message: "フォーマットはPDFにしてください" }
 
   validates :name,   presence: true, length: { maximum: 50 }
   validates :detail, length: { maximum: 140 }

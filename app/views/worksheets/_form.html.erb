@@ -1,0 +1,16 @@
+<%= form_with(model: @worksheet) do |f| %>
+
+  <%= f.label :name, "タイトル" %> <br>
+  <%= f.text_field :name, class: 'form-control' %> <br>
+
+  <%= f.label :detail, "ワークシートの説明(任意)" %> <br>
+  <%= f.text_area :detail, class: 'form-control' %> <br>
+
+  <%= f.label :file, "ワークシートをアップロード(PDFのみ)" %> <br>
+  <span class="file">
+    <%= f.file_field :file, accept: "application/pdf" %>
+  </span>
+  <br>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
