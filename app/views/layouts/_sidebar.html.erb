@@ -1,4 +1,7 @@
 <ul>
+  <% if logged_in? %>
+    <li><%= link_to "マイページ",   current_user %></li>
+  <% end %>
   <li><%= link_to "ユーザー一覧", users_path %></li>
   <li><%= link_to "教科一覧",     subjects_path %></li>
   <li><%= link_to "部活動一覧",   clubs_path %></li>

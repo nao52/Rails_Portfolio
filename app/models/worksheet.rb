@@ -1,0 +1,10 @@
+class Worksheet < ApplicationRecord
+  belongs_to :user
+  validates :user_id, presence: true
+
+  has_one_attached :file
+  validates :file, presence: true
+
+  validates :name,   presence: true, length: { maximum: 50 }
+  validates :detail, length: { maximum: 140 }
+end

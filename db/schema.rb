@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_26_014648) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_27_062919) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -165,6 +165,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_014648) do
     t.index ["subject_id"], name: "index_users_on_subject_id"
   end
 
+  create_table "worksheets", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.text "detail"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_worksheets_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_worksheets_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "club_posts", "clubs"
@@ -184,4 +194,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_014648) do
   add_foreign_key "users", "clubs"
   add_foreign_key "users", "kinds_of_schools"
   add_foreign_key "users", "subjects"
+  add_foreign_key "worksheets", "users"
 end
