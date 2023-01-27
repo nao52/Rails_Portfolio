@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'publishers/index'
-  get 'publishers/new'
-  get 'publishers/edit'
-
   root "application#hello"
   get     "/signup",    to: "users#new"
   get     "/login",     to: "sessions#new"
@@ -10,7 +6,7 @@ Rails.application.routes.draw do
   delete  "/logout",    to: "sessions#destroy"
   resources :users do
     member do
-      get :following, :followers, :joinings
+      get :following, :followers, :joinings, :worksheets
     end
   end
   resources :relationships,           only: [:create, :destroy]

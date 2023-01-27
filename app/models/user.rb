@@ -26,6 +26,7 @@ class User < ApplicationRecord
   end
   has_many :publishers
   has_many :reference_books
+  has_many :worksheets
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }
