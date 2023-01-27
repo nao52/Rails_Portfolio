@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user,       only: [:show, :following, :followers, :joinings]
+  before_action :set_user,       only: [:show, :following, :followers, :joinings, :worksheets]
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
-
-  include UsersHelper
 
   def index
     @users = User.all
@@ -53,6 +51,10 @@ class UsersController < ApplicationController
 
   def joinings
     @groups = @user.joining
+  end
+
+  def worksheets
+    @worksheets = @user.worksheets
   end
 
   private

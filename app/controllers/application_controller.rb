@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  include SessionsHelper
+  include ApplicationHelper
 
   # ログイン済みのユーザーかどうか確認
   def logged_in_user

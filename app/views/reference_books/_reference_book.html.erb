@@ -12,7 +12,7 @@
     <%= render 'reference_books/delete_image', book: book %>
   <% end %>
 
-  <% if current_user.admin? %>
+  <% if current_user?(admin_user) %>
     <div>
       <%= link_to "編集", edit_reference_book_path(book), class: "btn btn-primary" if current_user?(book.user) %>
       <%= link_to "削除", book, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>

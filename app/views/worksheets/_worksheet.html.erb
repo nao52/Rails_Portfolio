@@ -1,0 +1,26 @@
+<hr>
+
+<% @worksheets.each do |worksheet| %>
+
+  <%= "ワークシート名:【#{worksheet.name}】" %> <br>
+  <%= "作成者:【#{worksheet.user.name}】" %> <br>
+
+  <% if worksheet.detail.present? %>
+    <div style="padding: 10px 0;">
+      ワークシートの説明 <br>
+      <%= worksheet.detail %>
+    </div>
+  <% end %>
+
+  <%= link_to "【#{worksheet.name}】のダウンロード", rails_blob_path(worksheet.file, disposition: "attachment") %>
+
+  <% if current_user?(worksheet.user) || current_user?(admin_user) %>
+    <div style="margin-top: 10px;">
+      <%= link_to "編集", edit_worksheet_path(worksheet), class: "btn btn-primary" %>
+      <%= link_to "削除", worksheet, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+
+  <hr>
+
+<% end %>

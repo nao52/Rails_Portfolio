@@ -2,7 +2,7 @@
 
 <h1 class="text-center"><%= @publisher.name %></h1>
 <div class="text-right">
-  <% if current_user.admin? %>
+  <% if current_user?(admin_user) %>
     <div>
       <%= link_to "出版社名の編集", edit_publisher_path, class: "btn btn-primary" if current_user?(@publisher.user) %>
       <%= link_to "出版社の削除", @publisher, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" if @publisher.reference_books.empty? %>

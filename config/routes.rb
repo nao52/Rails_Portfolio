@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'publishers/index'
-  get 'publishers/new'
-  get 'publishers/edit'
-
+  get 'worksheets/new'
   root "application#hello"
   get     "/signup",    to: "users#new"
   get     "/login",     to: "sessions#new"
@@ -10,7 +7,7 @@ Rails.application.routes.draw do
   delete  "/logout",    to: "sessions#destroy"
   resources :users do
     member do
-      get :following, :followers, :joinings
+      get :following, :followers, :joinings, :worksheets
     end
   end
   resources :relationships,           only: [:create, :destroy]
@@ -41,4 +38,5 @@ Rails.application.routes.draw do
   resources :participations,          only: [:create, :destroy]
   resources :publishers
   resources :reference_books
+  resources :worksheets,              only: [:index, :new, :create, :edit, :update, :destroy]
 end

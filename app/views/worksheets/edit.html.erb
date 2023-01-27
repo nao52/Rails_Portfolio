@@ -1,0 +1,6 @@
+<% provide(:title, "ワークシート(#{@worksheet.name})の編集") %>
+<% provide(:button_text, "ワークシート情報を更新") %>
+
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<%= render 'form' %>
