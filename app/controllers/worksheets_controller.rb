@@ -2,6 +2,10 @@ class WorksheetsController < ApplicationController
   before_action :logged_in_user,   only: [:new, :create]
   before_action :correct_user,     only: [:edit, :update, :destroy]
 
+  def index
+    @worksheets = Worksheet.all
+  end
+
   def new
     @worksheet = current_user.worksheets.build
   end

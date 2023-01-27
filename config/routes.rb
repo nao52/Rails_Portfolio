@@ -38,5 +38,5 @@ Rails.application.routes.draw do
   resources :participations,          only: [:create, :destroy]
   resources :publishers
   resources :reference_books
-  resources :worksheets,              only: [:new, :create, :edit, :update, :destroy]
+  resources :worksheets,              only: [:index, :new, :create, :edit, :update, :destroy]
 end

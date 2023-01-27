@@ -3,6 +3,7 @@
 <% @worksheets.each do |worksheet| %>
 
   <%= "ワークシート名:【#{worksheet.name}】" %> <br>
+  <%= "作成者:【#{worksheet.user.name}】" %> <br>
 
   <% if worksheet.detail.present? %>
     <div style="padding: 10px 0;">
