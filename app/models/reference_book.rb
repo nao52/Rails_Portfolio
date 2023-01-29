@@ -6,6 +6,8 @@ class ReferenceBook < ApplicationRecord
     attachable.variant :display, resize_to_limit: [200, 200]
   end
 
+  has_many :book_favorites, dependent: :destroy
+
   validates :user_id,      presence: true
   validates :publisher_id, presence: true
   validates :title, presence: true, length: { maximum: 50 }
