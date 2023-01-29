@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :publishers
   has_many :reference_books
   has_many :worksheets
+  has_many :book_favorites, dependent: :destroy
+  has_many :favorite_books, through: :book_favorites, source: :reference_book
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }
@@ -70,6 +72,21 @@ class User < ApplicationRecord
   # 現在のユーザーがグループに参加していればtrueを返す
   def joining?(private_group)
     joining.include?(private_group)
+  end
+
+  # 書籍をお気に入りする
+  def favorite_book(book)
+    favorite_books << book
+  end
+
+  # 書籍のお気に入りを解除する
+  def unfavorite_book(book)
+    favorite_books.delete(book)
+  end
+
+  # 現在のユーザーが書籍をお気に入りしていればtrueを返す
+  def favorite_book?(book)
+    favorite_books.include?(book)
   end
 
 end

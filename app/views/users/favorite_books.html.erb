@@ -1,0 +1,4 @@
+<% provide(:title, "#{@user.name}のお気に入り書籍一覧") %>
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<%= render 'reference_books/reference_book' %>

@@ -1,0 +1,4 @@
+<%= form_with(model: current_user.book_favorites.build) do |f| %>
+  <div><%= hidden_field_tag :reference_book_id, book.id %></div>
+  <%= f.submit "お気に入り", class: "btn btn-primary" %>
+<% end %>

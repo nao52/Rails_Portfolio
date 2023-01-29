@@ -229,3 +229,10 @@ user.reference_books.create!( title: "くもんの式がひらめく！",       
 user.reference_books.create!( title: "くもんのスタートでつまずかない",                    publisher_id: 10)
 user.reference_books.create!( title: "くもんの中学基礎がため100％",                       publisher_id: 10)
 user.reference_books.create!( title: "高校入試　こわくない",                              publisher_id: 10)
+
+# book_favorites_tableにテストデータをセット
+user1 = User.first
+user2 = User.second
+books = ReferenceBook.all[0..49]
+books.each { |book| user1.favorite_book(book) }
+books.each { |book| user2.favorite_book(book) }
