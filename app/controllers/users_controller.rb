@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user,       only: [:show, :following, :followers, :joinings, :worksheets]
+  before_action :set_user,       only: [:show, :following, :followers, :joinings, :worksheets, :favorite_books]
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
 
@@ -55,6 +55,10 @@ class UsersController < ApplicationController
 
   def worksheets
     @worksheets = @user.worksheets
+  end
+
+  def favorite_books
+    @reference_books = @user.favorite_books
   end
 
   private
