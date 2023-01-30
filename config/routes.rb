@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'worksheets/new'
   root "application#hello"
   get     "/signup",    to: "users#new"
   get     "/login",     to: "sessions#new"
@@ -40,4 +39,5 @@ Rails.application.routes.draw do
   resources :reference_books
   resources :worksheets,              only: [:index, :new, :create, :edit, :update, :destroy]
   resources :book_favorites,          only: [:create, :destroy]
+  resources :worksheet_favorites,     only: [:create, :destroy]
 end

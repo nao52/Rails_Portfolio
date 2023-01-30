@@ -91,4 +91,19 @@ class User < ApplicationRecord
     favorite_books.include?(book)
   end
 
+  # ワークシートをお気に入りする
+  def favorite_worksheet(worksheet)
+    favorite_worksheets << worksheet
+  end
+
+  # ワークシートのお気に入りを解除する
+  def unfavorite_worksheet(worksheet)
+    favorite_worksheets.delete(worksheet)
+  end
+
+  # 現在のユーザーがワークシートをお気に入りしていればtrueを返す
+  def favorite_worksheet?(worksheet)
+    favorite_worksheets.include?(worksheet)
+  end
+
 end
