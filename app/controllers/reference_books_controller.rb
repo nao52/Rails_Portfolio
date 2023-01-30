@@ -13,7 +13,7 @@ class ReferenceBooksController < ApplicationController
     @reference_book = current_user.reference_books.build(publisher_id: params[:publisher_id])
   end
 
-  def create    
+  def create
     @reference_book = current_user.reference_books.build(reference_book_params)
     @reference_book.image.attach(params[:reference_book][:image])
     if @reference_book.save
