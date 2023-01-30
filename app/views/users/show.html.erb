@@ -22,9 +22,10 @@
   【<%= link_to @user.subject.name, @user.subject, style: "color: black;" %>】<br>
   部活動<br>
   【<%= link_to "#{@user.club.name}部", @user.club, style: "color: black;" %>】<br>
-  <%= link_to "フォロー(#{@user.following.count})",             following_user_path(@user) %><br>
-  <%= link_to "フォロワー(#{@user.followers.count})",           followers_user_path(@user) %><br>
-  <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",  favorite_books_user_path(@user) %><br>
-  <%= link_to "所属グループ(#{@user.joining.count})",           joinings_user_path(@user) %><br>
-  <%= link_to "ワークシート(#{@user.worksheets.count})",        worksheets_user_path(@user) %><br>
+  <%= link_to "フォロー(#{@user.following.count})",                         following_user_path(@user) %><br>
+  <%= link_to "フォロワー(#{@user.followers.count})",                       followers_user_path(@user) %><br>
+  <%= link_to "所属グループ(#{@user.joining.count})",                       joinings_user_path(@user) %><br>
+  <%= link_to "ワークシート(#{@user.worksheets.count})",                    worksheets_user_path(@user) %><br>
+  <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",              favorite_books_user_path(@user) %><br>
+  <%= link_to "お気に入りワークシート(#{@user.favorite_worksheets.count})", favorite_worksheets_user_path(@user) %><br>
 </pre>
