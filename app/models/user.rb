@@ -78,11 +78,15 @@ class User < ApplicationRecord
 
   # 書籍をお気に入りする
   def favorite_book(book)
+    likes_count = book.likes_count + 1
+    book.update!(likes_count: likes_count)
     favorite_books << book
   end
 
   # 書籍のお気に入りを解除する
   def unfavorite_book(book)
+    likes_count = book.likes_count - 1
+    book.update!(likes_count: likes_count)
     favorite_books.delete(book)
   end
 
@@ -93,11 +97,15 @@ class User < ApplicationRecord
 
   # ワークシートをお気に入りする
   def favorite_worksheet(worksheet)
+    likes_count = worksheet.likes_count + 1
+    worksheet.update!(likes_count: likes_count)
     favorite_worksheets << worksheet
   end
 
   # ワークシートのお気に入りを解除する
   def unfavorite_worksheet(worksheet)
+    likes_count = worksheet.likes_count - 1
+    worksheet.update!(likes_count: likes_count)
     favorite_worksheets.delete(worksheet)
   end
 
