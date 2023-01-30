@@ -97,11 +97,15 @@ class User < ApplicationRecord
 
   # ワークシートをお気に入りする
   def favorite_worksheet(worksheet)
+    likes_count = worksheet.likes_count + 1
+    worksheet.update!(likes_count: likes_count)
     favorite_worksheets << worksheet
   end
 
   # ワークシートのお気に入りを解除する
   def unfavorite_worksheet(worksheet)
+    likes_count = worksheet.likes_count - 1
+    worksheet.update!(likes_count: likes_count)
     favorite_worksheets.delete(worksheet)
   end
 

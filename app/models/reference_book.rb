@@ -7,7 +7,6 @@ class ReferenceBook < ApplicationRecord
   end
 
   has_many :book_favorites, dependent: :destroy
-  has_many :favorite_users, through: :book_favorites, source: :user
 
   default_scope -> { order(likes_count: :desc) }
 
