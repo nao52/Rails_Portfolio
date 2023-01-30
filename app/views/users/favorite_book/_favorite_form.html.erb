@@ -1,0 +1,7 @@
+<div id="favorite_form">
+<% if current_user.favorite_book?(book) %>
+  <%= render 'users/favorite_book/unfavorite', book: book %>
+<% else %>
+  <%= render 'users/favorite_book/favorite', book: book %>
+<% end %>
+</div>

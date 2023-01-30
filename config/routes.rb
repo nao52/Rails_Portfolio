@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'worksheets/new'
   root "application#hello"
   get     "/signup",    to: "users#new"
   get     "/login",     to: "sessions#new"
@@ -7,7 +6,7 @@ Rails.application.routes.draw do
   delete  "/logout",    to: "sessions#destroy"
   resources :users do
     member do
-      get :following, :followers, :joinings, :worksheets, :favorite_books
+      get :following, :followers, :joinings, :worksheets, :favorite_books, :favorite_worksheets
     end
   end
   resources :relationships,           only: [:create, :destroy]
@@ -40,4 +39,5 @@ Rails.application.routes.draw do
   resources :reference_books
   resources :worksheets,              only: [:index, :new, :create, :edit, :update, :destroy]
   resources :book_favorites,          only: [:create, :destroy]
+  resources :worksheet_favorites,     only: [:create, :destroy]
 end

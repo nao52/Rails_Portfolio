@@ -29,6 +29,8 @@ class User < ApplicationRecord
   has_many :worksheets
   has_many :book_favorites, dependent: :destroy
   has_many :favorite_books, through: :book_favorites, source: :reference_book
+  has_many :worksheet_favorites, dependent: :destroy
+  has_many :favorite_worksheets, through: :worksheet_favorites, source: :worksheet
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }
@@ -87,6 +89,21 @@ class User < ApplicationRecord
   # 現在のユーザーが書籍をお気に入りしていればtrueを返す
   def favorite_book?(book)
     favorite_books.include?(book)
+  end
+
+  # ワークシートをお気に入りする
+  def favorite_worksheet(worksheet)
+    favorite_worksheets << worksheet
+  end
+
+  # ワークシートのお気に入りを解除する
+  def unfavorite_worksheet(worksheet)
+    favorite_worksheets.delete(worksheet)
+  end
+
+  # 現在のユーザーがワークシートをお気に入りしていればtrueを返す
+  def favorite_worksheet?(worksheet)
+    favorite_worksheets.include?(worksheet)
   end
 
 end

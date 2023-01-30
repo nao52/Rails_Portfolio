@@ -1,0 +1,4 @@
+<% provide(:title, "#{@user.name}のお気に入りワークシート一覧") %>
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<%= render 'worksheets/worksheet' %>
