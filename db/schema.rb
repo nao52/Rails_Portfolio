@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_29_100100) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_30_022357) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -174,6 +174,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_100100) do
     t.index ["subject_id"], name: "index_users_on_subject_id"
   end
 
+  create_table "worksheet_favorites", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "worksheet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_worksheet_favorites_on_user_id"
+    t.index ["worksheet_id"], name: "index_worksheet_favorites_on_worksheet_id"
+  end
+
   create_table "worksheets", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.text "detail"
@@ -205,5 +214,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_100100) do
   add_foreign_key "users", "clubs"
   add_foreign_key "users", "kinds_of_schools"
   add_foreign_key "users", "subjects"
+  add_foreign_key "worksheet_favorites", "users"
+  add_foreign_key "worksheet_favorites", "worksheets"
   add_foreign_key "worksheets", "users"
 end
