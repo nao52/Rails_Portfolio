@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_30_090153) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_31_061127) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_30_090153) do
     t.datetime "updated_at", null: false
     t.index ["reference_book_id"], name: "index_book_favorites_on_reference_book_id"
     t.index ["user_id"], name: "index_book_favorites_on_user_id"
+  end
+
+  create_table "book_reviews", charset: "utf8mb3", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "reference_book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reference_book_id"], name: "index_book_reviews_on_reference_book_id"
+    t.index ["user_id", "created_at"], name: "index_book_reviews_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_book_reviews_on_user_id"
   end
 
   create_table "club_posts", charset: "utf8mb3", force: :cascade do |t|
@@ -201,6 +212,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_30_090153) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "book_favorites", "reference_books"
   add_foreign_key "book_favorites", "users"
+  add_foreign_key "book_reviews", "reference_books"
+  add_foreign_key "book_reviews", "users"
   add_foreign_key "club_posts", "clubs"
   add_foreign_key "club_posts", "users"
   add_foreign_key "kinds_of_school_posts", "kinds_of_schools"

@@ -31,6 +31,7 @@ class User < ApplicationRecord
   has_many :favorite_books, through: :book_favorites, source: :reference_book
   has_many :worksheet_favorites, dependent: :destroy
   has_many :favorite_worksheets, through: :worksheet_favorites, source: :worksheet
+  has_many :book_reviews
 
   before_save { email.downcase! }
   validates :name,  presence: true, length: { maximum: 50 }
