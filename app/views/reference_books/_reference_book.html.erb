@@ -5,7 +5,7 @@
   <hr>
 
   <div>
-    <%= "書籍名:【 #{book.title} 】" %>
+    <%= link_to "書籍名:【 #{book.title} 】", book %>
     <%= "内容:#{book.content}" if book.content.present? %>
   </div>
 

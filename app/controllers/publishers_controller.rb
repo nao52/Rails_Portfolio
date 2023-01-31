@@ -8,7 +8,7 @@ class PublishersController < ApplicationController
 
   def show
     @publisher = Publisher.find(params[:id])
-    @reference_books = @publisher.reference_books
+    @reference_books = @publisher.reference_books.page(params[:page]).per(30)
   end
 
   def new

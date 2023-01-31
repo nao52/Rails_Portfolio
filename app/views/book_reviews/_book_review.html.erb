@@ -1,0 +1,18 @@
+<% if logged_in? %>
+  <%= render 'shared/review_form' %>
+<% end %>
+
+<%= paginate @book_reviews %>
+
+<% @book_reviews.each do |review| %>
+  <hr>
+  <div style="margin: 5px 0; padding: 10px;">
+    投稿者:<%= review.user.name %><br>
+    <%= review.content %>
+  </div>
+  <% if current_user?(review.user) %>
+    <%= link_to "レビューの削除", review, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+  <% end %>
+<% end %>
+
+<%= paginate @book_reviews %>

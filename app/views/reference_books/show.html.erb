@@ -1,0 +1,6 @@
+<% provide(:title, @reference_book.title) %>
+<% provide(:params_id, "reference_book_id") %>
+
+<h1 class="text-center"><%= "【#{yield(:title)}】のレビュー一覧" %></h1>
+
+<%= render 'book_reviews/book_review' %>
