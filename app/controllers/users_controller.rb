@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
 
   def index
-    @users = User.all
+    @users = User.all.page(params[:page]).per(30)
   end
 
   def show
@@ -39,13 +39,13 @@ class UsersController < ApplicationController
 
   def following
     @title = "#{@user.name}のフォロー"
-    @users = @user.following
+    @users = @user.following.page(params[:page]).per(30)
     render 'show_follow', status: :unprocessable_entity
   end
 
   def followers
     @title = "#{@user.name}のフォロワー"
-    @users = @user.followers
+    @users = @user.followers.page(params[:page]).per(30)
     render 'show_follow', status: :unprocessable_entity
   end
 
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def favorite_books
-    @reference_books = @user.favorite_books
+    @reference_books = @user.favorite_books.page(params[:page]).per(30)
   end
 
   def favorite_worksheets

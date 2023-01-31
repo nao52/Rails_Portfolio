@@ -1,3 +1,5 @@
+<%= paginate @reference_books %>
+
 <% @reference_books.each do |book| %>
 
   <hr>
@@ -20,6 +22,6 @@
     <%= render 'users/favorite_book/favorite_form', book: book if logged_in? %>
   </div>
 
-
-
 <% end %>
+
+<%= paginate @reference_books %>

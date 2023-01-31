@@ -1,3 +1,11 @@
-<li>
-  <%= link_to publisher.name, publisher %>
-</li>
+<%= paginate @publishers %>
+
+<ul class="publishers">
+  <% @publishers.each do |publisher| %>
+    <li>
+      <%= link_to publisher.name, publisher %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @publishers %>

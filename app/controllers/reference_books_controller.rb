@@ -6,7 +6,7 @@ class ReferenceBooksController < ApplicationController
   }, only: [:create, :update]
   
   def index
-    @reference_books = ReferenceBook.all
+    @reference_books = ReferenceBook.all.page(params[:page]).per(30)
   end
 
   def new
