@@ -1,0 +1,11 @@
+<%= paginate @book_reviews %>
+
+<% @book_reviews.each do |review| %>
+  <hr>
+  <div style="margin: 5px 0; padding: 10px;">
+    投稿者:<%= review.user.name %><br>
+    <%= review.content %>
+  </div>
+<% end %>
+
+<%= paginate @book_reviews %>
