@@ -1,0 +1,8 @@
+【新規レビューを作成】
+<%= form_with(model: @book_review) do |f| %>
+  <div><%= f.hidden_field yield(:params_id), :value => params[:id] %></div>
+  <div class="field">
+    <%= f.text_area :content, style: "width: 100%;" %>
+  </div>
+  <%= f.submit "レビューを投稿", class: "btn btn-primary" %>
+<% end %>

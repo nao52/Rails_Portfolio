@@ -11,6 +11,7 @@ class ReferenceBooksController < ApplicationController
 
   def show
     @reference_book = ReferenceBook.find(params[:id])
+    @book_review  = current_user.book_reviews.build if logged_in?
     @book_reviews = @reference_book.book_reviews.page(params[:page]).per(30)
   end
 

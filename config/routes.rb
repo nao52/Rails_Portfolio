@@ -40,4 +40,5 @@ Rails.application.routes.draw do
   resources :worksheets,              only: [:index, :new, :create, :edit, :update, :destroy]
   resources :book_favorites,          only: [:create, :destroy]
   resources :worksheet_favorites,     only: [:create, :destroy]
+  resources :book_reviews,            only: [:create]
 end
