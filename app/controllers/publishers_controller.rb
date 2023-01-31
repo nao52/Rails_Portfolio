@@ -3,7 +3,7 @@ class PublishersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update, :destroy]
 
   def index
-    @publishers = Publisher.all
+    @publishers = Publisher.all.page(params[:page]).per(30)
   end
 
   def show
