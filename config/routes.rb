@@ -41,4 +41,7 @@ Rails.application.routes.draw do
   resources :book_favorites,          only: [:create, :destroy]
   resources :worksheet_favorites,     only: [:create, :destroy]
   resources :book_reviews,            only: [:create, :destroy]
+
+  get     "/test",    to: "tests#seat_create"
+  post    "/test",    to: "tests#crate_seats"
 end

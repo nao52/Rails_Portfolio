@@ -1,0 +1,26 @@
+<% if flash[:col].present? && flash[:row].present? %>
+  
+  <table>
+    <thead>
+      <tr>
+        <th colspan="<%= flash[:col] %>">
+          <h3>席替え</h3>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flash[:row].to_i.times do |n| %>
+        <tr>
+          <% flash[:col].to_i.times do |n| %>
+            <td>
+              <p>
+                
+              </p>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+<% end %>
