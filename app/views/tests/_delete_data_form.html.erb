@@ -1,4 +1,4 @@
-<% if @names.size > 0 %>
+<% if @names.any? { |name| name.present? } %>
 
   <%= form_with(url: test_delete_data_path) do |f| %>
 

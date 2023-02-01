@@ -1,4 +1,4 @@
-<% if @names.size > 1 %>
+<% if @names.any? { |name| name.present? } %>
 
   <%= form_with(url: test_shuffle_path) do |f| %>
 

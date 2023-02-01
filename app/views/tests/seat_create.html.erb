@@ -1,8 +1,11 @@
 <div class="test">
 
-  <% if flash[:col].present? && flash[:row].present? && flash[:names].size > 0 %>
+  <% if flash[:col].present? && flash[:row].present? %>
     <% @col   = flash[:col].to_i %>
     <% @row   = flash[:row].to_i %>
+  <% end %>
+
+  <% if flash[:names].present? %>
     <% @names = flash[:names] %>
   <% end %>
 

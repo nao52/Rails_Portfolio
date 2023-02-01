@@ -52,9 +52,11 @@ class TestsController < ApplicationController
   end
 
   def delete_data
+    names = []
+
     flash[:col] = params[:col].to_i
     flash[:row] = params[:row].to_i
-    flash[:names] = []
+    flash[:names] = names
 
     redirect_to test_url
   end
