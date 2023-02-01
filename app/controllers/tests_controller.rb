@@ -7,6 +7,8 @@ class TestsController < ApplicationController
   end
 
   def seat_create
+    @col = 6
+    @row = 6
   end
 
 end
