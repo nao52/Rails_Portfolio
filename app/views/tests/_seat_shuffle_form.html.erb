@@ -1,0 +1,13 @@
+<% if @names.size > 1 %>
+
+  <%= form_with(url: test_shuffle_path) do |f| %>
+
+    <div><%= hidden_field_tag :col,   @col %></div>
+    <div><%= hidden_field_tag :row,   @row %></div>
+    <div><%= hidden_field_tag :names, @names %></div>
+
+    <%= f.submit "座席のシャッフル", class: "btn btn-primary" %>
+
+  <% end %>
+  
+<% end %>
