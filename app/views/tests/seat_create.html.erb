@@ -1,9 +1,14 @@
 <div class="test">
 
+  <% if flash[:col].present? && flash[:row].present? %>
+    <% @col = flash[:col] %>
+    <% @row = flash[:row] %>
+  <% end %>
+
+  <% if flash[:names].present? %>
+    <% @names = flash[:names] %>
+  <% end %>
+
   <%= render 'seat_form' %>
-
-  <br>
-
-  <%= render 'seats' %>
   
 </div>
