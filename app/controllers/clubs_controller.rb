@@ -11,7 +11,7 @@ class ClubsController < ApplicationController
   end
 
   def members
-    @users = @group.users
+    @users = @group.users.page(params[:page]).per(30)
   end
 
   private
