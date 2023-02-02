@@ -1,2 +1,29 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.create_seats {
+  h3 {
+    height: 80px;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    border: solid;
+  }
+  p {
+    height: 80px;
+    text-align: center;
+    margin: 0;
+    border: solid;
+  }
+  table {
+    border: solid;
+    width: 100%;
+    text-align: center;
+  }
+  td {
+    border: solid;
+  }
+  .shuffle_btn {
+    margin: 10px 0;
+  }
+}

@@ -1,0 +1,18 @@
+<div class="create_seats">
+
+  <% if flash[:col].present? && flash[:row].present? %>
+    <% @col   = flash[:col].to_i %>
+    <% @row   = flash[:row].to_i %>
+  <% end %>
+
+  <% if flash[:names].present? %>
+    <% @names = flash[:names] %>
+  <% end %>
+
+  <%= render 'update_seat_form' %>
+
+  <%= render 'add_data_form' %>
+
+  <%= render 'delete_data_form' %>
+  
+</div>
