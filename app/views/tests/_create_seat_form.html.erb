@@ -1,0 +1,57 @@
+<%= form_with(url: test_path) do |f| %>
+
+    <%= f.label :col, "横の席数" %> <br>
+    <%= f.select :col, (1..8).to_a, { selected: @col }, class: 'form-control' %> <br>
+
+    <%= f.label :row, "縦の席数" %> <br>
+    <%= f.select :row, (1..8).to_a, { selected: @row }, class: 'form-control' %> <br>
+
+    <table>
+      <thead>
+        <tr>
+          <th colspan="<%= @col %>">
+            <h3>
+              席替えの自動生成
+            </h3>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @row.times do |i| %>
+          <tr>
+            <% @col.times do |j| %>
+              <td>
+                  <%= f.label "user_name#{(j+1) + (i*@col)}", "生徒名(#{(j+1) + (i*@col)})" %> <br>
+                  <%= f.text_field "user_name#{(j+1) + (i*@col)}", value: @names[((j+1) + (i*@col))-1], class: 'form-control' %> <br>
+
+                  <%= f.label("user#{(j+1) + (i*@col)}_fixed", "座席の固定") %>
+                  <% if flash["user#{(j+1) + (i*@col)}_fixed"] %>
+                    <%= f.check_box "user#{(j+1) + (i*@col)}_fixed", {checked: true}, true, false %> <br>
+                  <% else %>
+                    <%= f.check_box "user#{(j+1) + (i*@col)}_fixed", {}, true, false %> <br>
+                  <% end %>
+                  
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% if @names.any? { |name| name.present? } %>
+
+      <div class="shuffle_btn">
+        <%= f.label('shuffle', "座席のシャッフル") %>
+
+        <% if flash[:shuffle] %>
+          <%= f.check_box "shuffle", {checked: true}, true, false %> <br>
+        <% else %>
+          <%= f.check_box "shuffle", {}, true, false %> <br>
+        <% end %>
+      </div>
+
+    <% end %>
+
+    <%= f.submit "座席の作成 / 座席のシャッフル", class: "btn btn-primary" %>
+
+  <% end %>
