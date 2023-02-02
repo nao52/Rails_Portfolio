@@ -25,17 +25,22 @@
 
               <% @index = (j+1) + (i*@col) %>
               <% flash["user#{@index}_fixed"] ? @fixed_check = true : @fixed_check = false %>
+              <% flash["disable#{@index}"] ? @disable_check = true : @disable_check = false %>
               
               <td>
 
-                <%= f.label "user_name#{@index}", "生徒名(#{@index})" %> <br>
-                <%= f.text_field "user_name#{@index}", value: @names[(@index)-1], class: 'form-control' %> <br>
+                <% unless flash["disable#{@index}"] %>
 
-                <%= f.label("user#{@index}_fixed", "座席の固定") %>
-                <%= f.check_box "user#{@index}_fixed", {checked: @fixed_check}, true, false %> <br>
+                  <%= f.label "user_name#{@index}", "生徒名(#{@index})" %> <br>
+                  <%= f.text_field "user_name#{@index}", value: @names[(@index)-1], class: 'form-control' %> <br>
+
+                  <%= f.label("user#{@index}_fixed", "座席の固定") %>
+                  <%= f.check_box "user#{@index}_fixed", {checked: @fixed_check}, true, false %> <br>
+
+                <% end %>
 
                 <%= f.label("disable#{@index}", "使用しない") %>
-                <%= f.check_box "disable#{@index}", {}, true, false %> <br>
+                <%= f.check_box "disable#{@index}", {checked: @disable_check}, true, false %> <br>
                   
               </td>
             <% end %>
