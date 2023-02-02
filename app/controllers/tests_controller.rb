@@ -40,6 +40,8 @@ class TestsController < ApplicationController
     flash[:col] = col
     flash[:row] = row
     flash[:names] = user_names
+
+    flash[:test3] = true
     
     redirect_to test_url
   end
