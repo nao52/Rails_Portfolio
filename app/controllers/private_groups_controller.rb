@@ -43,7 +43,7 @@ class PrivateGroupsController < ApplicationController
   end
 
   def members
-    @users = @group.members
+    @users = @group.members.page(params[:page]).per(30)
   end
 
   private
