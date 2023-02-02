@@ -1,7 +1,7 @@
 <%= form_with(url: login_path, scope: :session) do |f| %>
 
-<div><%= f.hidden_field :email,    :value => "test1@net.com" %></div>
-<div><%= f.hidden_field :password, :value => "password" %></div>
+<div><%= f.hidden_field :email,    :value => "guest_user@example.com" %></div>
+<div><%= f.hidden_field :password, :value => "nagenage" %></div>
 
 <%= f.submit "ゲストとしてログイン", class: "btn btn-primary" %>
 <% end %>

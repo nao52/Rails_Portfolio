@@ -34,18 +34,31 @@ KindsOfSchool.create!( name: "公立/中学" )
 KindsOfSchool.create!( name: "公立/高校" )
 KindsOfSchool.create!( name: "公立/中学高校" )
 
+# 管理ユーザーの作成
+User.create!( name:                   "Nao",
+              email:                  "admin_user@example.com",
+              password:               "nagenage",
+              password_confirmation:  "nagenage",
+              subject_id:             3,
+              club_id:                4,
+              kinds_of_school_id:     3
+            )
+
 # テストユーザーの作成
 subject_size = Subject.all.size
 club_size = Club.all.size
 kinds_of_school_size = KindsOfSchool.all.size
-100.times do |n|
-  name = "テストユーザー#{n+1}"
-  email = "test#{n+1}@net.com"
-  password = "password"
+
+names = ["青山優雅", "芦戸三奈", "蛙吹梅雨", "飯田天哉", "麗日お茶子", "尾白猿夫", "上鳴電気", "切島鋭児郎", "口田甲司", "砂藤力道", "障子目蔵", "耳郎響香", "瀬呂範太", "常闇踏陰", "轟焦凍", "葉隠透", "爆豪勝己", "緑谷出久", "峰田実", "八百万百", "磯貝悠馬", "岡島大河", "木村正義", "菅谷創介", "杉野友人", "竹林考太郎", "千葉龍之介", "寺坂竜馬", "前原陽斗", "三村航輝", "村松拓也", "吉田大成", "岡野ひなた", "奥田愛美", "片岡メグ", "神崎有希子", "倉橋陽菜乃", "中村莉桜", "狭間綺羅々", "速水凛香", "原寿美鈴", "不破優月", "矢田桃花", "自律思考固定砲台", "堀部 イトナ", "秋元真夏", "生田 絵梨花", "生駒 里奈", "伊藤寧々", "伊藤万理華", "井上小百合", "衛藤美彩", "川後陽菜", "川村真洋", "齋藤飛鳥", "斎藤ちはる", "斉藤優里", "桜井玲香", "白石麻衣", "高山一実", "中田花奈", "中元日芽香", "永島聖羅", "西野七瀬", "能條愛未", "橋本奈々未", "畠中清羅", "樋口日奈", "深川麻衣", "星野みなみ", "松村 沙友理", "若月佑美", "和田 まあや", "ナゲ太郎", "ナゲ助", "ナゲ次郎"]
+
+names.each_with_index do |name, index|
+  user_name = name
+  email = "example#{index + 1}@example.com"
+  password = "nagenage"
   subject_id = rand(subject_size) + 1
   club_id = rand(club_size) + 1
   kinds_of_school_id = rand(kinds_of_school_size) + 1
-  User.create!( name:                   name,
+  User.create!( name:                   user_name,
                 email:                  email,
                 password:               password,
                 password_confirmation:  password,
@@ -55,20 +68,47 @@ kinds_of_school_size = KindsOfSchool.all.size
               )
 end
 
+# ゲストユーザーの作成
+User.create!( name:                   "Guest",
+              email:                  "guest_user@example.com",
+              password:               "nagenage",
+              password_confirmation:  "nagenage",
+              subject_id:             2,
+              club_id:                1,
+              kinds_of_school_id:     4
+            )
+
+# 100.times do |n|
+#   name = "テストユーザー#{n+1}"
+#   email = "test#{n+1}@net.com"
+#   password = "password"
+#   subject_id = rand(subject_size) + 1
+#   club_id = rand(club_size) + 1
+#   kinds_of_school_id = rand(kinds_of_school_size) + 1
+#   User.create!( name:                   name,
+#                 email:                  email,
+#                 password:               password,
+#                 password_confirmation:  password,
+#                 subject_id:             subject_id,
+#                 club_id:                club_id,
+#                 kinds_of_school_id:     kinds_of_school_id
+#               )
+# end
+
 # データ作成のためのユーザーをセット
 users = User.all
 admin_user     = users.first
 non_admin_user = users.second 
 
 # ユーザーフォローのリレーションシップを作成
-following = users[2..80]
-followers = users[21..100]
+following = users[2..50]
+followers = users[21..76]
 following.each { |followed| admin_user.follow(followed) }
 followers.each { |follower| follower.follow(admin_user) }
 
 # subject_posts_tableにテストデータをセット
 100.times do |n|
-  user_id = rand(5) + 1
+  user_id = rand(5) + 2
   user = User.find(user_id)
   content = "テスト#{n+1}"
   subject_id = rand(subject_size) + 1
@@ -78,7 +118,7 @@ end
 
 # club_posts_tableにテストデータをセット
 100.times do |n|
-  user_id = rand(5) + 1
+  user_id = rand(5) + 2
   user = User.find(user_id)
   content = "テスト#{n+1}"
   club_id = rand(club_size) + 1
@@ -88,7 +128,7 @@ end
 
 # kinds_of_school_posts_tableにテストデータをセット
 100.times do |n|
-  user_id = rand(5) + 1
+  user_id = rand(5) + 2
   user = User.find(user_id)
   content = "テスト#{n+1}"
   kinds_of_school_id = rand(kinds_of_school_size) + 1
@@ -123,8 +163,10 @@ end
 
 # ユーザーのグループ参加状況(participations_table)にテストデータをセット
 groups = PrivateGroup.all
-groups.each { |group| admin_user.join(group) }
-groups.each { |group| non_admin_user.join(group) }
+group_users = users[0..9]
+group_users.each do |user|
+  groups.each { |group| user.join(group) }
+end
 
 # 出版社情報(publishers_table)にテストデータをセット
 admin_user.publishers.create!( name: "アイシーピー" )
@@ -230,14 +272,16 @@ admin_user.reference_books.create!( title: "くもんの中学基礎がため100
 admin_user.reference_books.create!( title: "高校入試　こわくない",                              publisher_id: 10)
 
 # book_favorites_tableにテストデータをセット
-books = ReferenceBook.all[0..49]
-books.each { |book| admin_user.favorite_book(book) }
-books.each { |book| non_admin_user.favorite_book(book) }
+books = ReferenceBook.all
+book_favorite_users = users[0..9]
+book_favorite_users.each do |user|
+  books.each { |book| user.favorite_book(book) }
+end
 
 # book_reviews_tableにテストデータをセット
 reference_book_size = ReferenceBook.all.size
 100.times do |n|
-  user_id = rand(5) + 1
+  user_id = rand(5) + 2
   user = User.find(user_id)
   content = "テスト#{n+1}"
   reference_book_id = rand(reference_book_size) + 1

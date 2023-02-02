@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
 
   def new
+    if logged_in?
+      redirect_to current_user, status: :see_other
+    end
   end
 
   def create
