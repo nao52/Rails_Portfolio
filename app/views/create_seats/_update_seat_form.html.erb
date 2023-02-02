@@ -1,6 +1,6 @@
 <% @shuffle_check = true if flash[:shuffle] %>
 
-<%= form_with(url: test_path) do |f| %>
+<%= form_with(url: seat_update_path) do |f| %>
 
     <%= f.label :col, "横の席数" %> <br>
     <%= f.select :col, (1..8).to_a, { selected: @col }, class: 'form-control' %> <br>

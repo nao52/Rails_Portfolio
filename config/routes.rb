@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   root "application#hello"
-  get     "/signup",    to: "users#new"
-  get     "/login",     to: "sessions#new"
-  post    "/login",     to: "sessions#create"
-  delete  "/logout",    to: "sessions#destroy"
+  get     "/signup",   to: "users#new"
+  get     "/login",    to: "sessions#new"
+  post    "/login",    to: "sessions#create"
+  delete  "/logout",   to: "sessions#destroy"
+
+  get     "/seat/show",         to: "create_seats#show"
+  post    "/seat/update",       to: "create_seats#update"
+  post    "/seat/add_data",     to: "create_seats#add_data"
+  post    "/seat/delete_data",  to: "create_seats#delete_data"
+
   resources :users do
     member do
       get :following, :followers, :joinings, :worksheets, :favorite_books, :favorite_worksheets
@@ -42,8 +48,4 @@ Rails.application.routes.draw do
   resources :worksheet_favorites,     only: [:create, :destroy]
   resources :book_reviews,            only: [:create, :destroy]
 
-  get     "/test",              to: "tests#seat_create"
-  post    "/test",              to: "tests#crate_seats"
-  post    "/test/add_data",     to: "tests#add_data"
-  post    "/test/delete_data",  to: "tests#delete_data"
 end
