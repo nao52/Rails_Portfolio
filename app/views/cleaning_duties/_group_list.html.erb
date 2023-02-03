@@ -1,0 +1,27 @@
+<div class="group_list">
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3">
+          <h3>グループリスト</h3>
+        </th>
+      </tr>
+      <tr>
+        <th>グループ名</th>
+        <th>人数(男子)</th>
+        <th>人数(女子)</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @group_num.times do |n| %>
+        <tr>
+          <td><%= "グループ#{n+1}" %></td>
+          <td>男子の数</td>
+          <td>女子の数</td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+</div>
