@@ -27,3 +27,21 @@
     margin: 10px 0;
   }
 }
+
+.cleaning_duty {
+  table {
+    border: solid;
+    table-layout: fixed;
+    width: 100%;
+    th {
+      border: solid;
+      text-align: center;
+      height: 30px;
+    }
+    td {
+      border: solid;
+      text-align: center;
+      height: 30px;
+    }
+  }
+}

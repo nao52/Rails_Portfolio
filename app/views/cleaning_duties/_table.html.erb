@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>生徒名</th>
+      <th>性別</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @student_num.times do |n| %>
+      <tr>
+        <td><%= "ナゲ太郎#{n+1}" %></td>
+        <td>男 or 女</td>
+      </tr>  
+    <% end %>
+    
+  </tbody>
+</table>
