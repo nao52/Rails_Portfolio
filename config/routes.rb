@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   post    "/seat/add_data",     to: "create_seats#add_data"
   post    "/seat/delete_data",  to: "create_seats#delete_data"
 
-  get     "/cleaning_duty/show",         to: "cleaning_duties#show"
-  post    "/cleaning_duty/update_group", to: "cleaning_duties#update_group"
+  get     "/cleaning_duty/show",    to: "cleaning_duties#show"
+  post    "/cleaning_duty/update",  to: "cleaning_duties#update"
 
   resources :users do
     member do

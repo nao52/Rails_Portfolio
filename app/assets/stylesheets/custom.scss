@@ -50,10 +50,18 @@
       border: solid;
       text-align: center;
       height: 80px;
+      input {
+        text-align: center;
+      }
       .input-num {
         margin-left: 5px;
-        text-align: center;
       }
     }
   }
+}
+
+.debug {
+  font-size: 18px;
+  border: solid;
+  padding: 10px;
 }
