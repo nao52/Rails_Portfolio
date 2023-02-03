@@ -41,11 +41,19 @@
       border: solid;
       text-align: center;
       height: 30px;
+      .btn {
+        display: block;
+        margin: 0 10px 10px auto;
+      }
     }
     td {
       border: solid;
       text-align: center;
-      height: 30px;
+      height: 80px;
+      .input-num {
+        margin-left: 5px;
+        text-align: center;
+      }
     }
   }
 }

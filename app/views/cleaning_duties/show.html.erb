@@ -1,12 +1,10 @@
-<% @student_num = flash[:student_num].to_i if flash[:student_num] %>
-<% @group_num   = flash[:group_num].to_i if flash[:group_num] %>
+<% @student_size = flash[:student_size] || 32 %>
+<% @group_size   = flash[:group_size] || 4 %>
 
 <% provide(:title, "掃除当番表(自動生成)") %>
 <h1 class="text-center"><%= yield(:title) %></h1>
 
 <div class="cleaning_duty">
-
-  <%= render 'create_list_form' %>
 
   <%= render 'group_list' %>
 
