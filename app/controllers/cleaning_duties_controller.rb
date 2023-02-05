@@ -2,11 +2,21 @@ class CleaningDutiesController < ApplicationController
   before_action :set_hash
 
   def show
-    4.times do |n|
-      @groups["#{n+1}"] = { name: "", boys_size: 4, girls_size: 4, total_size: 8}
+    boys_size  = 4
+    girls_size = 4
+    @group_size    = 4
+    @student_size  = 0
+    @group_size.times do |n|
+      @groups["#{n+1}"] = { name: "", boys_size: boys_size, girls_size: girls_size, total_size: 8}
+      boys_size.times do
+        @student_size += 1
+        @students["#{@student_size}"] = { group_name: "", student_name: "", sex: "男子" }
+      end
+      girls_size.times do
+        @student_size += 1
+        @students["#{@student_size}"] = { group_name: "", student_name: "", sex: "女子" }
+      end
     end
-    @group_size    = @groups.size
-    @student_size  = 32
   end
 
   def update
@@ -20,24 +30,21 @@ class CleaningDutiesController < ApplicationController
       girls_size = params["girls_size#{n+1}"].to_i
       girls_size = 4 if girls_size == 0
       total_size = boys_size + girls_size
-      student_size += boys_size + girls_size
-      @group_names["#{n+1}"] = params["group_name#{n+1}"]
-      @boys_sizes["#{n+1}"] = boys_size
-      @girls_sizes["#{n+1}"] = girls_size
-      name = params["group_name#{n+1}"] || ""
-      @groups["#{n+1}"] = { name: name, boys_size: boys_size, girls_size: girls_size, total_size: total_size }
-    end
-
-    # student_size += (new_group_size - group_size) * 8
-    
-    student_size.times do |n|
-      if params["student_name#{n+1}"].nil?
-        @student_names["#{n+1}"] = ""
-      else
-        @student_names["#{n+1}"] = params["student_name#{n+1}"]
+      group_name = params["group_name#{n+1}"] || ""
+      @groups["#{n+1}"] = { name: group_name, boys_size: boys_size, girls_size: girls_size, total_size: total_size }
+      # 生徒情報をアップデートする
+      boys_size.times do
+        student_size += 1
+        student_name = params["student_name#{student_size}"] || ""
+        @students["#{student_size}"] = { group_name: group_name, student_name: student_name, sex: "男子" }
+      end
+      girls_size.times do
+        student_size += 1
+        student_name = params["student_name#{student_size}"] || ""
+        @students["#{student_size}"] = { group_name: group_name, student_name: student_name, sex: "女子" }
       end
     end
-
+    
     @group_size   = new_group_size
     @student_size = student_size
 
@@ -50,11 +57,8 @@ class CleaningDutiesController < ApplicationController
 
     # 画面表示の際に必要なハッシュ値の初期化
     def set_hash
-      @boys_sizes    = {}
-      @girls_sizes   = {}
-      @group_names   = {}
-      @student_names = {}
       @groups        = {}
+      @students      = {}
     end
     
 
