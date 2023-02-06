@@ -29,6 +29,16 @@ class CalcAbsentsController < ApplicationController
     render 'show', status: :unprocessable_entity
   end
 
+  def set_test_schedule
+    @carriculums = params[:carriculums].split if params[:carriculums].present?
+    30.times do |n|
+      carriculum = @carriculums.shuffle[0]
+      puts "テスト=#{carriculum}"
+      @schedules << carriculum
+    end
+    render 'show', status: :unprocessable_entity
+  end
+
   private
 
     # beforeフィルタ

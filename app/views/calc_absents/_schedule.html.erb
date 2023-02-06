@@ -35,4 +35,12 @@
 
   <% end %>
 
+  <%= form_with(url: calc_absent_add_schedule_path) do |f| %>
+
+    <div><%= hidden_field_tag :carriculums, @carriculums %></div>
+
+    <%= f.submit "テストデータ(日課表)をセット", class: "btn btn-primary" %>
+
+  <% end %>
+
 </div>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post    "/calc_absent/carriculum",      to: "calc_absents#set_curriculum"
   post    "/calc_absent/add_carriculum",  to: "calc_absents#set_test_carriculum"
   post    "/calc_absent/schedule",        to: "calc_absents#schedule"
+  post    "/calc_absent/add_schedule",    to: "calc_absents#set_test_schedule"
 
   resources :users do
     member do
