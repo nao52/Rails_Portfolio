@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get     "/cleaning_duty/show",    to: "cleaning_duties#show"
   post    "/cleaning_duty/update",  to: "cleaning_duties#update"
 
+  get     "/calc_absent/show",  to: "calc_absents#show"
+
   resources :users do
     member do
       get :following, :followers, :joinings, :worksheets, :favorite_books, :favorite_worksheets
