@@ -1,5 +1,3 @@
-<% @shuffle_check = true if flash[:shuffle] %>
-
 <%= form_with(url: seat_update_path) do |f| %>
 
     <%= f.label :col, "横の席数" %> <br>
@@ -23,24 +21,24 @@
           <tr>
             <% @col.times do |j| %>
 
-              <% @index = (j+1) + (i*@col) %>
-              <% flash["user#{@index}_fixed"] ? @fixed_check = true : @fixed_check = false %>
-              <% flash["disable#{@index}"] ? @disable_check = true : @disable_check = false %>
+              <% @seat_no = (j+1) + (i*@col) %>
+              <% @fixed_seat["#{@seat_no}"] = false if @fixed_seat["#{@seat_no}"].nil? %>
+              <% @disabled_seat["#{@seat_no}"] = false if @disabled_seat["#{@seat_no}"].nil? %>
               
               <td>
 
-                <% unless flash["disable#{@index}"] %>
+                <% unless @disabled_seat["#{@seat_no}"] %>
 
-                  <%= f.label "user_name#{@index}", "生徒名(#{@index})" %> <br>
-                  <%= f.text_field "user_name#{@index}", value: @names[(@index)-1], class: 'form-control' %> <br>
+                  <%= f.label "user_name#{@seat_no}", "生徒名(#{@seat_no})" %> <br>
+                  <%= f.text_field "user_name#{@seat_no}", value: @names[(@seat_no)-1], class: 'form-control text-center' %> <br>
 
-                  <%= f.label("user#{@index}_fixed", "座席の固定") %>
-                  <%= f.check_box "user#{@index}_fixed", {checked: @fixed_check}, true, false %> <br>
+                  <%= f.label("fixed_seat#{@seat_no}", "座席の固定") %>
+                  <%= f.check_box "fixed_seat#{@seat_no}", {checked: @fixed_seat["#{@seat_no}"]}, true, false %> <br>
 
                 <% end %>
 
-                <%= f.label("disable#{@index}", "使用しない") %>
-                <%= f.check_box "disable#{@index}", {checked: @disable_check}, true, false %> <br>
+                <%= f.label("disable_seat#{@seat_no}", "使用しない") %>
+                <%= f.check_box "disable_seat#{@seat_no}", {checked: @disabled_seat["#{@seat_no}"]}, true, false %> <br>
                   
               </td>
             <% end %>
@@ -53,7 +51,7 @@
 
       <div class="shuffle_btn">
         <%= f.label('shuffle', "座席のシャッフル") %>
-        <%= f.check_box "shuffle", {checked: @shuffle_check}, true, false %> <br>
+        <%= f.check_box "shuffle", {checked: @shuffle}, true, false %> <br>
       </div>
 
     <% end %>
