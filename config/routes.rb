@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get     "/calc_absent/show",        to: "calc_absents#show"
   post    "/calc_absent/carriculum",  to: "calc_absents#set_curriculum"
+  post    "/calc_absent/add_data",    to: "calc_absents#set_test_data"
   post    "/calc_absent/schedule",    to: "calc_absents#schedule"
 
   resources :users do
