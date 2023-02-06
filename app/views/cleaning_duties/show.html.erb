@@ -1,14 +1,18 @@
 <% provide(:title, "掃除当番表(自動生成)") %>
 <h1 class="text-center"><%= yield(:title) %></h1>
 
-<div class="debug">
-  <%= "グループの数 = #{@group_size}" %> <br>
-  <%= "生徒の数 = #{@student_size}" %> <br>
-  <%= "グループ情報 = #{@groups}" %> <br>
-  <%= "グループ情報(グループ数) = #{@groups.size}" %> <br>
-  <%= "生徒情報 = #{@students}" %> <br>
-  <%= "生徒情報(生徒数) = #{@students.size}" %> <br>
-</div>
+<% if Rails.env.development? %>
+
+  <div class="debug">
+    <%= "グループの数 = #{@group_size}" %> <br>
+    <%= "生徒の数 = #{@student_size}" %> <br>
+    <%= "グループ情報 = #{@groups}" %> <br>
+    <%= "グループ情報(グループ数) = #{@groups.size}" %> <br>
+    <%= "生徒情報 = #{@students}" %> <br>
+    <%= "生徒情報(生徒数) = #{@students.size}" %> <br>
+  </div>
+  
+<% end %>
 
 <div class="cleaning_duty">
 
