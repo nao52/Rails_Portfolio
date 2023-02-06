@@ -60,6 +60,16 @@
         <th colspan="3">
           <h3><%= "生徒リスト (生徒数:#{@student_size}人)" %></h3>
           <%= f.submit "生徒情報のアップデート", class: "btn btn-primary" %>
+          <div class="text-right">
+            <%= f.label("add_data", "テストデータの導入") %>
+            <%= f.check_box "add_data", {checked: false}, true, false %> <br>
+          </div>
+          <div class="text-right">
+            <%= f.label("shuffle_boys", "男子生徒のシャッフル") %>
+            <%= f.check_box "shuffle_boys", {checked: @shuffle_boys}, true, false %>
+            <%= f.label("shuffle_girls", "女子生徒のシャッフル") %>
+            <%= f.check_box "shuffle_girls", {checked: @shuffle_girls}, true, false %>
+          </div>
         </th>
       </tr>
       <tr>
