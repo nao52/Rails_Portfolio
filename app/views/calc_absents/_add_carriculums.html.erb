@@ -2,6 +2,10 @@
   <div class="col-md-6">
     <%= form_with(url: calc_absent_carriculum_path) do |f| %>
 
+      <% @schedules.each_with_index do |schedule, index| %>
+        <div><%= hidden_field_tag "schedule#{index+1}", schedule %></div>
+      <% end %>
+
       <% @carriculum_size.times do |n| %>
 
         <%= f.label "carriculums#{n+1}", "科目の追加(#{n+1})" %> <br>
@@ -9,7 +13,7 @@
 
       <% end %>
 
-        <%= f.submit "教科を追加する", class: "btn btn-primary" %>
+      <%= f.submit "教科を追加する", class: "btn btn-primary" %>
 
     <% end %>
 

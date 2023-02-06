@@ -1,30 +1,38 @@
-<%= form_with(url: calc_absent_schedule_path) do |f| %>
+<div class="schedule">
 
-  <table>
-    <thead>
-      <tr>
-        <th colspan="5">日課表</th>
-      </tr>
-      <tr>
-        <th>月</th>
-        <th>火</th>
-        <th>水</th>
-        <th>木</th>
-        <th>金</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% 6.times do |r| %>
+  <%= form_with(url: calc_absent_schedule_path) do |f| %>
+
+    <div><%= hidden_field_tag :carriculums, @carriculums %></div>
+
+    <table>
+      <thead>
         <tr>
-          <% 5.times do |c| %>
-            <% @index = (r+1)+(c*6) %>
-            <td>
-              <%= f.select "suchedule#{@index}", @carriculums, { include_blank: "科目を設定" }, class: 'form-control' %> <br>
-            </td>
-          <% end %>
+          <th colspan="5">日課表</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <tr>
+          <th>月</th>
+          <th>火</th>
+          <th>水</th>
+          <th>木</th>
+          <th>金</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% 6.times do |r| %>
+          <tr>
+            <% 5.times do |c| %>
+              <% @index = (r+1)+(c*6) %>
+              <td>
+                <%= f.select "suchedule#{@index}", @carriculums, { include_blank: "科目を設定", selected: @schedules[@index-1] }, class: 'form-control' %> <br>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<% end %>
+    <%= f.submit "日課表に科目を設定", class: "btn btn-primary" %>
+
+  <% end %>
+
+</div>
