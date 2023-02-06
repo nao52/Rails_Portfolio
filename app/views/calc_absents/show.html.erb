@@ -1,2 +1,16 @@
 <% provide(:title, "欠時の自動計算") %>
 <h1 class="text-center"><%= yield(:title) %></h1>
+
+<div class="calc_absent">
+
+  <div class="debug">
+    <%= "科目リスト = #{@carriculums}" %>
+  </div>
+
+  <%= render 'manual' %>
+
+  <%= render 'add_carriculums' %>
+
+  <%= render 'schedule' %>
+
+</div>

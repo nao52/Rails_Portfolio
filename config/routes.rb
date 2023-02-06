@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get     "/cleaning_duty/show",    to: "cleaning_duties#show"
   post    "/cleaning_duty/update",  to: "cleaning_duties#update"
 
-  get     "/calc_absent/show",  to: "calc_absents#show"
+  get     "/calc_absent/show",        to: "calc_absents#show"
+  post    "/calc_absent/carriculum",  to: "calc_absents#set_curriculum"
+  post    "/calc_absent/schedule",    to: "calc_absents#schedule"
 
   resources :users do
     member do
