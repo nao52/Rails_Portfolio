@@ -27,3 +27,41 @@
     margin: 10px 0;
   }
 }
+
+.cleaning_duty {
+  table {
+    border: solid;
+    table-layout: fixed;
+    width: 100%;
+    margin: 20px 0;
+    h3 {
+      margin: 10px 0;
+    }
+    th {
+      border: solid;
+      text-align: center;
+      height: 30px;
+      .btn {
+        display: block;
+        margin: 0 10px 10px auto;
+      }
+    }
+    td {
+      border: solid;
+      text-align: center;
+      height: 80px;
+      input {
+        text-align: center;
+      }
+      .input-num {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.debug {
+  font-size: 18px;
+  border: solid;
+  padding: 10px;
+}
