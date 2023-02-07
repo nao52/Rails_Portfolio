@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_022425) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -187,6 +187,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_022425) do
     t.bigint "subject_id", null: false
     t.bigint "club_id", null: false
     t.bigint "kinds_of_school_id", null: false
+    t.string "carriculum_schedule", default: "", null: false
     t.index ["club_id"], name: "index_users_on_club_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["kinds_of_school_id"], name: "index_users_on_kinds_of_school_id"
