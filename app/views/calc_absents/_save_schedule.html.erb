@@ -1,0 +1,16 @@
+<% if logged_in? && @schedules.size == 30 && @schedules.all? { |schedule| schedule.present? } %>
+
+  <div class="save_schedule">
+  
+    <%= form_with(url: calc_absent_save_schedule_path, scope: :user) do |f| %>
+
+      <div><%= f.hidden_field :schedules, value: @schedules %></div>
+
+      <%= f.submit "日課表をユーザー情報に保存する", class: "btn btn-primary" %>
+
+    <% end %>
+    
+  </div>
+
+
+<% end %>

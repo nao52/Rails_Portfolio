@@ -1,0 +1,15 @@
+<% if @error_messages %>
+
+  <div class="messages error_messages">
+    <p><%= "『#{@error_messages}』" %></p>
+  </div>
+  
+<% end %>
+
+<% if flash[:success] %>
+
+  <div class="messages success_messages">
+    <p><%= "『#{flash[:success]}』" %></p>
+  </div>
+
+<% end %>

@@ -1,6 +1,24 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.messages {
+  padding: 12px;
+  text-align: center;
+  font-size: 24px;
+  color: red;
+  p {
+    margin: 0;
+  }
+}
+
+.error_messages {
+  color: red;
+}
+
+.success_messages {
+  color: limegreen;
+}
+
 .create_seats {
   h3 {
     height: 80px;

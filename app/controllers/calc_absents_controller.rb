@@ -2,6 +2,7 @@ class CalcAbsentsController < ApplicationController
   before_action :preparation_show
   before_action :set_curriculums, only: [:schedule, :set_test_schedule, :calc_absent]
   before_action :set_schedules,   only: [:set_curriculum, :calc_absent]
+  before_action :logged_in_user,  only: [:save_schedule]
 
   def show
   end
@@ -26,11 +27,24 @@ class CalcAbsentsController < ApplicationController
   end
 
   def set_test_schedule
+    @schedules = []
     30.times do |n|
       carriculum = @carriculums.shuffle[0]
       @schedules << carriculum
     end
     render 'show', status: :unprocessable_entity
+  end
+
+  def save_schedule
+    schedules = user_params[:schedules]
+    if current_user.update(carriculum_schedule: user_params[:schedules])
+      flash[:success] = "日課表の保存に成功しました！！"
+      redirect_to calc_absent_show_url
+    else
+      @schedules = schedules.split
+      @error_messages = "日課表の保存に失敗しました"
+      render 'show', status: :unprocessable_entity
+    end
   end
 
   def calc_absent
@@ -75,14 +89,24 @@ class CalcAbsentsController < ApplicationController
 
   private
 
+    def user_params
+      params.require(:user).permit(:schedules)
+    end
+
     # beforeフィルタ
 
     # ページを表示するために必要な要素をセットする
     def preparation_show
       @carriculum_size = 15
       @carriculums = Carriculum.all.map(&:name)
-      @schedules   = []
       @absents = {}
+
+      if logged_in?
+        @schedules = current_user.carriculum_schedule.split
+      else
+        @schedules = []
+      end
+
     end
 
     def set_curriculums

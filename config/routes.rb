@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   post    "/calc_absent/schedule",        to: "calc_absents#schedule"
   post    "/calc_absent/add_schedule",    to: "calc_absents#set_test_schedule"
   post    "/calc_absent/calc_absent",     to: "calc_absents#calc_absent"
+  post    "/calc_absent/save_schedule",   to: "calc_absents#save_schedule"
 
   resources :users do
     member do
