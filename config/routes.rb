@@ -50,13 +50,17 @@ Rails.application.routes.draw do
       get :members
     end
   end
+  resources :publishers do
+    collection do
+      get :search
+    end
+  end
+  resources :reference_books
   resources :subject_posts,           only: [:create, :destroy]
   resources :club_posts,              only: [:create, :destroy]
   resources :kinds_of_school_posts,   only: [:create, :destroy]
   resources :private_group_posts,     only: [:create, :destroy]
   resources :participations,          only: [:create, :destroy]
-  resources :publishers
-  resources :reference_books
   resources :worksheets,              only: [:index, :new, :create, :edit, :update, :destroy]
   resources :book_favorites,          only: [:create, :destroy]
   resources :worksheet_favorites,     only: [:create, :destroy]
