@@ -66,8 +66,19 @@ class UsersController < ApplicationController
   end
 
   def search
-    name = params[:name]
-    @users = User.where("name LIKE ?", "%#{name}%").page(params[:page]).per(30)
+    case params[:condition]
+    when "name"
+      @name  = params[:name]
+      @users = User.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
+    when "subject"
+      @subject = params[:subject]
+      @users = User.where("subject_id LIKE ?", "%#{@subject}%").page(params[:page]).per(30)
+      @checked_subject = true
+    when "club"
+      @club = params[:club]
+      @users = User.where("club_id LIKE ?", "%#{@club}%").page(params[:page]).per(30)
+      @checked_club = true
+    end
     render 'index'
   end
 
