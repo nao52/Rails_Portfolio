@@ -25,6 +25,9 @@ Rails.application.routes.draw do
     member do
       get :following, :followers, :joinings, :worksheets, :favorite_books, :favorite_worksheets
     end
+    collection do
+      get :search
+    end
   end
   resources :relationships,           only: [:create, :destroy]
   resources :subjects,                only: [:index, :show] do

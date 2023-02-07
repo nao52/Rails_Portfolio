@@ -1,4 +1,24 @@
 <% provide(:title, 'ユーザー一覧') %>
 <h1 class="text-center">ユーザー一覧</h1>
 
+<%= form_with(url: search_users_url, method: :get) do |f| %>
+
+  <h3>検索条件</h3>
+  <%= f.radio_button :condition, "name", checked: true %>
+  <%= f.label :condition, "名前", {value: "name", style: "display: inline-block;" } %>
+  <%= f.radio_button :condition, "subject", checked: @checked_subject %>
+  <%= f.label :condition, "担当教科", {value: "subject", style: "display: inline-block;"} %>
+  <%= f.radio_button :condition, "club", checked: @checked_club %>
+  <%= f.label :condition, "担当部活動", {value: "club", style: "display: inline-block;"} %> <br>
+
+  <%= f.label :name, "名前" %>
+  <%= f.text_field :name, value: @name, class: 'form-control' %> <br>
+
+  <%= f.select :subject, make_select_form(Subject.all), { include_blank: "教科を選択", selected: @subject }, class: 'form-control' %> <br>
+
+  <%= f.select :club, make_select_form(Club.all), { include_blank: "部活動を選択", selected: @club }, class: 'form-control' %> <br>
+
+  <%= f.submit "検索", class: "btn btn-primary" %>
+<% end %>
+
 <%= render 'user' %>
