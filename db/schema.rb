@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_31_061127) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_07_022425) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,6 +57,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_061127) do
     t.index ["reference_book_id"], name: "index_book_reviews_on_reference_book_id"
     t.index ["user_id", "created_at"], name: "index_book_reviews_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_book_reviews_on_user_id"
+  end
+
+  create_table "carriculums", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "club_posts", charset: "utf8mb3", force: :cascade do |t|

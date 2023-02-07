@@ -80,7 +80,7 @@ class CalcAbsentsController < ApplicationController
     # ページを表示するために必要な要素をセットする
     def preparation_show
       @carriculum_size = 15
-      @carriculums = []
+      @carriculums = Carriculum.all.map(&:name)
       @schedules   = []
       @absents = {}
     end
