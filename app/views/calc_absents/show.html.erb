@@ -6,6 +6,7 @@
   <div class="debug">
     <%= "科目リスト = #{@carriculums}" %> <br>
     <%= "日課表 = #{@schedules}" %> <br>
+    <%= "日課表(サイズ) = #{@schedules.size}" %> <br>
   </div>
 
   <%= render 'manual' %>
@@ -13,5 +14,7 @@
   <%= render 'add_carriculums' %>
 
   <%= render 'schedule' %>
+
+  <%= render 'calc_absent' %>
 
 </div>

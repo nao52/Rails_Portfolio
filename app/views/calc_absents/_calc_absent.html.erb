@@ -1,0 +1,30 @@
+<% if @schedules.size == 30 && @schedules.all? { |schedule| schedule.present? } %>
+
+  <div class="calc_absent">
+
+    <h3>日課表から欠時を計算する</h3>
+
+    <%= form_with(url: calc_absent_calc_absent_path) do |f| %>
+
+      <%= f.label "monday", "月曜日課の欠席数を入力" %>
+      <%= f.select "monday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+
+      <%= f.label "tuesday", "火曜日課の欠席数を入力" %>
+      <%= f.select "tuesday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+
+      <%= f.label "wednesday", "水曜日課の欠席数を入力" %>
+      <%= f.select "wednesday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+      
+      <%= f.label "thursday", "木曜日課の欠席数を入力" %>
+      <%= f.select "thursday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+      
+      <%= f.label "friday", "金曜日課の欠席数を入力" %>
+      <%= f.select "friday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+
+      <%= f.submit "欠席日数から欠時数を計算", class: "btn btn-primary" %>
+
+    <% end %>
+
+  </div>
+
+<% end %>
