@@ -38,9 +38,11 @@ class CalcAbsentsController < ApplicationController
   def save_schedule
     schedules = user_params[:schedules]
     if current_user.update(carriculum_schedule: user_params[:schedules])
+      flash[:success] = "日課表の保存に成功しました！！"
       redirect_to calc_absent_show_url
     else
       @schedules = schedules.split
+      @error_messages = "日課表の保存に失敗しました"
       render 'show', status: :unprocessable_entity
     end
   end
