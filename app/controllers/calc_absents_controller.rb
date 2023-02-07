@@ -1,15 +1,12 @@
 class CalcAbsentsController < ApplicationController
-  before_action :set_carriculums
+  before_action :preparation_array
+  before_action :set_curriculums, only: [:schedule, :set_test_schedule, :calc_absent]
+  before_action :set_schedules,   only: [:set_curriculum, :calc_absent]
 
   def show
   end
 
   def set_curriculum
-    30.times do |n|
-      @schedules << params["schedule#{n+1}"]
-    end
-    puts "テスト=#{@schedules}"
-
     @carriculum_size.times do |n|
       @carriculums << params["carriculums#{n+1}"] if params["carriculums#{n+1}"].present?
     end
@@ -22,7 +19,6 @@ class CalcAbsentsController < ApplicationController
   end
 
   def schedule
-    @carriculums = params[:carriculums].split if params[:carriculums].present?
     30.times do |n|
       @schedules << params["suchedule#{n+1}"]
     end
@@ -30,7 +26,6 @@ class CalcAbsentsController < ApplicationController
   end
 
   def set_test_schedule
-    @carriculums = params[:carriculums].split if params[:carriculums].present?
     30.times do |n|
       carriculum = @carriculums.shuffle[0]
       puts "テスト=#{carriculum}"
@@ -39,15 +34,29 @@ class CalcAbsentsController < ApplicationController
     render 'show', status: :unprocessable_entity
   end
 
+  def calc_absent
+
+  end
+
   private
 
     # beforeフィルタ
 
-    # カリキュラム情報をセット
-    def set_carriculums
+    # 空の配列を準備する
+    def preparation_array
       @carriculum_size = 15
       @carriculums = []
       @schedules   = []
+    end
+
+    def set_curriculums
+      @carriculums = params[:carriculums].split if params[:carriculums].present?
+    end
+
+    def set_schedules
+      30.times do |n|
+        @schedules << params["schedule#{n+1}"]
+      end
     end
 
 end
