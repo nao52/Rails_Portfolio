@@ -6,20 +6,26 @@
 
     <%= form_with(url: calc_absent_calc_absent_path) do |f| %>
 
+      <div><%= hidden_field_tag :carriculums, @carriculums %></div>
+      <% @schedules.each_with_index do |schedule, index| %>
+        <div><%= hidden_field_tag "schedule#{index+1}", schedule %></div>
+      <% end %>
+
+
       <%= f.label "monday", "月曜日課の欠席数を入力" %>
-      <%= f.select "monday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+      <%= f.select "monday", (0..35).to_a, {selected: @monday}, class: 'form-control' %> <br>
 
       <%= f.label "tuesday", "火曜日課の欠席数を入力" %>
-      <%= f.select "tuesday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+      <%= f.select "tuesday", (0..35).to_a, {selected: @tuesday}, class: 'form-control' %> <br>
 
       <%= f.label "wednesday", "水曜日課の欠席数を入力" %>
-      <%= f.select "wednesday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+      <%= f.select "wednesday", (0..35).to_a, {selected: @wednesday}, class: 'form-control' %> <br>
       
       <%= f.label "thursday", "木曜日課の欠席数を入力" %>
-      <%= f.select "thursday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+      <%= f.select "thursday", (0..35).to_a, {selected: @thursday}, class: 'form-control' %> <br>
       
       <%= f.label "friday", "金曜日課の欠席数を入力" %>
-      <%= f.select "friday", (1..35).to_a, { include_blank: "選択してください" }, class: 'form-control' %> <br>
+      <%= f.select "friday", (0..35).to_a, {selected: @friday}, class: 'form-control' %> <br>
 
       <%= f.submit "欠席日数から欠時数を計算", class: "btn btn-primary" %>
 

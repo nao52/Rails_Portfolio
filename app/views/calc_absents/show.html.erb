@@ -3,11 +3,16 @@
 
 <div class="calc_absent">
 
-  <div class="debug">
-    <%= "科目リスト = #{@carriculums}" %> <br>
-    <%= "日課表 = #{@schedules}" %> <br>
-    <%= "日課表(サイズ) = #{@schedules.size}" %> <br>
-  </div>
+  <% if Rails.env.development? %>
+
+    <div class="debug">
+      <%= "科目リスト = #{@carriculums}" %> <br>
+      <%= "日課表 = #{@schedules}" %> <br>
+      <%= "日課表(サイズ) = #{@schedules.size}" %> <br>
+      <%= "各科目の欠時数 = #{@absents}" %> <br>
+    </div>
+
+  <% end %>
 
   <%= render 'manual' %>
 
@@ -16,5 +21,7 @@
   <%= render 'schedule' %>
 
   <%= render 'calc_absent' %>
+
+  <%= render 'show_absent' %>
 
 </div>

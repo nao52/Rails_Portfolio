@@ -95,6 +95,24 @@
       padding: 10px 0;
     }
   }
+  .show_absent {
+    table {
+      border: solid;
+      table-layout: fixed;
+      width: 100%;
+      margin: 20px 0;
+      th {
+        border: solid;
+        text-align: center;
+        height: 30px;
+      }
+      td {
+        border: solid;
+        height: 80px;
+        text-align: center;
+      }
+    }
+  }
 }
 
 .debug {
