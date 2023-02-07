@@ -1,0 +1,27 @@
+<% provide(:title, "欠時の自動計算") %>
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<div class="calc_absent">
+
+  <% if Rails.env.development? %>
+
+    <div class="debug">
+      <%= "科目リスト = #{@carriculums}" %> <br>
+      <%= "日課表 = #{@schedules}" %> <br>
+      <%= "日課表(サイズ) = #{@schedules.size}" %> <br>
+      <%= "各科目の欠時数 = #{@absents}" %> <br>
+    </div>
+
+  <% end %>
+
+  <%= render 'manual' %>
+
+  <%= render 'add_carriculums' %>
+
+  <%= render 'schedule' %>
+
+  <%= render 'calc_absent' %>
+
+  <%= render 'show_absent' %>
+
+</div>

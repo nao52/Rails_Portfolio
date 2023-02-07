@@ -13,6 +13,13 @@ Rails.application.routes.draw do
   get     "/cleaning_duty/show",    to: "cleaning_duties#show"
   post    "/cleaning_duty/update",  to: "cleaning_duties#update"
 
+  get     "/calc_absent/show",            to: "calc_absents#show"
+  post    "/calc_absent/carriculum",      to: "calc_absents#set_curriculum"
+  post    "/calc_absent/add_carriculum",  to: "calc_absents#set_test_carriculum"
+  post    "/calc_absent/schedule",        to: "calc_absents#schedule"
+  post    "/calc_absent/add_schedule",    to: "calc_absents#set_test_schedule"
+  post    "/calc_absent/calc_absent",     to: "calc_absents#calc_absent"
+
   resources :users do
     member do
       get :following, :followers, :joinings, :worksheets, :favorite_books, :favorite_worksheets

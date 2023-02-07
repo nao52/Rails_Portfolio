@@ -1,0 +1,33 @@
+<div class="row add_carriculums">
+  <div class="col-md-6">
+    <%= form_with(url: calc_absent_carriculum_path) do |f| %>
+
+      <% @schedules.each_with_index do |schedule, index| %>
+        <div><%= hidden_field_tag "schedule#{index+1}", schedule %></div>
+      <% end %>
+
+      <% @carriculum_size.times do |n| %>
+
+        <%= f.label "carriculums#{n+1}", "科目の追加(#{n+1})" %> <br>
+        <%= f.text_field "carriculums#{n+1}", value: @carriculums[n], class: 'form-control' %> <br>
+
+      <% end %>
+
+      <%= f.submit "教科を追加する", class: "btn btn-primary" %>
+
+    <% end %>
+
+    <%= form_with(url: calc_absent_add_carriculum_path) do |f| %>
+      <%= f.submit "テストデータをセット", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+  <div class="col-md-6">
+    <h3>科目リスト</h3>
+    <ul>
+      <% @carriculums.size.times do |n| %>
+        <li><%= @carriculums[n] %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
