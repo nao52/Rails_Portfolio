@@ -66,19 +66,31 @@ class UsersController < ApplicationController
   end
 
   def search
+
     case params[:condition]
+
     when "name"
       @name  = params[:name]
       @users = User.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
+
     when "subject"
       @subject = params[:subject]
       @users = User.where("subject_id LIKE ?", "%#{@subject}%").page(params[:page]).per(30)
       @checked_subject = true
+
     when "club"
       @club = params[:club]
       @users = User.where("club_id LIKE ?", "%#{@club}%").page(params[:page]).per(30)
       @checked_club = true
     end
+
+    if @users.size == 0
+      @error_messages = "該当するユーザーが見つからなかったので、全てのユーザーを表示します。"
+      @users = User.all.page(params[:page]).per(30)
+    else
+      @messages = "#{@users.size}件のユーザーが見つかりました！"
+    end
+
     render 'index'
   end
 

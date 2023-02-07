@@ -1,3 +1,11 @@
+<% if @messages %>
+
+  <div class="messages">
+    <p><%= "『#{@messages}』" %></p>
+  </div>
+  
+<% end %>
+
 <% if @error_messages %>
 
   <div class="messages error_messages">
