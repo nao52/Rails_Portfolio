@@ -65,6 +65,12 @@ class UsersController < ApplicationController
     @worksheets = @user.favorite_worksheets
   end
 
+  def search
+    name = params[:name]
+    @users = User.where("name LIKE ?", "%#{name}%").page(params[:page]).per(30)
+    render 'index'
+  end
+
   private
 
     def user_params
