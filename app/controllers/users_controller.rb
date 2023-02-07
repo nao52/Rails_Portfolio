@@ -70,6 +70,13 @@ class UsersController < ApplicationController
     case params[:condition]
 
     when "name"
+
+      if @name.empty?
+        @users = User.all.page(params[:page]).per(30)
+        @error_messages = "ユーザー名を入力してください"
+        return render 'index'
+      end
+
       @name  = params[:name]
       @users = User.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
 
