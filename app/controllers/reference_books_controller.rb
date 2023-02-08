@@ -46,6 +46,29 @@ class ReferenceBooksController < ApplicationController
     redirect_back(fallback_location: root_url, status: :see_other)
   end
 
+  def search
+    @title  = params[:title]
+
+    puts "タイトル = #{@title}"
+
+    if @title.empty?
+      @reference_books = ReferenceBook.all.page(params[:page]).per(30)
+      @error_messages = "出版社名を入力してください"
+      return render 'index'
+    end
+
+    @reference_books = ReferenceBook.where("title LIKE ?", "%#{@title}%").page(params[:page]).per(30)
+
+    if @reference_books.size == 0
+      @reference_books = ReferenceBook.all.page(params[:page]).per(30)
+      @error_messages = "該当する出版社が見つからなかったので、全ての出版社を表示します。"
+    else
+      @messages = "#{@reference_books.size}件の出版社が見つかりました！"
+    end
+
+    render 'index'
+  end
+
   private
 
     def reference_book_params

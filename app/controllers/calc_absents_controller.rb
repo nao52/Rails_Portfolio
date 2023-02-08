@@ -20,6 +20,7 @@ class CalcAbsentsController < ApplicationController
   end
 
   def schedule
+    @schedules = []
     30.times do |n|
       @schedules << params["suchedule#{n+1}"]
     end

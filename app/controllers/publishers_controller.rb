@@ -53,7 +53,7 @@ class PublishersController < ApplicationController
       return render 'index'
     end
 
-    @publishers = User.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
+    @publishers = Publisher.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
 
     if @publishers.size == 0
       @publishers = Publisher.all.page(params[:page]).per(30)
