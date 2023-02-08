@@ -55,7 +55,11 @@ Rails.application.routes.draw do
       get :search
     end
   end
-  resources :reference_books
+  resources :reference_books do
+    collection do
+      get :search
+    end
+  end
   resources :subject_posts,           only: [:create, :destroy]
   resources :club_posts,              only: [:create, :destroy]
   resources :kinds_of_school_posts,   only: [:create, :destroy]
