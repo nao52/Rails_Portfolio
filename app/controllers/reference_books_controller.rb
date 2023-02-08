@@ -49,8 +49,6 @@ class ReferenceBooksController < ApplicationController
   def search
     @title  = params[:title]
 
-    puts "タイトル = #{@title}"
-
     if @title.empty?
       @reference_books = ReferenceBook.all.page(params[:page]).per(30)
       @error_messages = "出版社名を入力してください"

@@ -49,11 +49,6 @@ class CalcAbsentsController < ApplicationController
   end
 
   def calc_absent
-    @monday    = params[:monday].to_i
-    @tuesday   = params[:tuesday].to_i
-    @wednesday = params[:wednesday].to_i
-    @thursday  = params[:thursday].to_i
-    @friday    = params[:friday].to_i
 
     # 日課表から重複を取り除く
     courses = @schedules.uniq
@@ -64,25 +59,20 @@ class CalcAbsentsController < ApplicationController
     end
 
     # 各曜日の欠席数を計算
-    carriculum_monday = @schedules[0..5]
-    carriculum_monday.each do |carriculum|
-      @absents["#{carriculum}"] += @monday
+    @schedules[0..5].each do |carriculum|
+      @absents["#{carriculum}"] += params[:monday].to_i
     end
-    carriculum_tuesday = @schedules[6..11]
-    carriculum_tuesday.each do |carriculum|
-      @absents["#{carriculum}"] += @tuesday
+    @schedules[6..11].each do |carriculum|
+      @absents["#{carriculum}"] += params[:tuesday].to_i
     end
-    carriculum_wednesday = @schedules[12..17]
-    carriculum_wednesday.each do |carriculum|
-      @absents["#{carriculum}"] += @wednesday
+    @schedules[12..17].each do |carriculum|
+      @absents["#{carriculum}"] += params[:wednesday].to_i
     end
-    carriculum_thursday = @schedules[18..23]
-    carriculum_thursday.each do |carriculum|
-      @absents["#{carriculum}"] += @thursday
+    @schedules[18..23].each do |carriculum|
+      @absents["#{carriculum}"] += params[:thursday].to_i
     end
-    carriculum_friday = @schedules[24..29]
-    carriculum_friday.each do |carriculum|
-      @absents["#{carriculum}"] += @friday
+    @schedules[24..29].each do |carriculum|
+      @absents["#{carriculum}"] += params[:friday].to_i
     end
 
     render 'show', status: :unprocessable_entity
