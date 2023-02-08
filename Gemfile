@@ -18,6 +18,8 @@ gem "bootsnap",                   "1.12.0", require: false
 
 group :development, :test do
   gem "debug",   "1.5.0", platforms: %i[ mri mingw x64_mingw ]
+  gem "rspec-rails", "~> 6.0.0"
+  gem "spring-commands-rspec"
 end
 
 group :development do
