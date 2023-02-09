@@ -25,15 +25,15 @@ RSpec.describe User, type: :model do
   end
 
   it "is invalid without subject_id" do
-    expect(FactoryBot.build(:user, subject_id: "")).to_not be_valid
+    expect(FactoryBot.build(:user, subject_id: nil)).to_not be_valid
   end
 
   it "is invalid without club_id" do
-    expect(FactoryBot.build(:user, club_id: "")).to_not be_valid
+    expect(FactoryBot.build(:user, club_id: nil)).to_not be_valid
   end
 
   it "is invalid without kinds_of_school_id" do
-    expect(FactoryBot.build(:user, kinds_of_school_id: "")).to_not be_valid
+    expect(FactoryBot.build(:user, kinds_of_school_id: nil)).to_not be_valid
   end
 
   it "is valid when name is less than 50 characters" do
@@ -74,6 +74,22 @@ RSpec.describe User, type: :model do
   it "is invalid when password is less than 7 characters" do
     invalid_password = "a" * 7
     expect(FactoryBot.build(:user, password: invalid_password)).to_not be_valid
+  end
+
+  it "is valid with valid email" do
+    valid_emails = %w[ user@example.com USER@foo.COM A_US-ER@foo.bar.org
+                       first.last@foo.jp alice+bob@baz.cn]
+    valid_emails.each do |valid_email|
+      expect(FactoryBot.build(:user, email: valid_email)).to be_valid
+    end
+  end
+
+  it "is invalid with invalid email" do
+    invalid_addresses = %w[user@example,com user_at_foo.org
+      user.name@example. foo@bar_baz.com foo@bar+baz.com]
+    invalid_addresses.each do |invalid_email|
+      expect(FactoryBot.build(:user, email: invalid_email)).to_not be_valid
+    end
   end
 
 end

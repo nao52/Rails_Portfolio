@@ -3,8 +3,8 @@ FactoryBot.define do
     name               { "taro" }
     sequence(:email)   { |n| "test#{n}@example.com" }
     password           { "password" }
-    subject_id         { 1 }
-    club_id            { 1 }
-    kinds_of_school_id { 1 }
+    subject_id         { Subject.first.id }
+    club_id            { Club.first.id }
+    kinds_of_school_id { KindsOfSchool.first.id }
   end
 end
