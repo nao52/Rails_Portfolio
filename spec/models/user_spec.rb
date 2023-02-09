@@ -6,6 +6,8 @@ RSpec.describe User, type: :model do
     FactoryBot.create(:subject)
     FactoryBot.create(:club)
     FactoryBot.create(:kinds_of_school)
+    @user  = FactoryBot.create(:user)
+    @group = FactoryBot.create(:private_group)
   end
 
   let(:user) { FactoryBot.build(:user) }
@@ -121,13 +123,21 @@ RSpec.describe User, type: :model do
     expect(user1.following?(user1)).to be_falsey
   end
 
-  # it "join and leave a group" do
-  #   expect(user1.joining?(user2)).to be_falsey
-  #   user1.follow(user2)
-  #   expect(user1.joining?(user2)).to be_truthy
-  #   expect(user2.followers.include?(user1)).to be_truthy
-  #   user1.unfollow(user2)
-  #   expect(user1.joining?(user2)).to be_falsey
-  # end
+  it "join and leave a group" do
+    expect(user1.joining?(@group)).to be_falsey
+    user1.join(@group)
+    expect(user1.joining?(@group)).to be_truthy
+    expect(@group.members.include?(user1)).to be_truthy
+    user1.leave(@group)
+    expect(user1.joining?(@group)).to be_falsey
+  end
+
+  it "can't leave my group" do
+    group = user1.private_groups.create!( name: "テストグループ" )
+    user1.join(group)
+    expect(user1.joining?(group)).to be_truthy
+    user1.leave(group)
+    expect(user1.joining?(group)).to be_truthy
+  end
 
 end
