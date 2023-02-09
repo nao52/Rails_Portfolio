@@ -17,6 +17,7 @@ AllCops:
     - "config/puma.rb"
     - "app/helpers/*"
     - "app/models/*"
+    - "spec/**/*"
   DisplayCopNames: true
   TargetRubyVersion: 2.6
 
