@@ -17,7 +17,7 @@ AllCops:
     - "config/puma.rb"
     - "app/helpers/*"
     - "app/models/*"
-    - "spec/*helper.rb"
+    - "spec/**/*"
   DisplayCopNames: true
   TargetRubyVersion: 2.6
 
@@ -34,10 +34,6 @@ Layout/LineLength:
 # メソッドの改行ルール
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
-
-# クラスの本体の周りの空の行が構成に一致するかどうか
-Layout/EmptyLinesAroundBlockBody:
-  Enabled: false
 
 # 日本語にコメントを許可
 Style/AsciiComments:
