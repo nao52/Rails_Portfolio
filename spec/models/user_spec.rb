@@ -104,9 +104,10 @@ RSpec.describe User, type: :model do
     expect(duplicate_user).to_not be_valid
   end
 
+  let(:user1) { FactoryBot.create(:user) }
+  let(:user2) { FactoryBot.create(:user) }
+
   it "follow and unfollow a user" do
-    user1 = FactoryBot.create(:user)
-    user2 = FactoryBot.create(:user)
     expect(user1.following?(user2)).to be_falsey
     user1.follow(user2)
     expect(user1.following?(user2)).to be_truthy
@@ -116,9 +117,17 @@ RSpec.describe User, type: :model do
   end
 
   it "can't follow oneself" do
-    user1 = FactoryBot.create(:user)
     user1.follow(user1)
     expect(user1.following?(user1)).to be_falsey
   end
+
+  # it "join and leave a group" do
+  #   expect(user1.joining?(user2)).to be_falsey
+  #   user1.follow(user2)
+  #   expect(user1.joining?(user2)).to be_truthy
+  #   expect(user2.followers.include?(user1)).to be_truthy
+  #   user1.unfollow(user2)
+  #   expect(user1.joining?(user2)).to be_falsey
+  # end
 
 end
