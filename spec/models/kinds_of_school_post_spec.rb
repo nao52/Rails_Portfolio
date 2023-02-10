@@ -3,13 +3,15 @@ require 'rails_helper'
 RSpec.describe KindsOfSchoolPost, type: :model do
 
   before do
-    FactoryBot.create(:subject)
-    FactoryBot.create(:club)
-    FactoryBot.create(:kinds_of_school)
-    FactoryBot.create(:user)
+    @subject         = FactoryBot.create(:subject)
+    @club            = FactoryBot.create(:club)
+    @kinds_of_school = FactoryBot.create(:kinds_of_school)
+    @user            = FactoryBot.create(:user, subject_id: @subject.id,
+                                                club_id:  @club.id,
+                                                kinds_of_school_id: @kinds_of_school.id)
   end
 
-  let(:post) { FactoryBot.build(:kinds_of_school_post) }
+  let(:post) { FactoryBot.build(:kinds_of_school_post, user_id: @user.id, kinds_of_school_id: @kinds_of_school.id) }
 
   it "is valid with content, user_id, kinds_of_school_id" do
     expect(post).to be_valid
