@@ -9,7 +9,7 @@ RSpec.describe WorksheetFavorite, type: :model do
     @user            = FactoryBot.create(:user, subject_id: @subject.id,
                                                 club_id:  @club.id,
                                                 kinds_of_school_id: @kinds_of_school.id)
-    @worksheet       =  FactoryBot.create(:worksheet, user_id: @user.id)
+    @worksheet       = FactoryBot.create(:worksheet, user_id: @user.id)
   end
 
   let(:worksheet_favorite) { @user.worksheet_favorites.build(worksheet_id: @worksheet.id) }

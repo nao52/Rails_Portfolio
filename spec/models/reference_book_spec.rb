@@ -3,14 +3,16 @@ require 'rails_helper'
 RSpec.describe ReferenceBook, type: :model do
 
   before do
-    FactoryBot.create(:subject)
-    FactoryBot.create(:club)
-    FactoryBot.create(:kinds_of_school)
-    FactoryBot.create(:user)
-    FactoryBot.create(:publisher)
+    @subject         = FactoryBot.create(:subject)
+    @club            = FactoryBot.create(:club)
+    @kinds_of_school = FactoryBot.create(:kinds_of_school)
+    @user            = FactoryBot.create(:user, subject_id: @subject.id,
+                                                club_id:  @club.id,
+                                                kinds_of_school_id: @kinds_of_school.id)
+    @publisher       = FactoryBot.create(:publisher, user_id: @user.id)
   end
 
-  let(:book) { FactoryBot.build(:reference_book) }
+  let(:book) { FactoryBot.build(:reference_book, user_id: @user.id, publisher_id: @publisher.id) }
 
   it "is valid with title, user_id, publisher_id, likes_count" do
     expect(book).to be_valid
@@ -49,6 +51,14 @@ RSpec.describe ReferenceBook, type: :model do
   it "is invalid when content is more 141 characters" do
     book.content = "a" * 141
     expect(book).to_not be_valid
+  end
+
+  it "is first for the most likes count" do
+    3.times do
+      FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id, likes_count: 3)
+    end
+    most_likes_count = FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id, likes_count: 10)
+    expect(most_likes_count).to eq(ReferenceBook.first)
   end
 
 end
