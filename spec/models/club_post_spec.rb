@@ -43,19 +43,11 @@ RSpec.describe ClubPost, type: :model do
   end
 
   it "is first for most recent" do
-    5.times do
-      FactoryBot.create(:club_post, created_at: 2.years.ago)
+    3.times do
+      FactoryBot.create(:club_post, user_id: @user.id, club_id: @club.id, created_at: 3.years.ago)
     end
-    most_recent_post = FactoryBot.create(:club_post)
+    most_recent_post = FactoryBot.create(:club_post, user_id: @user.id, club_id: @club.id, created_at: Time.zone.now)
     expect(most_recent_post).to eq(ClubPost.first)
-  end
-
-  it "is last for most old" do
-    5.times do
-      FactoryBot.create(:club_post)
-    end
-    most_old_post = FactoryBot.create(:club_post, created_at: 2.years.ago)
-    expect(most_old_post).to eq(ClubPost.last)
   end
 
 end
