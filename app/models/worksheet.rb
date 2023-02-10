@@ -1,14 +1,16 @@
 class Worksheet < ApplicationRecord
   belongs_to :user
-  validates :user_id, presence: true
   
   has_one_attached :file
-  validates :file, presence: true, content_type: { in: 'application/pdf', message: "フォーマットはPDFにしてください" }
-
+  
   has_many :worksheet_favorites, dependent: :destroy
+  
+  default_scope -> { order(likes_count: :desc) }
   
   validates :name,   presence: true, length: { maximum: 50 }
   validates :detail, length: { maximum: 140 }
+  validates :file, presence: true, content_type: { in: 'application/pdf', message: "フォーマットはPDFにしてください" }
+  validates :user_id, presence: true
+  validates :likes_count, presence: true
 
-  default_scope -> { order(likes_count: :desc) }
 end
