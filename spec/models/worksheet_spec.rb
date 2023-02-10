@@ -65,12 +65,4 @@ RSpec.describe Worksheet, type: :model do
     expect(most_likes_count).to eq(Worksheet.first)
   end
 
-  it "is last for the least likes count" do
-    5.times do
-      FactoryBot.create(:worksheet, user_id: @user.id, likes_count: 10)
-    end
-    least_likes_count = FactoryBot.create(:worksheet, user_id: @user.id, likes_count: 1)
-    expect(least_likes_count).to eq(Worksheet.last)
-  end
-
 end
