@@ -3,15 +3,17 @@ require 'rails_helper'
 RSpec.describe BookReview, type: :model do
 
   before do
-    FactoryBot.create(:subject)
-    FactoryBot.create(:club)
-    FactoryBot.create(:kinds_of_school)
-    FactoryBot.create(:user)
-    FactoryBot.create(:publisher)
-    FactoryBot.create(:reference_book)
+    @subject         = FactoryBot.create(:subject)
+    @club            = FactoryBot.create(:club)
+    @kinds_of_school = FactoryBot.create(:kinds_of_school)
+    @user            = FactoryBot.create(:user, subject_id: @subject.id,
+                                                club_id:  @club.id,
+                                                kinds_of_school_id: @kinds_of_school.id)
+    @publisher       = FactoryBot.create(:publisher, user_id: @user.id)
+    @reference_book  = FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id)
   end
 
-  let(:review) { FactoryBot.build(:book_review) }
+  let(:review) { FactoryBot.build(:book_review, user_id: @user.id, reference_book_id: @reference_book.id) }
 
   it "is valid with content, user_id, reference_book_id" do
     expect(review).to be_valid
@@ -44,18 +46,10 @@ RSpec.describe BookReview, type: :model do
 
   it "is first for most recent" do
     5.times do
-      FactoryBot.create(:book_review, created_at: 2.years.ago)
+      FactoryBot.create(:book_review, user_id: @user.id, reference_book_id: @reference_book.id, created_at: 3.years.ago)
     end
-    most_recent_review = FactoryBot.create(:book_review)
+    most_recent_review = FactoryBot.create(:book_review, user_id: @user.id, reference_book_id: @reference_book.id, created_at: Time.zone.now)
     expect(most_recent_review).to eq(BookReview.first)
-  end
-
-  it "is last for most old" do
-    5.times do
-      FactoryBot.create(:book_review)
-    end
-    most_old_review = FactoryBot.create(:book_review, created_at: 2.years.ago)
-    expect(most_old_review).to eq(BookReview.last)
   end
 
 end

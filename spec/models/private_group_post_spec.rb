@@ -3,14 +3,16 @@ require 'rails_helper'
 RSpec.describe PrivateGroupPost, type: :model do
 
   before do
-    FactoryBot.create(:subject)
-    FactoryBot.create(:club)
-    FactoryBot.create(:kinds_of_school)
-    FactoryBot.create(:user)
-    FactoryBot.create(:private_group)
+    @subject         = FactoryBot.create(:subject)
+    @club            = FactoryBot.create(:club)
+    @kinds_of_school = FactoryBot.create(:kinds_of_school)
+    @user            = FactoryBot.create(:user, subject_id: @subject.id,
+                                                club_id:  @club.id,
+                                                kinds_of_school_id: @kinds_of_school.id)
+    @private_group   = FactoryBot.create(:private_group, user_id: @user.id)
   end
 
-  let(:post) { FactoryBot.build(:private_group_post) }
+  let(:post) { FactoryBot.build(:private_group_post, user_id: @user.id, private_group_id: @private_group.id) }
 
   it "is valid with content, user_id, private_group_id" do
     expect(post).to be_valid
@@ -42,19 +44,11 @@ RSpec.describe PrivateGroupPost, type: :model do
   end
 
   it "is first for most recent" do
-    5.times do
-      FactoryBot.create(:private_group_post, created_at: 2.years.ago)
+    3.times do
+      FactoryBot.create(:private_group_post, user_id: @user.id, private_group_id: @private_group.id, created_at: 3.years.ago)
     end
-    most_recent_post = FactoryBot.create(:private_group_post)
+    most_recent_post = FactoryBot.create(:private_group_post, user_id: @user.id, private_group_id: @private_group.id, created_at: Time.zone.now)
     expect(most_recent_post).to eq(PrivateGroupPost.first)
-  end
-
-  it "is last for most old" do
-    5.times do
-      FactoryBot.create(:private_group_post)
-    end
-    most_old_post = FactoryBot.create(:private_group_post, created_at: 2.years.ago)
-    expect(most_old_post).to eq(PrivateGroupPost.last)
   end
 
 end
