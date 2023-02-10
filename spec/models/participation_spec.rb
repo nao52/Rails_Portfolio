@@ -9,7 +9,7 @@ RSpec.describe Participation, type: :model do
     @user            = FactoryBot.create(:user, subject_id: @subject.id,
                                                 club_id:  @club.id,
                                                 kinds_of_school_id: @kinds_of_school.id)
-    @private_group   = FactoryBot.create(:private_group)
+    @private_group   = FactoryBot.create(:private_group, user_id: @user.id)
   end
 
   let(:participation) { @user.participations.build( private_group_id: @private_group.id ) }

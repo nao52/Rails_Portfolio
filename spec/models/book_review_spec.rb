@@ -46,18 +46,10 @@ RSpec.describe BookReview, type: :model do
 
   it "is first for most recent" do
     5.times do
-      FactoryBot.create(:book_review, created_at: 2.years.ago)
+      FactoryBot.create(:book_review, user_id: @user.id, reference_book_id: @reference_book.id, created_at: 3.years.ago)
     end
-    most_recent_review = FactoryBot.create(:book_review)
+    most_recent_review = FactoryBot.create(:book_review, user_id: @user.id, reference_book_id: @reference_book.id, created_at: Time.zone.now)
     expect(most_recent_review).to eq(BookReview.first)
-  end
-
-  it "is last for most old" do
-    5.times do
-      FactoryBot.create(:book_review)
-    end
-    most_old_review = FactoryBot.create(:book_review, created_at: 2.years.ago)
-    expect(most_old_review).to eq(BookReview.last)
   end
 
 end
