@@ -3,13 +3,15 @@ require 'rails_helper'
 RSpec.describe Publisher, type: :model do
 
   before do
-    FactoryBot.create(:subject)
-    FactoryBot.create(:club)
-    FactoryBot.create(:kinds_of_school)
-    FactoryBot.create(:user)
+    @subject         = FactoryBot.create(:subject)
+    @club            = FactoryBot.create(:club)
+    @kinds_of_school = FactoryBot.create(:kinds_of_school)
+    @user            = FactoryBot.create(:user, subject_id: @subject.id,
+                                                club_id:  @club.id,
+                                                kinds_of_school_id: @kinds_of_school.id)
   end
 
-  let(:publisher) { FactoryBot.create(:publisher) }
+  let(:publisher) { FactoryBot.create(:publisher, user_id: @user.id) }
 
   it "is valid with name, user_id" do
     expect(publisher).to be_valid
