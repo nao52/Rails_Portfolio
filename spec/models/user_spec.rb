@@ -3,11 +3,15 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   before do
-    FactoryBot.create(:subject)
-    FactoryBot.create(:club)
-    FactoryBot.create(:kinds_of_school)
-    @user  = FactoryBot.create(:user)
-    @group = FactoryBot.create(:private_group)
+    @subject         = FactoryBot.create(:subject)
+    @club            = FactoryBot.create(:club)
+    @kinds_of_school = FactoryBot.create(:kinds_of_school)
+    @user            = FactoryBot.create(:user, subject_id: @subject.id,
+                                                club_id:  @club.id,
+                                                kinds_of_school_id: @kinds_of_school.id)
+    @group           = FactoryBot.create(:private_group, user_id: @user.id)
+    @publisher       = FactoryBot.create(:publisher, user_id: @user.id)
+    @book            = FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id)
   end
 
   let(:user) { FactoryBot.build(:user) }
@@ -100,9 +104,8 @@ RSpec.describe User, type: :model do
   end
 
   it "is valid when email is unique" do
-    user.save
-    duplicate_user = user.dup
-    duplicate_user.email = user.email.upcase
+    duplicate_user = @user.dup
+    duplicate_user.email = @user.email.upcase
     expect(duplicate_user).to_not be_valid
   end
 
@@ -138,6 +141,14 @@ RSpec.describe User, type: :model do
     expect(user1.joining?(group)).to be_truthy
     user1.leave(group)
     expect(user1.joining?(group)).to be_truthy
+  end
+
+  it "favorite and unfavorite a book" do
+    expect(@user.favorite_book?(@book)).to be_falsey
+    @user.favorite_book(@book)
+    expect(@user.favorite_book?(@book)).to be_truthy
+    @user.unfavorite_book(@book)
+    expect(@user.favorite_book?(@book)).to be_falsey
   end
 
 end
