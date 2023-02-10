@@ -12,6 +12,7 @@ RSpec.describe User, type: :model do
     @group           = FactoryBot.create(:private_group, user_id: @user.id)
     @publisher       = FactoryBot.create(:publisher, user_id: @user.id)
     @book            = FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id)
+    @worksheet       = FactoryBot.create(:worksheet, user_id: @user.id)
   end
 
   let(:user) { FactoryBot.build(:user) }
@@ -149,6 +150,18 @@ RSpec.describe User, type: :model do
     expect(@user.favorite_book?(@book)).to be_truthy
     @user.unfavorite_book(@book)
     expect(@user.favorite_book?(@book)).to be_falsey
+  end
+
+  it "favorite and unfavorite a worksheet" do
+    likes_count = @worksheet.likes_count
+    expect(@user.favorite_worksheet?(@worksheet)).to be_falsey
+    @user.favorite_worksheet(@worksheet)
+    expect(@user.favorite_worksheet?(@worksheet)).to be_truthy
+    expect(likes_count + 1).to eq(@worksheet.likes_count)
+    likes_count = @worksheet.likes_count
+    @user.unfavorite_worksheet(@worksheet)
+    expect(@user.favorite_worksheet?(@worksheet)).to be_falsey
+    expect(likes_count - 1).to eq(@worksheet.likes_count)
   end
 
 end
