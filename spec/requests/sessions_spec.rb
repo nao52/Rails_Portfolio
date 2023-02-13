@@ -12,6 +12,7 @@ RSpec.describe "Sessions", type: :request do
   end
 
   let(:unprocessable_entity) { 422 }
+  let(:see_other) { 303 }
 
   describe "GET /login" do
     it "render new" do
@@ -60,6 +61,7 @@ RSpec.describe "Sessions", type: :request do
       delete logout_path
       expect(is_logged_in?).to be_falsey
       redirect_to login_path
+      expect(response).to have_http_status(see_other)
       follow_redirect!
       expect(response.body).to match(message("ログアウトしました"))
     end
