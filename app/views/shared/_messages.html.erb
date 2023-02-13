@@ -6,10 +6,10 @@
   
 <% end %>
 
-<% if @error_messages %>
+<% if flash[:danger] %>
 
   <div class="messages error_messages">
-    <p><%= "『#{@error_messages}』" %></p>
+    <p><%= "『#{flash[:danger]}』" %></p>
   </div>
   
 <% end %>

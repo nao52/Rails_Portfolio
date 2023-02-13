@@ -12,15 +12,17 @@ class SessionsController < ApplicationController
       forwarding_url = session[:forwarding_url]
       reset_session
       log_in user
+      flash[:success] = "ログインに成功しました！"
       redirect_to forwarding_url || users_url
     else
-      # エラーメッセージを作成する
+      flash.now[:danger] = "ログインに失敗しました..."
       render 'new', status: :unprocessable_entity
     end
   end
 
   def destroy
     log_out
+    flash[:success] = "ログアウトしました"
     redirect_to login_url, status: :see_other
   end
 
