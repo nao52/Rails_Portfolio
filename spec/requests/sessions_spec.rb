@@ -47,8 +47,10 @@ RSpec.describe "Sessions", type: :request do
     it "redirected forwarding_url" do
       get edit_user_path(@user)
       redirect_to login_url
+      follow_redirect!
+      expect(response.body).to match(message("ログインしてください"))
       login_as(@user)
-      redirect_to edit_user_path(@user)
+      redirect_to edit_user_url(@user)
       follow_redirect!
       expect(response).to render_template("users/edit")
     end
@@ -60,7 +62,7 @@ RSpec.describe "Sessions", type: :request do
       expect(is_logged_in?).to be_truthy
       delete logout_path
       expect(is_logged_in?).to be_falsey
-      redirect_to login_path
+      redirect_to login_url
       expect(response).to have_http_status(see_other)
       follow_redirect!
       expect(response.body).to match(message("ログアウトしました"))

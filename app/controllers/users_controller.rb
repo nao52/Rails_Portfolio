@@ -19,8 +19,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.image.attach(params[:user][:image])
     if @user.save
+      reset_session
+      log_in @user
+      flash[:success] = "ユーザーの新規登録を行いました！"
       redirect_to users_url
     else
+      flash.now[:danger] = "ユーザー登録に失敗しました..."
       render 'new', status: :unprocessable_entity
     end
   end
@@ -31,8 +35,10 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       @user.image.purge if params[:delete_image]
+      flash[:success] = "ユーザーの編集に成功しました！"
       redirect_to @user
     else
+      flash.now[:danger] = "ユーザーの編集に失敗しました..."
       render 'edit', status: :unprocessable_entity
     end
   end
