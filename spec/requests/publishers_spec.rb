@@ -52,6 +52,34 @@ RSpec.describe "Publishers", type: :request do
     end
   end
 
+  describe "POST /publishers/create" do
+    it "is successful create" do
+      login_as(@user)
+      expect {
+        post publishers_path, params: { publisher: { name: "New_Publisher" } }
+      }.to change { Publisher.count }.by(1)
+      follow_redirect!
+      expect(response).to render_template("publishers/index")
+      expect(response.body).to match(message("新しい出版社を登録しました！！"))
+    end
+
+    it "is unsuccessful create" do
+      login_as(@user)
+      expect {
+        post publishers_path, params: { publisher: { name: "" } }
+      }.to_not change { Publisher.count }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("publishers/new")
+      expect(response.body).to match(message("出版社の登録に失敗しました..."))
+    end
+
+    it "post publishers_create as non_login_user" do
+      post publishers_path, params: { publisher: { name: "New_Publisher" } }
+      redirect_to login_url
+      expect(response).to have_http_status(see_other)
+    end
+  end
+
   describe "Get /publishers/edit" do
     it "get publishers_edit as login_user" do
       login_as(@user)
