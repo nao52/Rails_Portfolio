@@ -134,6 +134,44 @@ RSpec.describe "Publishers", type: :request do
     end
   end
 
+  describe "DELETE /publishers/destroy" do
+    it "delete publishers_destroy" do
+      login_as(@user)
+      expect {
+        delete publisher_path(@publisher)
+      }.to change {Publisher.count}.by(-1)
+      expect(response).to have_http_status(see_other)
+      follow_redirect!
+      expect(response).to render_template("publishers/index")
+      expect(response.body).to match(message("出版社を削除しました"))
+    end
+
+    it "can't delete when reference_book is present" do
+      login_as(@user)
+      FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id)
+      expect {
+        delete publisher_path(@publisher)
+      }.to_not change {Publisher.count}
+      redirect_to publishers_url
+      expect(response).to have_http_status(see_other)
+      follow_redirect!
+      expect(response.body).to match(message("こちらの出版社は削除できません"))
+    end
+
+    it "delete publishers_destroy as non_login_user" do
+      delete publisher_path(@publisher)
+      redirect_to login_url
+      expect(response).to have_http_status(see_other)
+    end
+
+    it "delete publishers_destroy as non_correct_user" do
+      login_as(@other_user)
+      delete publisher_path(@publisher)
+      redirect_to root_url
+      expect(response).to have_http_status(see_other)
+    end
+  end
+
   describe "Get /publishers/search" do
     it "shows all publishers when name is empty" do
       get search_publishers_path, params: { name: "" }

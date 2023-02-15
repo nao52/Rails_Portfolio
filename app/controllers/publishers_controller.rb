@@ -1,5 +1,5 @@
 class PublishersController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :edit, :update]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update, :destroy]
 
   def index
@@ -40,11 +40,12 @@ class PublishersController < ApplicationController
   end
 
   def destroy
-    unless @publisher.reference_books.empty?
-      # エラーメッセージ
-      redirect_back(fallback_location: root_url)
+    if @publisher.reference_books.present?
+      flash[:danger] = "こちらの出版社は削除できません"
+      return redirect_to publishers_url, status: :see_other
     end
     @publisher.destroy
+    flash[:success] = "出版社を削除しました"
     redirect_to publishers_url, status: :see_other
   end
 
