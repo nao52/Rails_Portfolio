@@ -52,7 +52,7 @@ RSpec.describe "Publishers", type: :request do
     end
   end
 
-  describe "Get edit /publishers/edit" do
+  describe "Get /publishers/edit" do
     it "get publishers_edit as login_user" do
       login_as(@user)
       get edit_publisher_path(@publisher)
@@ -72,6 +72,30 @@ RSpec.describe "Publishers", type: :request do
       get edit_publisher_path(@publisher)
       redirect_to root_url
       expect(response).to have_http_status(see_other)
+    end
+  end
+
+  describe "Get /publishers/search" do
+    it "shows all publishers when name is empty" do
+      get search_publishers_path, params: { name: "" }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("publishers/index")
+      expect(response.body).to match(message("出版社名を入力してください"))
+    end
+
+    it "shows all publishers when name is invalid" do
+      get search_publishers_path, params: { name: "invalid" }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("publishers/index")
+      expect(response.body).to match(message("該当する出版社が見つからなかったので、全ての出版社を表示します。"))
+    end
+
+    it "shows target publishers when name is valid" do
+      FactoryBot.create(:publisher, user_id: @user.id)
+      get search_publishers_path, params: { name: "テスト" }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("publishers/index")
+      expect(response.body).to match(message("2件の出版社が見つかりました！"))
     end
   end
 end
