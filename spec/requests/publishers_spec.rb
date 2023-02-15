@@ -103,6 +103,37 @@ RSpec.describe "Publishers", type: :request do
     end
   end
 
+  describe "PATCH /publishers/update" do
+    it "is successful update" do
+      login_as(@user)
+      patch publisher_path(@publisher), params: { publisher: { name: "Update_Publisher" } }
+      follow_redirect!
+      expect(response).to render_template("publishers/show")
+      expect(response.body).to match(message("出版社情報の編集に成功しました！！"))
+    end
+
+    it "is unsuccessful update" do
+      login_as(@user)
+      patch publisher_path(@publisher), params: { publisher: { name: "" } }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("publishers/edit")
+      expect(response.body).to match(message("出版社情報の編集に失敗しました..."))
+    end
+
+    it "patch publishers_update as non_login_user" do
+      patch publisher_path(@publisher), params: { publisher: { name: "Update_Publisher" } }
+      redirect_to login_url
+      expect(response).to have_http_status(see_other)
+    end
+
+    it "patch publishers_update as non_correct_user" do
+      login_as(@other_user)
+      patch publisher_path(@publisher), params: { publisher: { name: "Update_Publisher" } }
+      redirect_to root_url
+      expect(response).to have_http_status(see_other)
+    end
+  end
+
   describe "Get /publishers/search" do
     it "shows all publishers when name is empty" do
       get search_publishers_path, params: { name: "" }

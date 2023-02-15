@@ -31,8 +31,10 @@ class PublishersController < ApplicationController
 
   def update
     if @publisher.update(publisher_params)
+      flash[:success] = "出版社情報の編集に成功しました！！"
       redirect_to @publisher
     else
+      flash.now[:danger] = "出版社情報の編集に失敗しました..."
       render 'edit', status: :unprocessable_entity
     end
   end
