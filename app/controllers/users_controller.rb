@@ -76,14 +76,14 @@ class UsersController < ApplicationController
     case params[:condition]
 
     when "name"
+      @name  = params[:name]
 
       if @name.empty?
         @users = User.all.page(params[:page]).per(30)
-        @error_messages = "ユーザー名を入力してください"
-        return render 'index'
+        flash.now[:danger] = "ユーザー名を入力してください"
+        return render 'index', status: :unprocessable_entity
       end
 
-      @name  = params[:name]
       @users = User.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
 
     when "subject"
@@ -98,13 +98,13 @@ class UsersController < ApplicationController
     end
 
     if @users.size == 0
-      @error_messages = "該当するユーザーが見つからなかったので、全てのユーザーを表示します。"
+      flash.now[:danger] = "該当するユーザーが見つからなかったので、全てのユーザーを表示します。"
       @users = User.all.page(params[:page]).per(30)
     else
       @messages = "#{@users.size}件のユーザーが見つかりました！"
     end
 
-    render 'index'
+    render 'index', status: :unprocessable_entity
   end
 
   private

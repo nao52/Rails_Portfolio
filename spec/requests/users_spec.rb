@@ -187,4 +187,43 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "Get /users/search" do
+    it "shows all users when name is empty" do
+      get search_users_path, params: { condition: "name", name: "" }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("users/index")
+      expect(response.body).to match(message("ユーザー名を入力してください"))
+    end
+
+    it "shows target users when checked subject" do
+      FactoryBot.create(:user, subject_id: @subject.id, club_id: @club.id, kinds_of_school_id: @kinds_of_school.id)
+      get search_users_path, params: { condition: "subject", subject: @subject.id }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("users/index")
+      expect(response.body).to match(message("2件のユーザーが見つかりました！"))
+    end
+
+    it "shows target users when checked subject" do
+      FactoryBot.create(:user, subject_id: @subject.id, club_id: @club.id, kinds_of_school_id: @kinds_of_school.id)
+      get search_users_path, params: { condition: "club", club: @club.id }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("users/index")
+      expect(response.body).to match(message("2件のユーザーが見つかりました！"))
+    end
+
+    it "shows all users when name is invalid" do
+      get search_users_path, params: { condition: "name", name: "invalid" }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("users/index")
+      expect(response.body).to match(message("該当するユーザーが見つからなかったので、全てのユーザーを表示します。"))
+    end
+
+    it "shows target users when name is valid" do
+      get search_users_path, params: { condition: "name", name: "michael" }
+      expect(response).to have_http_status(unprocessable_entity)
+      expect(response).to render_template("users/index")
+      expect(response.body).to match(message("1件のユーザーが見つかりました！"))
+    end
+  end
+
 end
