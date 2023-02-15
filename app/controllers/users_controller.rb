@@ -19,8 +19,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.image.attach(params[:user][:image])
     if @user.save
+      reset_session
+      log_in @user
+      flash[:success] = "ユーザーの新規登録を行いました！"
       redirect_to users_url
     else
+      flash.now[:danger] = "ユーザー登録に失敗しました..."
       render 'new', status: :unprocessable_entity
     end
   end
@@ -31,8 +35,10 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       @user.image.purge if params[:delete_image]
+      flash[:success] = "ユーザーの編集に成功しました！"
       redirect_to @user
     else
+      flash.now[:danger] = "ユーザーの編集に失敗しました..."
       render 'edit', status: :unprocessable_entity
     end
   end
@@ -70,14 +76,14 @@ class UsersController < ApplicationController
     case params[:condition]
 
     when "name"
+      @name  = params[:name]
 
       if @name.empty?
         @users = User.all.page(params[:page]).per(30)
-        @error_messages = "ユーザー名を入力してください"
-        return render 'index'
+        flash.now[:danger] = "ユーザー名を入力してください"
+        return render 'index', status: :unprocessable_entity
       end
 
-      @name  = params[:name]
       @users = User.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
 
     when "subject"
@@ -92,13 +98,13 @@ class UsersController < ApplicationController
     end
 
     if @users.size == 0
-      @error_messages = "該当するユーザーが見つからなかったので、全てのユーザーを表示します。"
+      flash.now[:danger] = "該当するユーザーが見つからなかったので、全てのユーザーを表示します。"
       @users = User.all.page(params[:page]).per(30)
     else
       @messages = "#{@users.size}件のユーザーが見つかりました！"
     end
 
-    render 'index'
+    render 'index', status: :unprocessable_entity
   end
 
   private
