@@ -39,14 +39,11 @@ class User < ApplicationRecord
   uniqueness: { case_sensitive: false }
   validates :profile, length: { maximum: 140 }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
+  validates :password, presence: true, length: { in: 8..16 }, allow_nil: true
   validates :image,    content_type:  { in: %w[image/jpeg image/gif image/png],
     message: "形式は「jpeg / gif / png」のいずれかにしてください" },
     size:          { less_than: 5.megabytes,
-      message: "画像は5MB以下にしてください"}
-  validates :subject_id, presence: true
-  validates :club_id, presence: true
-  validates :kinds_of_school_id, presence: true
+                     message: "画像は5MB以下にしてください" }
       
   # ユーザーをフォローする
   def follow(other_user)
