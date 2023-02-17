@@ -56,6 +56,7 @@ RSpec.feature "UsersSignups", type: :feature do
         }.to_not change{ User.count }
 
         expect(page).to have_text("ユーザー登録に失敗しました...")
+        expect(page).to have_css('div#validation_messages')
       end
     end
   end
