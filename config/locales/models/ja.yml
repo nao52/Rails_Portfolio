@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        profile: プロフィール
+        password: パスワード
+        image: プロフィール画像
+        subject: 教科
+        club: 部活動
+        kinds_of_school: 校種
+    errors:
+      messages:
+        blank: は必須項目です
+        required: を選択してください
+        invalid: の形式が不正です
