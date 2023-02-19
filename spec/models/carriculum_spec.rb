@@ -11,6 +11,7 @@ RSpec.describe Carriculum, type: :model do
   it "is invalid without name" do
     carriculum.name = ""
     expect(carriculum).to_not be_valid
+    expect(carriculum.errors.full_messages).to include("カリキュラム名は必須項目です")
   end
 
   it "is valid when name is less than 50 characters" do
@@ -21,6 +22,7 @@ RSpec.describe Carriculum, type: :model do
   it "is invalid when name is more 51 characters" do
     carriculum.name = "a" * 51
     expect(carriculum).to_not be_valid
+    expect(carriculum.errors.full_messages).to include("カリキュラム名は50文字以内で入力してください")
   end
 
 end

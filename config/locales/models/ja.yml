@@ -10,6 +10,11 @@ ja:
         subject: 教科
         club: 部活動
         kinds_of_school: 校種
+      book_review:
+        content: レビュー内容
+      carriculum:
+        name: カリキュラム名
+      
     errors:
       messages:
         blank: は必須項目です

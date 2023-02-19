@@ -13,8 +13,6 @@ class ReferenceBook < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 140 }
-  validates :user_id,      presence: true
-  validates :publisher_id, presence: true
   validates :likes_count,  presence: true
   validates :image,   content_type:  {  in: %w[image/jpeg image/gif image/png],
                                         message: "形式は「jpeg / gif / png」のいずれかにしてください" },

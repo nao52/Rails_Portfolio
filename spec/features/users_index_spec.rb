@@ -9,12 +9,14 @@ RSpec.feature "UsersIndices", type: :feature do
     @user            = FactoryBot.create(:user, subject_id: @subject.id,
                                                 club_id:  @club.id,
                                                 kinds_of_school_id: @kinds_of_school.id)
+
     # 画面表示用のユーザーを作成
     100.times do
       FactoryBot.create(:user, subject_id: @subject.id,
                                club_id:  @club.id,
                                kinds_of_school_id: @kinds_of_school.id)
     end
+
   end
 
   scenario "show users with pagination" do
@@ -27,7 +29,7 @@ RSpec.feature "UsersIndices", type: :feature do
     end
   end
 
-  describe "search users by name" do
+  feature "search users by name" do
     scenario "users found" do
       login(@user)
       visit users_path

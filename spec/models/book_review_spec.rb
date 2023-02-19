@@ -3,12 +3,7 @@ require 'rails_helper'
 RSpec.describe BookReview, type: :model do
 
   before do
-    @subject         = FactoryBot.create(:subject)
-    @club            = FactoryBot.create(:club)
-    @kinds_of_school = FactoryBot.create(:kinds_of_school)
-    @user            = FactoryBot.create(:user, subject_id: @subject.id,
-                                                club_id:  @club.id,
-                                                kinds_of_school_id: @kinds_of_school.id)
+    @user            = FactoryBot.create(:user)
     @publisher       = FactoryBot.create(:publisher, user_id: @user.id)
     @reference_book  = FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id)
   end
@@ -22,6 +17,7 @@ RSpec.describe BookReview, type: :model do
   it "is invalid without content" do
     review.content = ""
     expect(review).to_not be_valid
+    expect(review.errors.full_messages).to include("レビュー内容は必須項目です")
   end
 
   it "is invalid without user_id" do
@@ -42,6 +38,7 @@ RSpec.describe BookReview, type: :model do
   it "is invalid when content is more 141 characters" do
     review.content = "a" * 141
     expect(review).to_not be_valid
+    expect(review.errors.full_messages).to include("レビュー内容は140文字以内で入力してください")
   end
 
   it "is first for most recent" do

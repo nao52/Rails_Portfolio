@@ -3,14 +3,9 @@ require 'rails_helper'
 RSpec.describe BookFavorite, type: :model do
 
   before do
-    @subject         = FactoryBot.create(:subject)
-    @club            = FactoryBot.create(:club)
-    @kinds_of_school = FactoryBot.create(:kinds_of_school)
-    @user            = FactoryBot.create(:user, subject_id: @subject.id,
-                                                club_id:  @club.id,
-                                                kinds_of_school_id: @kinds_of_school.id)
-    @publisher       = FactoryBot.create(:publisher, user_id: @user.id)
-    @book = FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id)
+    @user       = FactoryBot.create(:user)
+    @publisher  = FactoryBot.create(:publisher, user_id: @user.id)
+    @book       = FactoryBot.create(:reference_book, user_id: @user.id, publisher_id: @publisher.id)
   end
 
   let(:book_favorite) { @user.book_favorites.build(reference_book_id: @book.id) }
