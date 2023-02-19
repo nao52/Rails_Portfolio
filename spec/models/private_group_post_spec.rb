@@ -3,12 +3,7 @@ require 'rails_helper'
 RSpec.describe PrivateGroupPost, type: :model do
 
   before do
-    @subject         = FactoryBot.create(:subject)
-    @club            = FactoryBot.create(:club)
-    @kinds_of_school = FactoryBot.create(:kinds_of_school)
-    @user            = FactoryBot.create(:user, subject_id: @subject.id,
-                                                club_id:  @club.id,
-                                                kinds_of_school_id: @kinds_of_school.id)
+    @user            = FactoryBot.create(:user)
     @private_group   = FactoryBot.create(:private_group, user_id: @user.id)
   end
 
@@ -21,6 +16,7 @@ RSpec.describe PrivateGroupPost, type: :model do
   it "is invalid without content" do
     post.content = ""
     expect(post).to_not be_valid
+    expect(post.errors.full_messages).to include("投稿内容は必須項目です")
   end
 
   it "is invalid without user_id" do
@@ -41,6 +37,7 @@ RSpec.describe PrivateGroupPost, type: :model do
   it "is invalid when content is more 141 characters" do
     post.content = "a" * 141
     expect(post).to_not be_valid
+    expect(post.errors.full_messages).to include("投稿内容は140文字以内で入力してください")
   end
 
   it "is first for most recent" do

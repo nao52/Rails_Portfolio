@@ -22,6 +22,11 @@ ja:
         content: 投稿内容
       kinds_of_school:
         name: 校種名
+      private_group_post:
+        content: 投稿内容
+      private_group:
+        name: グループ名
+        detail: グループ詳細
       
     errors:
       messages:
