@@ -7,6 +7,4 @@ class PrivateGroup < ApplicationRecord
   
   validates :name,    presence: true, length: { maximum: 50 }
   validates :detail,  length: { maximum: 140 }
-  validates :user_id, presence: true
-
 end

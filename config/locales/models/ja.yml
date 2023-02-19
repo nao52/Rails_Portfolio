@@ -27,6 +27,8 @@ ja:
       private_group:
         name: グループ名
         detail: グループ詳細
+      publisher:
+        name: 出版社名
       
     errors:
       messages:
