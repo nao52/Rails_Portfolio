@@ -14,6 +14,10 @@ ja:
         content: レビュー内容
       carriculum:
         name: カリキュラム名
+      club_post:
+        content: 投稿内容
+      club:
+        name: 部活動名
       
     errors:
       messages:
