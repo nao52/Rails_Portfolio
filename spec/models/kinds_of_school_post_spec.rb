@@ -3,15 +3,11 @@ require 'rails_helper'
 RSpec.describe KindsOfSchoolPost, type: :model do
 
   before do
-    @subject         = FactoryBot.create(:subject)
-    @club            = FactoryBot.create(:club)
-    @kinds_of_school = FactoryBot.create(:kinds_of_school)
-    @user            = FactoryBot.create(:user, subject_id: @subject.id,
-                                                club_id:  @club.id,
-                                                kinds_of_school_id: @kinds_of_school.id)
+    @user = FactoryBot.create(:user)
   end
 
-  let(:post) { FactoryBot.build(:kinds_of_school_post, user_id: @user.id, kinds_of_school_id: @kinds_of_school.id) }
+  let(:post) { FactoryBot.build(:kinds_of_school_post, user_id: @user.id, kinds_of_school_id: KindsOfSchool.first.id) }
+  let(:kinds_of_school) { KindsOfSchool.first }
 
   it "is valid with content, user_id, kinds_of_school_id" do
     expect(post).to be_valid
@@ -20,6 +16,7 @@ RSpec.describe KindsOfSchoolPost, type: :model do
   it "is invalid without content" do
     post.content = ""
     expect(post).to_not be_valid
+    expect(post.errors.full_messages).to include("投稿内容は必須項目です")
   end
 
   it "is invalid without user_id" do
@@ -40,13 +37,14 @@ RSpec.describe KindsOfSchoolPost, type: :model do
   it "is invalid when content is more 140 characters" do
     post.content = "a" * 141
     expect(post).to_not be_valid
+    expect(post.errors.full_messages).to include("投稿内容は140文字以内で入力してください")
   end
 
   it "is first for most recent" do
     3.times do
-      FactoryBot.create(:kinds_of_school_post, user_id: @user.id, kinds_of_school_id: @kinds_of_school.id, created_at: 3.years.ago)
+      FactoryBot.create(:kinds_of_school_post, user_id: @user.id, kinds_of_school_id: kinds_of_school.id, created_at: 3.years.ago)
     end
-    most_recent_post = FactoryBot.create(:kinds_of_school_post, user_id: @user.id, kinds_of_school_id: @kinds_of_school.id, created_at: Time.zone.now)
+    most_recent_post = FactoryBot.create(:kinds_of_school_post, user_id: @user.id, kinds_of_school_id: kinds_of_school.id, created_at: Time.zone.now)
     expect(most_recent_post).to eq(KindsOfSchoolPost.first)
   end
 

@@ -18,6 +18,10 @@ ja:
         content: 投稿内容
       club:
         name: 部活動名
+      kinds_of_school_post:
+        content: 投稿内容
+      kinds_of_school:
+        name: 校種名
       
     errors:
       messages:
