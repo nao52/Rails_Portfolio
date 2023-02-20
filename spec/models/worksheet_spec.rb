@@ -3,12 +3,7 @@ require 'rails_helper'
 RSpec.describe Worksheet, type: :model do
   
   before do
-    @subject         = FactoryBot.create(:subject)
-    @club            = FactoryBot.create(:club)
-    @kinds_of_school = FactoryBot.create(:kinds_of_school)
-    @user            = FactoryBot.create(:user, subject_id: @subject.id,
-                                                club_id:  @club.id,
-                                                kinds_of_school_id: @kinds_of_school.id)
+    @user = FactoryBot.create(:user)
   end
 
   let(:worksheet) { FactoryBot.build(:worksheet, user_id: @user.id) }
@@ -20,11 +15,13 @@ RSpec.describe Worksheet, type: :model do
   it "is invalid without name" do
     worksheet.name = ""
     expect(worksheet).to_not be_valid
+    expect(worksheet.errors.full_messages).to include("ワークシート名は必須項目です")
   end
 
   it "is invalid without file" do
     worksheet.file = nil
     expect(worksheet).to_not be_valid
+    expect(worksheet.errors.full_messages).to include("ワークシートは必須項目です")
   end
 
   it "is invalid without user_id" do
@@ -45,6 +42,7 @@ RSpec.describe Worksheet, type: :model do
   it "is invalid when name is more 51 characters" do
     worksheet.name = "a" * 51
     expect(worksheet).to_not be_valid
+    expect(worksheet.errors.full_messages).to include("ワークシート名は50文字以内で入力してください")
   end
 
   it "is valid when detail is less than 140 characters" do
@@ -55,6 +53,7 @@ RSpec.describe Worksheet, type: :model do
   it "is invalid when detail is more 141 characters" do
     worksheet.detail = "a" * 141
     expect(worksheet).to_not be_valid
+    expect(worksheet.errors.full_messages).to include("ワークシートの詳細は140文字以内で入力してください")
   end
 
   it "is first for the most likes count" do

@@ -34,6 +34,12 @@ ja:
         content: 書籍の内容
       subject_post:
         content: 投稿内容
+      subject:
+        name: 教科名
+      worksheet:
+        name: ワークシート名
+        file: ワークシート
+        detail: ワークシートの詳細
       
     errors:
       messages:
