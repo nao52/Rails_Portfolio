@@ -2,14 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Logins", type: :feature do
 
-  before do
-    @subject         = FactoryBot.create(:subject)
-    @club            = FactoryBot.create(:club)
-    @kinds_of_school = FactoryBot.create(:kinds_of_school)
-    @user            = FactoryBot.create(:user, subject_id: @subject.id,
-                                                club_id:  @club.id,
-                                                kinds_of_school_id: @kinds_of_school.id)
-  end
+  let(:user) { FactoryBot.create(:user) }
 
   scenario "login with valid information and logout" do
     visit root_path
@@ -18,7 +11,7 @@ RSpec.feature "Logins", type: :feature do
 
       click_link "ログイン"
   
-      fill_in "session[email]",    with: "test1@example.com"
+      fill_in "session[email]",    with: user.email
       fill_in "session[password]", with: "password"
       click_button "ログイン"
 

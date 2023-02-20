@@ -88,12 +88,12 @@ class UsersController < ApplicationController
 
     when "subject"
       @subject = params[:subject]
-      users = User.where("subject_id LIKE ?", "%#{@subject}%")
+      users = User.where("subject_id LIKE ?", @subject)
       @checked_subject = true
 
     when "club"
       @club = params[:club]
-      users = User.where("club_id LIKE ?", "%#{@club}%")
+      users = User.where("club_id LIKE ?", @club)
       @checked_club = true
     end
 
