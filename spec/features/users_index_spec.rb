@@ -74,7 +74,7 @@ RSpec.feature "UsersIndices", type: :feature do
       select  "#{subject1.name}", from: "subject"
       click_button "検索"
     
-      users = User.where("subject_id LIKE ?", "#{subject1.id}")
+      users = User.where("subject_id LIKE ?", subject1.id)
     
       expect(page).to have_text("#{users.count}件のユーザーが見つかりました！")
       users.page(1).per(30).each do |user|
@@ -104,7 +104,7 @@ RSpec.feature "UsersIndices", type: :feature do
       select  "#{club1.name}", from: "club"
       click_button "検索"
     
-      users = User.where("club_id LIKE ?", "#{club1.id}")
+      users = User.where("club_id LIKE ?", club1.id)
     
       expect(page).to have_text("#{users.count}件のユーザーが見つかりました！")
       users.page(1).per(30).each do |user|
