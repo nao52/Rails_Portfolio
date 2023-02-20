@@ -3,13 +3,8 @@ require 'rails_helper'
 RSpec.describe ReferenceBook, type: :model do
 
   before do
-    @subject         = FactoryBot.create(:subject)
-    @club            = FactoryBot.create(:club)
-    @kinds_of_school = FactoryBot.create(:kinds_of_school)
-    @user            = FactoryBot.create(:user, subject_id: @subject.id,
-                                                club_id:  @club.id,
-                                                kinds_of_school_id: @kinds_of_school.id)
-    @publisher       = FactoryBot.create(:publisher, user_id: @user.id)
+    @user      = FactoryBot.create(:user)
+    @publisher = FactoryBot.create(:publisher, user_id: @user.id)
   end
 
   let(:book) { FactoryBot.build(:reference_book, user_id: @user.id, publisher_id: @publisher.id) }
@@ -21,6 +16,7 @@ RSpec.describe ReferenceBook, type: :model do
   it "is invalid without title" do
     book.title = ""
     expect(book).to_not be_valid
+    expect(book.errors.full_messages).to include("書籍名は必須項目です")
   end
 
   it "is invalid without user_id" do
@@ -41,6 +37,7 @@ RSpec.describe ReferenceBook, type: :model do
   it "is invalid when title is more 51 characters" do
     book.title = "a" * 51
     expect(book).to_not be_valid
+    expect(book.errors.full_messages).to include("書籍名は50文字以内で入力してください")
   end
 
   it "is valid when content is less than 140 characters" do
@@ -51,6 +48,7 @@ RSpec.describe ReferenceBook, type: :model do
   it "is invalid when content is more 141 characters" do
     book.content = "a" * 141
     expect(book).to_not be_valid
+    expect(book.errors.full_messages).to include("書籍の内容は140文字以内で入力してください")
   end
 
   it "is first for the most likes count" do

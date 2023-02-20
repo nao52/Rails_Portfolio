@@ -29,6 +29,11 @@ ja:
         detail: グループ詳細
       publisher:
         name: 出版社名
+      reference_book:
+        title: 書籍名
+        content: 書籍の内容
+      subject_post:
+        content: 投稿内容
       
     errors:
       messages:
