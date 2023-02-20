@@ -56,7 +56,7 @@ RSpec.feature "Subjects", type: :feature do
         click_button "投稿"
         fill_in "subject_post[content]", with: "最新の投稿です！"
         click_button "投稿"
-      }.to change {japanese.subject_posts.count}.by(3)
+      }.to change { japanese.subject_posts.count }.by(3)
 
       expect(page).to have_content("新規投稿を行いました！")
       expect(page).to have_content("1番目の投稿です！")

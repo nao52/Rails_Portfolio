@@ -25,7 +25,7 @@ class SubjectPostsController < ApplicationController
   private
 
     def subject_post_params
-      params.require(:subject_post).permit(:content, :subject_id)
+      params.require(:subject_post).permit(:subject_id, :content)
     end
 
     # before フィルタ

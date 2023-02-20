@@ -3,7 +3,7 @@
   <%= form_with(model: @post) do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
 
-    <div><%= f.hidden_field "subject_id", :value => @group.id %></div>
+    <div><%= f.hidden_field params_id, :value => @group.id %></div>
     <div class="field">
       <%= f.text_area :content, style: "width: 100%;" %>
     </div>
