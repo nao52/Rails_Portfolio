@@ -8,7 +8,7 @@ class ClubPostsController < ApplicationController
       redirect_back(fallback_location: root_url)
     else
       @group = Club.find(params[:id])
-      @posts = ClubPost.where(club_id: params[:id])
+      @posts = ClubPost.where(club_id: params[:id]).page(params[:page]).per(30)
       render 'clubs/show', status: :unprocessable_entity
     end
   end

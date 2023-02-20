@@ -16,7 +16,7 @@ RSpec.feature "Subjects", type: :feature do
     end
   end
 
-  scenario "layout of subject_show" do
+  scenario "layout of subjects_show" do
 
     50.times do
       user = FactoryBot.create(:user, subject_id: japanese.id)
