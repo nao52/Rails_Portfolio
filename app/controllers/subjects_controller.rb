@@ -7,7 +7,7 @@ class SubjectsController < ApplicationController
 
   def show
     @post  = current_user.subject_posts.build if logged_in?
-    @posts = SubjectPost.where(subject_id: params[:id])
+    @posts = SubjectPost.where(subject_id: params[:id]).page(params[:page]).per(30)
   end
 
   def members
