@@ -3,12 +3,7 @@ require 'rails_helper'
 RSpec.describe WorksheetFavorite, type: :model do
 
   before do
-    @subject         = FactoryBot.create(:subject)
-    @club            = FactoryBot.create(:club)
-    @kinds_of_school = FactoryBot.create(:kinds_of_school)
-    @user            = FactoryBot.create(:user, subject_id: @subject.id,
-                                                club_id:  @club.id,
-                                                kinds_of_school_id: @kinds_of_school.id)
+    @user            = FactoryBot.create(:user)
     @worksheet       = FactoryBot.create(:worksheet, user_id: @user.id)
   end
 

@@ -84,24 +84,25 @@ class UsersController < ApplicationController
         return render 'index', status: :unprocessable_entity
       end
 
-      @users = User.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
+      users = User.where("name LIKE ?", "%#{@name}%")
 
     when "subject"
       @subject = params[:subject]
-      @users = User.where("subject_id LIKE ?", "%#{@subject}%").page(params[:page]).per(30)
+      users = User.where("subject_id LIKE ?", @subject)
       @checked_subject = true
 
     when "club"
       @club = params[:club]
-      @users = User.where("club_id LIKE ?", "%#{@club}%").page(params[:page]).per(30)
+      users = User.where("club_id LIKE ?", @club)
       @checked_club = true
     end
 
-    if @users.size == 0
+    if users.size == 0
       flash.now[:danger] = "該当するユーザーが見つからなかったので、全てのユーザーを表示します。"
       @users = User.all.page(params[:page]).per(30)
     else
-      @messages = "#{@users.size}件のユーザーが見つかりました！"
+      @messages = "#{users.size}件のユーザーが見つかりました！"
+      @users = users.page(params[:page]).per(30)
     end
 
     render 'index', status: :unprocessable_entity

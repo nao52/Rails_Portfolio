@@ -10,7 +10,5 @@ class Worksheet < ApplicationRecord
   validates :name,   presence: true, length: { maximum: 50 }
   validates :detail, length: { maximum: 140 }
   validates :file, presence: true, content_type: { in: 'application/pdf', message: "フォーマットはPDFにしてください" }
-  validates :user_id, presence: true
   validates :likes_count, presence: true
-
 end

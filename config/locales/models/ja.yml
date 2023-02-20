@@ -10,6 +10,37 @@ ja:
         subject: 教科
         club: 部活動
         kinds_of_school: 校種
+      book_review:
+        content: レビュー内容
+      carriculum:
+        name: カリキュラム名
+      club_post:
+        content: 投稿内容
+      club:
+        name: 部活動名
+      kinds_of_school_post:
+        content: 投稿内容
+      kinds_of_school:
+        name: 校種名
+      private_group_post:
+        content: 投稿内容
+      private_group:
+        name: グループ名
+        detail: グループ詳細
+      publisher:
+        name: 出版社名
+      reference_book:
+        title: 書籍名
+        content: 書籍の内容
+      subject_post:
+        content: 投稿内容
+      subject:
+        name: 教科名
+      worksheet:
+        name: ワークシート名
+        file: ワークシート
+        detail: ワークシートの詳細
+      
     errors:
       messages:
         blank: は必須項目です
