@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :private_group do
-    name    { "プライベートグループ" }
+    sequence(:name)        { |n| "プライベートグループ#{n}" }
   end
 end

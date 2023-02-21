@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def joinings
-    @groups = @user.joining
+    @private_groups = @user.joining.page(params[:page]).per(30)
   end
 
   def worksheets

@@ -1,16 +1,25 @@
 <hr>
-<li>
-  <%= link_to private_group.name, private_group %>
-  <% if private_group.detail.present? %>
-    <div>
-      【グループ説明】
-      <%= private_group.detail %>
-    </div>
+
+<%= paginate @private_groups %>
+
+<ul class="private_groups">
+  <% @private_groups.each do |private_group| %>
+    <li>
+      <%= link_to private_group.name, private_group %>
+      <% if private_group.detail.present? %>
+        <div>
+          【グループ説明】
+          <%= private_group.detail %>
+        </div>
+      <% end %>
+      <% if current_user?(private_group.user) %>
+        <div>
+          <%= link_to "グループ情報の編集", edit_private_group_path(private_group), { class: "btn btn-primary" } %>
+          <%= link_to "グループの削除", private_group, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+        </div>
+      <% end %>
+    </li>
   <% end %>
-  <% if current_user?(private_group.user) %>
-    <div>
-      <%= link_to "グループ情報の編集", edit_private_group_path(private_group), { class: "btn btn-primary" } %>
-      <%= link_to "グループの削除", private_group, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-    </div>
-  <% end %>
-</li>
+</ul>
+
+<%= paginate @private_groups %>

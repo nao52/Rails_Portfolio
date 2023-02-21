@@ -1,3 +1,6 @@
 <% provide(:title, @group.name) %>
 
-<%= render 'shared/group_member' %>
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<%= render 'kinds_of_schools/link' %>
+<%= render 'users/user' %>

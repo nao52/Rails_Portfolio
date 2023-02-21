@@ -1,11 +1,6 @@
 <% provide(:title, @group.name) %>
 
-<div style="border: solid; padding: 10px;">
-  <h1><%= yield(:title) %></h1>
-  <h3>グループ詳細:<%= @group.detail %></h3>
-  <%= render 'users/join_form' %>
-</div>
+<%= render 'private_groups/group_info' %>
 
-<%= render 'show_link' %>
-
+<%= render 'private_groups/link' %>
 <%= render 'users/user' %>

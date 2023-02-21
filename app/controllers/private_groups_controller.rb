@@ -4,12 +4,12 @@ class PrivateGroupsController < ApplicationController
   before_action :correct_user,        only: [:edit, :update, :destroy]
 
   def index
-    @private_groups = PrivateGroup.all
+    @private_groups = PrivateGroup.all.page(params[:page]).per(30)
   end
 
   def show
     @post  = current_user.private_group_posts.build if logged_in?
-    @posts = PrivateGroupPost.where(private_group_id: params[:id])
+    @posts = PrivateGroupPost.where(private_group_id: params[:id]).page(params[:page]).per(30)
   end
 
   def new
@@ -52,7 +52,7 @@ class PrivateGroupsController < ApplicationController
       @group = PrivateGroup.find(params[:id])
     end
 
-    def  private_group_params
+    def private_group_params
       params.require(:private_group).permit(:name, :detail)
     end
 

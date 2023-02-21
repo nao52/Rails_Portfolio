@@ -25,13 +25,15 @@ RSpec.feature "UsersIndices", type: :feature do
 
   feature "search users by name" do
     scenario "users found" do
+      search_name = "テストユーザー"
+
       visit users_path
 
       choose "名前"
-      fill_in "name", with: "michael"
+      fill_in "name", with: search_name
       click_button "検索"
     
-      users = User.where("name LIKE ?", "%michael%")
+      users = User.where("name LIKE ?", "%#{search_name}%")
     
       expect(page).to have_text("#{users.count}件のユーザーが見つかりました！")
       users.page(1).per(30).each do |user|
