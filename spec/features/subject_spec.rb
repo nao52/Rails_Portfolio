@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Subjects", type: :feature do
 
-  let(:michael)    { FactoryBot.create(:user) }
+  let(:michael)    { FactoryBot.create(:user, name: "michael") }
   let(:other_user) { FactoryBot.create(:user) }
   let(:japanese)   { Subject.first }
 
@@ -17,7 +17,6 @@ RSpec.feature "Subjects", type: :feature do
   end
 
   scenario "layout of subjects_show" do
-
     50.times do
       user = FactoryBot.create(:user, subject_id: japanese.id)
       user.subject_posts.create!(content: "テスト投稿", subject_id: japanese.id)
@@ -36,6 +35,7 @@ RSpec.feature "Subjects", type: :feature do
 
     click_link "ユーザー"
 
+    expect(page).to have_selector('ul.pagination')
     japanese.users.page(1).per(30).each do |member|
       expect(page).to have_link member.name, href: user_path(member)
     end

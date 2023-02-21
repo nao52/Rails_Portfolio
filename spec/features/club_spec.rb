@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Clubs", type: :feature do
 
-  let(:michael)    { FactoryBot.create(:user) }
+  let(:michael)    { FactoryBot.create(:user, name: "michael") }
   let(:other_user) { FactoryBot.create(:user) }
   let(:baseball)   { Club.first }
 
@@ -36,6 +36,7 @@ RSpec.feature "Clubs", type: :feature do
 
     click_link "ユーザー"
 
+    expect(page).to have_selector('ul.pagination')
     baseball.users.page(1).per(30).each do |member|
       expect(page).to have_link member.name, href: user_path(member)
     end

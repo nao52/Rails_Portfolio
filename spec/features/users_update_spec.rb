@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.feature "UsersUpdates", type: :feature do
 
-  let(:michael)    { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user, name: "Anya") }
+  let(:michael)    { FactoryBot.create(:user, name: "michael") }
+  let(:other_user) { FactoryBot.create(:user) }
 
   feature "update a user" do
     scenario "valid information" do

@@ -9,7 +9,7 @@ class PrivateGroupsController < ApplicationController
 
   def show
     @post  = current_user.private_group_posts.build if logged_in?
-    @posts = PrivateGroupPost.where(private_group_id: params[:id])
+    @posts = PrivateGroupPost.where(private_group_id: params[:id]).page(params[:page]).per(30)
   end
 
   def new

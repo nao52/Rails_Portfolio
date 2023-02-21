@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.feature "UsersFollows", type: :feature do
 
   before do
-    @other_user = FactoryBot.create(:user, name: "Mike")
+    @other_user = FactoryBot.create(:user)
   end
 
-  let(:michael)    { FactoryBot.create(:user) }
+  let(:michael)    { FactoryBot.create(:user, name: "michael") }
 
   scenario "follow other_user and unfollow other_user" do
 

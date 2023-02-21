@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Logins", type: :feature do
 
-  let(:user) { FactoryBot.create(:user) }
+  before do
+    @user = FactoryBot.create(:user)
+  end
 
   scenario "login with valid information and logout" do
     visit root_path
@@ -11,14 +13,14 @@ RSpec.feature "Logins", type: :feature do
 
       click_link "ログイン"
   
-      fill_in "session[email]",    with: user.email
+      fill_in "session[email]",    with: @user.email
       fill_in "session[password]", with: "password"
       click_button "ログイン"
 
-    }.to change { current_path }.to user_path(user)
+    }.to change { current_path }.to user_path(@user)
 
     expect(page).to have_text("ログインに成功しました！")
-    expect(page).to have_content("michaelでログイン中")
+    expect(page).to have_content("#{@user.name}でログイン中")
 
     expect {
 
@@ -27,7 +29,7 @@ RSpec.feature "Logins", type: :feature do
     }.to change { current_path }.to login_path
 
     expect(page).to have_text("ログアウトしました")
-    expect(page).to_not have_content("michaelでログイン中")
+    expect(page).to_not have_content("#{@user.name}でログイン中")
   end
 
   scenario "login with invalid information" do

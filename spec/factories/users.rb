@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do    
-    name                    { "michael" }
+    sequence(:name)         { |n| "テストユーザー(#{n})" }
     sequence(:email)        { |n| "test#{n}@example.com" }
     password                { "password" }
     password_confirmation   { "password" }
