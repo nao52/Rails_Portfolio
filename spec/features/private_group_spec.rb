@@ -107,6 +107,22 @@ RSpec.feature "PrivateGroups", type: :feature do
 
       expect(page).to_not have_content("投稿の削除")
     end
+
+    scenario "creating post is failed" do
+      login(michael)
+      visit root_path
+
+      click_link "グループ一覧"
+      click_link @private_group.name
+
+      expect {
+        fill_in "private_group_post[content]", with: ""
+        click_button "投稿"
+      }.to_not change { @private_group.private_group_posts.count }
+
+      expect(page).to have_text("新規投稿に失敗しました")
+      expect(page).to have_css('div#validation_messages')
+    end
   end
 
 end
