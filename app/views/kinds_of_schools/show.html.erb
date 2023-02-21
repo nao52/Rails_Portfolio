@@ -1,4 +1,6 @@
 <% provide(:title, @group.name) %>
-<% provide(:params_id, "kinds_of_school_id") %>
 
-<%= render 'shared/group_show' %>
+<h1 class="text-center"><%= yield(:title) %></h1>
+
+<%= render 'shared/post_form' %>
+<%= render 'shared/post' %>

@@ -1,62 +1,62 @@
 require 'rails_helper'
 
-RSpec.feature "Subjects", type: :feature do
+RSpec.feature "Clubs", type: :feature do
 
   let(:michael)    { FactoryBot.create(:user) }
   let(:other_user) { FactoryBot.create(:user) }
-  let(:japanese)   { Subject.first }
+  let(:baseball)   { Club.first }
 
-  scenario "show subjects_index" do
+  scenario "show clubs_index" do
     visit root_path
 
-    click_link "教科一覧"
+    click_link "部活動一覧"
 
-    Subject.all.each do |subject|
-      expect(page).to have_link subject.name, href: subject_path(subject)
+    Club.all.each do |club|
+      expect(page).to have_link club.name, href: club_path(club)
     end
   end
 
-  scenario "layout of subjects_show" do
+  scenario "layout of clubs_show" do
 
     50.times do
-      user = FactoryBot.create(:user, subject_id: japanese.id)
-      user.subject_posts.create!(content: "テスト投稿", subject_id: japanese.id)
+      user = FactoryBot.create(:user, club_id: baseball.id)
+      user.club_posts.create!(content: "テスト投稿", club_id: baseball.id)
     end
 
     visit root_path
 
-    click_link "教科一覧"
-    click_link japanese.name
+    click_link "部活動一覧"
+    click_link baseball.name
 
     expect(page).to have_selector('ul.pagination')
-    japanese.subject_posts.page(1).per(30).each do |post|
+    baseball.club_posts.page(1).per(30).each do |post|
       expect(page).to have_content(post.user.name)
       expect(page).to have_content(post.content)
     end
 
     click_link "ユーザー"
 
-    japanese.users.page(1).per(30).each do |member|
+    baseball.users.page(1).per(30).each do |member|
       expect(page).to have_link member.name, href: user_path(member)
     end
   end
 
-  feature "subject_posts" do
-    scenario "create new posts and delete posts" do 
+  feature "club_posts" do
+    scenario "create new posts and delete posts" do
       login(michael)
       visit root_path
 
-      click_link "教科一覧"
-      click_link japanese.name
+      click_link "部活動一覧"
+      click_link baseball.name
 
       expect {
-        fill_in "subject_post[content]", with: "1番目の投稿です！"
+        fill_in "club_post[content]", with: "1番目の投稿です！"
         click_button "投稿"
-        fill_in "subject_post[content]", with: "2番目の投稿です！"
+        fill_in "club_post[content]", with: "2番目の投稿です！"
         click_button "投稿"
-        fill_in "subject_post[content]", with: "最新の投稿です！"
+        fill_in "club_post[content]", with: "最新の投稿です！"
         click_button "投稿"
-      }.to change { japanese.subject_posts.count }.by(3)
+      }.to change { baseball.club_posts.count }.by(3)
 
       expect(page).to have_content("新規投稿を行いました！")
       expect(page).to have_content("1番目の投稿です！")
@@ -64,8 +64,8 @@ RSpec.feature "Subjects", type: :feature do
       expect(page).to have_content("最新の投稿です！")
 
       expect {
-        first("#delete_btn#{japanese.subject_posts.first.id}").click
-      }.to change {japanese.subject_posts.count}.by(-1)
+        first("#delete_btn#{baseball.club_posts.first.id}").click
+      }.to change {baseball.club_posts.count}.by(-1)
 
       expect(page).to have_text("投稿(最新の投稿です！)を削除しました")
       expect(page).to have_content("1番目の投稿です！")
@@ -74,7 +74,7 @@ RSpec.feature "Subjects", type: :feature do
       logout
 
       login(other_user)
-      visit subject_path(japanese)
+      visit club_path(baseball)
 
       expect(page).to_not have_content("投稿の削除")
     end
@@ -83,15 +83,15 @@ RSpec.feature "Subjects", type: :feature do
       login(michael)
       visit root_path
 
-      click_link "教科一覧"
-      click_link japanese.name
+      click_link "部活動一覧"
+      click_link baseball.name
 
       expect {
-        fill_in "subject_post[content]",    with: ""
+        fill_in "club_post[content]", with: ""
         click_button "投稿"
-      }.to_not change { japanese.subject_posts.count }
+      }.to_not change { baseball.club_posts.count }
 
-      expect(page).to have_text("新規投稿に失敗しました...")
+      expect(page).to have_text("新規投稿に失敗しました")
       expect(page).to have_css('div#validation_messages')
     end
   end
