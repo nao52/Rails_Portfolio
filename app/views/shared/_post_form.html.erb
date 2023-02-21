@@ -1,6 +1,6 @@
 <% if logged_in? %>
   【新規投稿を作成】
-  <%= form_with(model: @post) do |f| %>
+  <%= form_with model: @post, class: 'post_form' do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
 
     <div><%= f.hidden_field params_id, :value => @group.id %></div>

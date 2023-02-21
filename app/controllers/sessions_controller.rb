@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
     if logged_in?
       redirect_to current_user, status: :see_other
     end
+    session[:forwarding_url] = params[:original_url] if session[:forwarding_url].blank?
   end
 
   def create
@@ -13,7 +14,7 @@ class SessionsController < ApplicationController
       reset_session
       log_in user
       flash[:success] = "ログインに成功しました！"
-      redirect_to forwarding_url || users_url
+      redirect_to forwarding_url || user
     else
       flash.now[:danger] = "ログインに失敗しました..."
       render 'new', status: :unprocessable_entity
