@@ -7,7 +7,7 @@ class KindsOfSchoolsController < ApplicationController
 
   def show
     @post = current_user.kinds_of_school_posts.build if logged_in?
-    @posts = KindsOfSchoolPost.where(kinds_of_school_id: params[:id])
+    @posts = KindsOfSchoolPost.where(kinds_of_school_id: params[:id]).page(params[:page]).per(30)
   end
 
   def members

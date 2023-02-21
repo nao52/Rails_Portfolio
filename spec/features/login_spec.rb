@@ -15,7 +15,7 @@ RSpec.feature "Logins", type: :feature do
       fill_in "session[password]", with: "password"
       click_button "ログイン"
 
-    }.to change { current_path }.to users_path
+    }.to change { current_path }.to user_path(user)
 
     expect(page).to have_text("ログインに成功しました！")
     expect(page).to have_content("michaelでログイン中")

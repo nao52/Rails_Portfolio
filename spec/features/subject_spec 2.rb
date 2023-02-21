@@ -42,6 +42,22 @@ RSpec.feature "Subjects", type: :feature do
   end
 
   feature "subject_posts" do
+    scenario "form not found with no login_user" do
+      visit root_path
+
+      click_link "教科一覧"
+      click_link japanese.name
+
+      expect(page).to_not have_css('form.post_form')
+
+      login(michael)
+
+      click_link "教科一覧"
+      click_link japanese.name
+
+      expect(page).to have_css('form.post_form')
+    end
+
     scenario "create new posts and delete posts" do 
       login(michael)
       visit root_path

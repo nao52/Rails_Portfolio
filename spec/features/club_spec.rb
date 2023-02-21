@@ -42,6 +42,22 @@ RSpec.feature "Clubs", type: :feature do
   end
 
   feature "club_posts" do
+    scenario "form not found with no login_user" do
+      visit root_path
+
+      click_link "部活動一覧"
+      click_link baseball.name
+
+      expect(page).to_not have_css('form.post_form')
+
+      login(michael)
+
+      click_link "部活動一覧"
+      click_link baseball.name
+
+      expect(page).to have_css('form.post_form')
+    end
+
     scenario "create new posts and delete posts" do
       login(michael)
       visit root_path
@@ -65,7 +81,7 @@ RSpec.feature "Clubs", type: :feature do
 
       expect {
         first("#delete_btn#{baseball.club_posts.first.id}").click
-      }.to change {baseball.club_posts.count}.by(-1)
+      }.to change { baseball.club_posts.count }.by(-1)
 
       expect(page).to have_text("投稿(最新の投稿です！)を削除しました")
       expect(page).to have_content("1番目の投稿です！")
