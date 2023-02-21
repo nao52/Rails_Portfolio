@@ -95,6 +95,21 @@ RSpec.feature "KindsOfSchools", type: :feature do
       expect(page).to_not have_content("投稿の削除")
     end
 
+    scenario "creating post is failed" do
+      login(michael)
+      visit root_path
+
+      click_link "校種一覧"
+      click_link j_high_school.name
+
+      expect {
+        fill_in "kinds_of_school_post[content]", with: ""
+        click_button "投稿"
+      }.to_not change { j_high_school.kinds_of_school_posts.count }
+
+      expect(page).to have_text("新規投稿に失敗しました")
+      expect(page).to have_css('div#validation_messages')
+    end
   end
 
 end
