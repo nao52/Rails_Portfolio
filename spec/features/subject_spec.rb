@@ -79,7 +79,7 @@ RSpec.feature "Subjects", type: :feature do
       expect(page).to_not have_content("投稿の削除")
     end
 
-    scenario "new post is failed" do
+    scenario "creating post is failed" do
       login(michael)
       visit root_path
 
@@ -89,10 +89,10 @@ RSpec.feature "Subjects", type: :feature do
       expect {
         fill_in "subject_post[content]",    with: ""
         click_button "投稿"
-      }.to_not change {japanese.subject_posts.count}
+      }.to_not change { japanese.subject_posts.count }
 
       expect(page).to have_text("新規投稿に失敗しました...")
-      expect(page).to have_content("投稿内容は必須項目です")
+      expect(page).to have_css('div#validation_messages')
     end
   end
 
