@@ -58,6 +58,43 @@ RSpec.feature "KindsOfSchools", type: :feature do
       expect(page).to have_css('form.post_form')
     end
 
+    scenario "create new posts and delete posts" do
+      login(michael)
+      visit root_path
+
+      click_link "校種一覧"
+      click_link j_high_school.name
+
+      expect {
+        fill_in "kinds_of_school_post[content]", with: "1番目の投稿です！"
+        click_button "投稿"
+        fill_in "kinds_of_school_post[content]", with: "2番目の投稿です！"
+        click_button "投稿"
+        fill_in "kinds_of_school_post[content]", with: "最新の投稿です！"
+        click_button "投稿"
+      }.to change { j_high_school.kinds_of_school_posts.count }.by(3)
+
+      expect(page).to have_content("新規投稿を行いました！")
+      expect(page).to have_content("1番目の投稿です！")
+      expect(page).to have_content("2番目の投稿です！")
+      expect(page).to have_content("最新の投稿です！")
+
+      expect {
+        first("#delete_btn#{j_high_school.kinds_of_school_posts.first.id}").click
+      }.to change { j_high_school.kinds_of_school_posts.count }.by(-1)
+
+      expect(page).to have_text("投稿(最新の投稿です！)を削除しました")
+      expect(page).to have_content("1番目の投稿です！")
+      expect(page).to have_content("2番目の投稿です！")
+
+      logout
+
+      login(other_user)
+      visit kinds_of_school_path(j_high_school)
+
+      expect(page).to_not have_content("投稿の削除")
+    end
+
   end
 
 end

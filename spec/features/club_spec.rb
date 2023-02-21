@@ -81,7 +81,7 @@ RSpec.feature "Clubs", type: :feature do
 
       expect {
         first("#delete_btn#{baseball.club_posts.first.id}").click
-      }.to change {baseball.club_posts.count}.by(-1)
+      }.to change { baseball.club_posts.count }.by(-1)
 
       expect(page).to have_text("投稿(最新の投稿です！)を削除しました")
       expect(page).to have_content("1番目の投稿です！")
