@@ -17,7 +17,9 @@ RSpec.feature "KindsOfSchools", type: :feature do
   end
 
   scenario "layout of kinds_of_schools_show" do
-
+    10.times do
+      user = FactoryBot.create(:user, kinds_of_school_id: KindsOfSchool.second.id)
+    end
     50.times do
       user = FactoryBot.create(:user, kinds_of_school_id: j_high_school.id)
       user.kinds_of_school_posts.create!(content: "テスト投稿", kinds_of_school_id: j_high_school.id)
@@ -34,7 +36,7 @@ RSpec.feature "KindsOfSchools", type: :feature do
       expect(page).to have_content(post.content)
     end
 
-    click_link "ユーザー"
+    click_link "メンバー"
 
     expect(page).to have_selector('ul.pagination')
     j_high_school.users.page(1).per(30).each do |member|

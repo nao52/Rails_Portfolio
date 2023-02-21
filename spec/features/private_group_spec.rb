@@ -46,7 +46,7 @@ RSpec.feature "PrivateGroups", type: :feature do
       expect(page).to have_content(post.content)
     end
 
-    click_link "ユーザー"
+    click_link "メンバー"
 
     expect(page).to have_selector('ul.pagination')
     @private_group.members.page(1).per(30).each do |member|
@@ -69,6 +69,43 @@ RSpec.feature "PrivateGroups", type: :feature do
       click_link @private_group.name
 
       expect(page).to have_css('form.post_form')
+    end
+
+    scenario "create new posts and delete posts" do
+      login(michael)
+      visit root_path
+
+      click_link "グループ一覧"
+      click_link @private_group.name
+
+      expect {
+        fill_in "private_group_post[content]", with: "1番目の投稿です！"
+        click_button "投稿"
+        fill_in "private_group_post[content]", with: "2番目の投稿です！"
+        click_button "投稿"
+        fill_in "private_group_post[content]", with: "最新の投稿です！"
+        click_button "投稿"
+      }.to change { @private_group.private_group_posts.count }.by(3)
+
+      expect(page).to have_content("新規投稿を行いました！")
+      expect(page).to have_content("1番目の投稿です！")
+      expect(page).to have_content("2番目の投稿です！")
+      expect(page).to have_content("最新の投稿です！")
+
+      expect {
+        first("#delete_btn#{@private_group.private_group_posts.first.id}").click
+      }.to change {@private_group.private_group_posts.count}.by(-1)
+
+      expect(page).to have_text("投稿(最新の投稿です！)を削除しました")
+      expect(page).to have_content("1番目の投稿です！")
+      expect(page).to have_content("2番目の投稿です！")
+
+      logout
+
+      login(other_user)
+      visit private_group_path(@private_group)
+
+      expect(page).to_not have_content("投稿の削除")
     end
   end
 
