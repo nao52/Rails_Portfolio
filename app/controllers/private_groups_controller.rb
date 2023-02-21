@@ -4,7 +4,7 @@ class PrivateGroupsController < ApplicationController
   before_action :correct_user,        only: [:edit, :update, :destroy]
 
   def index
-    @private_groups = PrivateGroup.all
+    @private_groups = PrivateGroup.all.page(params[:page]).per(30)
   end
 
   def show
