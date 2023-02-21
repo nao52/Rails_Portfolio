@@ -54,6 +54,49 @@ RSpec.feature "PrivateGroups", type: :feature do
     end
   end
 
+  feature "join a private_group" do
+    scenario "joining button not found with no login_user" do
+      visit root_path
+
+      click_link "グループ一覧"
+      click_link @private_group.name
+
+      expect(page).to_not have_css('div#join_form')
+
+      login(michael)
+
+      click_link "グループ一覧"
+      click_link @private_group.name
+
+      expect(page).to have_css('div#join_form')
+    end
+
+    scenario "join a private_group and leave a private_group" do
+      login(michael)
+
+      click_link "グループ一覧"
+      click_link @private_group.name
+
+      expect {
+        click_button "グループへ参加"
+      }.to change { @private_group.members.count }.by(1)
+
+      visit user_path(michael)
+
+      expect(page).to have_link "所属グループ(1)", href: joinings_user_path(michael)
+
+      visit private_group_path(@private_group)
+
+      expect {
+        click_button "グループの退出"
+      }.to change { @private_group.members.count }.by(-1)
+
+      visit user_path(michael)
+
+      expect(page).to have_link "所属グループ(0)", href: joinings_user_path(michael)
+    end
+  end
+
   feature "private_group_posts" do
     scenario "form not found with no login_user" do
       visit root_path

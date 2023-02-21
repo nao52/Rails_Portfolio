@@ -52,7 +52,7 @@ class PrivateGroupsController < ApplicationController
       @group = PrivateGroup.find(params[:id])
     end
 
-    def  private_group_params
+    def private_group_params
       params.require(:private_group).permit(:name, :detail)
     end
 
