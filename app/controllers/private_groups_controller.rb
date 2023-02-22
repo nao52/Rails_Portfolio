@@ -33,8 +33,10 @@ class PrivateGroupsController < ApplicationController
 
   def update
     if @private_group.update(private_group_params)
+      flash[:success] = "グループ情報を更新しました！"
       redirect_to private_groups_url
     else
+      flash.now[:danger] = "グループ情報の編集に失敗しました..."
       render 'edit', status: :unprocessable_entity
     end
   end
