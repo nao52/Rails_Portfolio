@@ -18,7 +18,7 @@ class PublishersController < ApplicationController
   def create
     @publisher = current_user.publishers.build(publisher_params)
     if @publisher.save
-      flash[:success] = "新しい出版社を登録しました！！"
+      flash[:success] = "新しい出版社を登録しました！"
       redirect_to publishers_url
     else
       flash.now[:danger] = "出版社の登録に失敗しました..."

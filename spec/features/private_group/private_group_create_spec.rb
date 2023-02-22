@@ -14,7 +14,7 @@ RSpec.feature "PrivateGroupCreates", type: :feature do
         click_link "グループの新規作成"
       }.to change { current_path }.to login_path
 
-      expect(page).to have_text("ログインしてください")
+      expect(page).to have_text("『ログインしてください』")
     end
 
     scenario "create a private_group and delete a private_group" do

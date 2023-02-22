@@ -1,4 +1,5 @@
 <%= form_with(model: @publisher) do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
 
   <%= f.label :name, "出版社名" %> <br>
   <%= f.text_field :name, class: 'form-control' %> <br>
