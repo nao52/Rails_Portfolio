@@ -58,13 +58,14 @@ class PublishersController < ApplicationController
       return render 'index', status: :unprocessable_entity
     end
 
-    @publishers = Publisher.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
+    publishers = Publisher.where("name LIKE ?", "%#{@name}%").page(params[:page]).per(30)
 
-    if @publishers.size == 0
+    if publishers.size == 0
       @publishers = Publisher.all.page(params[:page]).per(30)
       flash.now[:danger] = "該当する出版社が見つからなかったので、全ての出版社を表示します。"
     else
-      @messages = "#{@publishers.size}件の出版社が見つかりました！"
+      @messages = "#{publishers.size}件の出版社が見つかりました！"
+      @publishers = publishers.page(params[:page]).per(30)
     end
 
     render 'index', status: :unprocessable_entity
