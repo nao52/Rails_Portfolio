@@ -19,9 +19,11 @@ class PrivateGroupsController < ApplicationController
   def create
     @private_group = current_user.private_groups.build(private_group_params)
     if @private_group.save
+      flash[:success] = "新規グループの作成を行いました！"
       current_user.join(@private_group)
       redirect_to private_groups_url
     else
+      flash.now[:danger] = "新規グループの作成に失敗しました..."
       render 'new', status: :unprocessable_entity
     end
   end
@@ -38,7 +40,9 @@ class PrivateGroupsController < ApplicationController
   end
 
   def destroy
+    group_name = @private_group.name
     @private_group.destroy
+    flash[:success] = "グループ(#{group_name})を削除しました"
     redirect_back(fallback_location: root_url, status: :see_other)
   end
 
