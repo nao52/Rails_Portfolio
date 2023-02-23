@@ -40,7 +40,31 @@ RSpec.feature "ReferenceBookIndices", type: :feature do
       end
     end
 
-    
+    scenario "reference_books not found" do
+      visit root_path
+      click_link "参考書一覧"
+
+      fill_in "title", with: "kdjfgoierjg"
+      click_button "検索"
+
+      expect(page).to have_text("『該当する書籍が見つからなかったので、全ての書籍を表示します。』")
+      ReferenceBook.all.page(1).per(30).each do |reference_book|
+        expect(page).to have_link "書籍名:【 #{reference_book.title} 】", href: reference_book_path(reference_book)
+      end
+    end
+
+    scenario "title is empty" do
+      visit root_path
+      click_link "参考書一覧"
+
+      fill_in "title", with: ""
+      click_button "検索"
+
+      expect(page).to have_text("『書籍名を入力してください』")
+      ReferenceBook.all.page(1).per(30).each do |reference_book|
+        expect(page).to have_link "書籍名:【 #{reference_book.title} 】", href: reference_book_path(reference_book)
+      end
+    end
   end
   
 end

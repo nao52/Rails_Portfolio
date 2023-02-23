@@ -51,7 +51,7 @@ class ReferenceBooksController < ApplicationController
 
     if @title.empty?
       @reference_books = ReferenceBook.all.page(params[:page]).per(30)
-      flash.now[:danger] = "出版社名を入力してください"
+      flash.now[:danger] = "書籍名を入力してください"
       return render 'index'
     end
 
@@ -59,7 +59,7 @@ class ReferenceBooksController < ApplicationController
 
     if reference_books.size == 0
       @reference_books = ReferenceBook.all.page(params[:page]).per(30)
-      flash.now[:danger] = "該当する出版社が見つからなかったので、全ての出版社を表示します。"
+      flash.now[:danger] = "該当する書籍が見つからなかったので、全ての書籍を表示します。"
     else
       flash[:success] = "#{reference_books.size}件の書籍が見つかりました！"
       @reference_books = reference_books.page(params[:page]).per(30)
