@@ -51,17 +51,18 @@ class ReferenceBooksController < ApplicationController
 
     if @title.empty?
       @reference_books = ReferenceBook.all.page(params[:page]).per(30)
-      @error_messages = "出版社名を入力してください"
+      flash.now[:danger] = "書籍名を入力してください"
       return render 'index'
     end
 
-    @reference_books = ReferenceBook.where("title LIKE ?", "%#{@title}%").page(params[:page]).per(30)
+    reference_books = ReferenceBook.where("title LIKE ?", "%#{@title}%")
 
-    if @reference_books.size == 0
+    if reference_books.size == 0
       @reference_books = ReferenceBook.all.page(params[:page]).per(30)
-      @error_messages = "該当する出版社が見つからなかったので、全ての出版社を表示します。"
+      flash.now[:danger] = "該当する書籍が見つからなかったので、全ての書籍を表示します。"
     else
-      @messages = "#{@reference_books.size}件の出版社が見つかりました！"
+      flash[:success] = "#{reference_books.size}件の書籍が見つかりました！"
+      @reference_books = reference_books.page(params[:page]).per(30)
     end
 
     render 'index'
