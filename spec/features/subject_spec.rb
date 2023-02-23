@@ -77,14 +77,14 @@ RSpec.feature "Subjects", type: :feature do
         click_button "投稿"
       }.to change { japanese.subject_posts.count }.by(3)
 
-      expect(page).to have_content("新規投稿を行いました！")
+      expect(page).to have_text("『新規投稿を行いました！』")
       expect(page).to have_content("1番目の投稿です！")
       expect(page).to have_content("2番目の投稿です！")
       expect(page).to have_content("最新の投稿です！")
 
       expect {
         first("#delete_btn#{japanese.subject_posts.first.id}").click
-      }.to change {japanese.subject_posts.count}.by(-1)
+      }.to change { japanese.subject_posts.count }.by(-1)
 
       expect(page).to have_text("投稿(最新の投稿です！)を削除しました")
       expect(page).to have_content("1番目の投稿です！")
@@ -110,7 +110,7 @@ RSpec.feature "Subjects", type: :feature do
         click_button "投稿"
       }.to_not change { japanese.subject_posts.count }
 
-      expect(page).to have_text("新規投稿に失敗しました...")
+      expect(page).to have_text("『新規投稿に失敗しました...』")
       expect(page).to have_css('div#validation_messages')
     end
   end

@@ -1,5 +1,7 @@
 【新規レビューを作成】
-<%= form_with(model: @book_review) do |f| %>
+<%= form_with model: @book_review, class: "review_form" do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+
   <div><%= f.hidden_field yield(:params_id), :value => params[:id] %></div>
   <div class="field">
     <%= f.text_area :content, style: "width: 100%;" %>

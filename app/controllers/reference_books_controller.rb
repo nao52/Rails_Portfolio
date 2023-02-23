@@ -61,7 +61,7 @@ class ReferenceBooksController < ApplicationController
       @reference_books = ReferenceBook.all.page(params[:page]).per(30)
       flash.now[:danger] = "該当する書籍が見つからなかったので、全ての書籍を表示します。"
     else
-      flash[:success] = "#{reference_books.size}件の書籍が見つかりました！"
+      @messages = "#{reference_books.size}件の書籍が見つかりました！"
       @reference_books = reference_books.page(params[:page]).per(30)
     end
 
