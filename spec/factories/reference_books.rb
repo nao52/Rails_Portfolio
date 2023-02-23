@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :reference_book do
-    title         { "書籍タイトル" }
+    sequence(:title)        { |n| "書籍タイトル(#{n})" }
     likes_count   { 0 }
   end
 end
