@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "PublisherCreates", type: :feature do
 
-  let(:michael)    { FactoryBot.create(:user, name: "michael") }
+  let(:michael) { FactoryBot.create(:user, name: "michael") }
 
   feature "creating new publisher" do
     scenario "redirected login page" do
