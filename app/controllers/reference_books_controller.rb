@@ -23,8 +23,10 @@ class ReferenceBooksController < ApplicationController
     @reference_book = current_user.reference_books.build(reference_book_params)
     @reference_book.image.attach(params[:reference_book][:image])
     if @reference_book.save
-      redirect_to @reference_book.publisher
+      flash[:success] = "新規参考書を登録しました！"
+      redirect_to reference_books_url
     else
+      flash[:danger] = "出版社の登録に失敗しました..."
       render 'new', status: :unprocessable_entity
     end
   end
