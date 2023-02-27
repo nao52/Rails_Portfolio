@@ -46,7 +46,9 @@ class ReferenceBooksController < ApplicationController
   end
 
   def destroy
+    title = @reference_book.title
     @reference_book.destroy
+    flash[:success] = "参考書(#{title})を削除しました"
     redirect_back(fallback_location: root_url, status: :see_other)
   end
 

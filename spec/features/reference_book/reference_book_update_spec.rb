@@ -63,4 +63,5 @@ RSpec.feature "ReferenceBookUpdates", type: :feature do
       expect(page).to have_css('div#validation_messages')
     end
   end
+
 end
