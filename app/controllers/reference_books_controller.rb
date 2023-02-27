@@ -26,7 +26,7 @@ class ReferenceBooksController < ApplicationController
       flash[:success] = "新規参考書を登録しました！"
       redirect_to reference_books_url
     else
-      flash[:danger] = "出版社の登録に失敗しました..."
+      flash.now[:danger] = "出版社の登録に失敗しました..."
       render 'new', status: :unprocessable_entity
     end
   end
@@ -37,8 +37,10 @@ class ReferenceBooksController < ApplicationController
   def update
     if @reference_book.update(reference_book_params)
       @reference_book.image.purge if params[:delete_image]
-      redirect_to @reference_book.publisher
+      flash[:success] = "参考書情報を更新しました！"
+      redirect_to reference_books_url
     else
+      flash.now[:danger] = "グループ情報の編集に失敗しました..."
       render 'edit', status: :unprocessable_entity
     end
   end
