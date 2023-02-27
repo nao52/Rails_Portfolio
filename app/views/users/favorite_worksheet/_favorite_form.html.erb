@@ -1,4 +1,4 @@
-<div id="favorite_form">
+<div id="favorite_form_<%= worksheet.id %>">
   <% if current_user.favorite_worksheet?(worksheet) %>
   <%= render 'users/favorite_worksheet/unfavorite', worksheet: worksheet %>
   <% else %>
