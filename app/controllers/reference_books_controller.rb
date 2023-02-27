@@ -40,7 +40,7 @@ class ReferenceBooksController < ApplicationController
       flash[:success] = "参考書情報を更新しました！"
       redirect_to reference_books_url
     else
-      flash.now[:danger] = "グループ情報の編集に失敗しました..."
+      flash.now[:danger] = "参考書情報の編集に失敗しました..."
       render 'edit', status: :unprocessable_entity
     end
   end

@@ -50,7 +50,7 @@ RSpec.feature "ReferenceBookUpdates", type: :feature do
       expect(page).to have_link "参考書(更新)", href: reference_book_path(@reference_book)
     end
 
-    scenario "update is reference_book is failed" do
+    scenario "update reference_book is failed" do
       login(@michael)
       visit root_path
       click_link "参考書一覧"
@@ -59,7 +59,7 @@ RSpec.feature "ReferenceBookUpdates", type: :feature do
       fill_in "reference_book[title]", with: ""
       click_button "参考書情報を更新"
 
-      expect(page).to have_text("『グループ情報の編集に失敗しました...』")
+      expect(page).to have_text("『参考書情報の編集に失敗しました...』")
       expect(page).to have_css('div#validation_messages')
     end
   end

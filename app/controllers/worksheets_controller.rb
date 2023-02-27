@@ -27,8 +27,10 @@ class WorksheetsController < ApplicationController
 
   def update
     if @worksheet.update(worksheet_params)
-      redirect_to worksheets_user_path(current_user)
+      flash[:success] = "ワークシート情報を更新しました！"
+      redirect_to worksheets_path
     else
+      flash.now[:danger] = "ワークシート情報の編集に失敗しました..."
       render 'edit', status: :unprocessable_entity
     end
   end
