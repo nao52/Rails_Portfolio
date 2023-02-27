@@ -14,8 +14,10 @@ class WorksheetsController < ApplicationController
     @worksheet = current_user.worksheets.build(worksheet_params)
     @worksheet.file.attach(params[:worksheet][:file])
     if @worksheet.save
+      flash[:success] = "新規ワークシートを追加しました！"
       redirect_to worksheets_url
     else
+      flash.now[:danger] = "出版社の登録に失敗しました..."
       render 'new', status: :unprocessable_entity
     end
   end
