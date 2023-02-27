@@ -3,7 +3,7 @@ class WorksheetsController < ApplicationController
   before_action :correct_user,     only: [:edit, :update, :destroy]
 
   def index
-    @worksheets = Worksheet.all
+    @worksheets = Worksheet.all.page(params[:page]).per(30)
   end
 
   def new
@@ -14,7 +14,7 @@ class WorksheetsController < ApplicationController
     @worksheet = current_user.worksheets.build(worksheet_params)
     @worksheet.file.attach(params[:worksheet][:file])
     if @worksheet.save
-      redirect_to worksheets_user_path(current_user)
+      redirect_to worksheets_url
     else
       render 'new', status: :unprocessable_entity
     end

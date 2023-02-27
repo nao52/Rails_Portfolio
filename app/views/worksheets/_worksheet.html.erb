@@ -1,5 +1,7 @@
 <hr>
 
+<%= paginate @worksheets %>
+
 <% @worksheets.each do |worksheet| %>
 
   <%= "ワークシート名:【#{worksheet.name}】" %> <br>
@@ -25,3 +27,5 @@
   <hr>
 
 <% end %>
+
+<%= paginate @worksheets %>
