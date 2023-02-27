@@ -36,7 +36,9 @@ class WorksheetsController < ApplicationController
   end
 
   def destroy
+    name = @worksheet.name
     @worksheet.destroy
+    flash[:danger] = "ワークシート(#{name})を削除しました"
     redirect_back(fallback_location: root_url, status: :see_other)
   end
 
