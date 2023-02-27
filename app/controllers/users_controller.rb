@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def worksheets
-    @worksheets = @user.worksheets
+    @worksheets = @user.worksheets.page(params[:page]).per(30)
   end
 
   def favorite_books
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   end
 
   def favorite_worksheets
-    @worksheets = @user.favorite_worksheets
+    @worksheets = @user.favorite_worksheets.page(params[:page]).per(30)
   end
 
   def search
