@@ -12,15 +12,17 @@
 
 <body>
   <%= render 'layouts/header' %>
-  <div class="row">
-    <div class="col-md-3">
+
+  <div class="container">
+    <div class="item">
       <%= render 'layouts/sidebar' %>
     </div>
-    <div class="col-md-6">
+    <div class="item">
       <%= render 'shared/messages' %>
       <%= yield %>
     </div>
   </div>
+  
   <div class="text-center">
     <%= debug(params) if Rails.env.development? %>
   </div>
