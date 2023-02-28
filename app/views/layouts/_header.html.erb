@@ -1,20 +1,18 @@
-<header>
-  <div class="container">
-    <%= link_to "Active Teaching", '#' %>
-    <% if logged_in? %>
+<header class="page-header wrapper">
+  <%= link_to "Active Teaching", '#', class: "logo" %>
+  <% if logged_in? %>
     <%= current_user.name %>でログイン中
     <nav>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="main-nav">
         <li><%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete } %></li>
       </ul>
     </nav>
-    <% else %>
+  <% else %>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="main-nav">
         <li><%= link_to "ログイン", login_path(original_url: request.original_url) %></li>
         <li><%= link_to "新規登録", signup_path %></li>
       </ul>
     </nav>
-    <% end %>
-  </div>
+  <% end %>
 </header>
