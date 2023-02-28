@@ -1,5 +1,5 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+// @import "bootstrap-sprockets";
+// @import "bootstrap";
 
 // 共通部分
 
@@ -19,6 +19,11 @@ a {
 
 img {
   max-width: 100%;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
 }
 
 // メッセージ
@@ -83,9 +88,23 @@ img {
 
 // サイドバー
 
-
-
-
+.page-sidebar {
+  font-size: 16px;
+  padding-top: 20px;
+  ul {
+    list-style: none;
+    li {
+      width: 50%;
+      margin: 10px auto;
+      a {
+        color: #432;
+      }
+      a:hover {
+        color: #0bd;
+      }
+    }
+  }
+}
 
 .create_seats {
   h3 {
