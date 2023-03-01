@@ -1,18 +1,16 @@
-<aside class="page-sidebar">
-  <ul>
-    <% if logged_in? %>
-      <li><%= link_to "マイページ", current_user %></li>
-    <% end %>
-    <li><%= link_to "ユーザー一覧",       users_path %></li>
-    <li><%= link_to "教科一覧",           subjects_path %></li>
-    <li><%= link_to "部活動一覧",         clubs_path %></li>
-    <li><%= link_to "校種一覧",           kinds_of_schools_path %></li>
-    <li><%= link_to "グループ一覧",       private_groups_path %></li>
-    <li><%= link_to "出版社一覧",         publishers_path %></li>
-    <li><%= link_to "参考書一覧",         reference_books_path %></li>
-    <li><%= link_to "ワークシート一覧",   worksheets_path %></li>
-    <li><%= link_to "席替え作成",         seat_show_path %></li>
-    <li><%= link_to "掃除当番表作成",     cleaning_duty_show_path %></li>
-    <li><%= link_to "欠時の自動計算",     calc_absent_show_path %></li>
-  </ul>
-</aside>
+<ul class="link-list">
+  <% if logged_in? %>
+    <li><%= link_to "マイページ", current_user %></li>
+  <% end %>
+  <li><%= link_to "ユーザー一覧",       users_path %></li>
+  <li><%= link_to "教科一覧",           subjects_path %></li>
+  <li><%= link_to "部活動一覧",         clubs_path %></li>
+  <li><%= link_to "校種一覧",           kinds_of_schools_path %></li>
+  <li><%= link_to "グループ一覧",       private_groups_path %></li>
+  <li><%= link_to "出版社一覧",         publishers_path %></li>
+  <li><%= link_to "参考書一覧",         reference_books_path %></li>
+  <li><%= link_to "ワークシート一覧",   worksheets_path %></li>
+  <li><%= link_to "席替え作成",         seat_show_path %></li>
+  <li><%= link_to "掃除当番表作成",     cleaning_duty_show_path %></li>
+  <li><%= link_to "欠時の自動計算",     calc_absent_show_path %></li>
+</ul>

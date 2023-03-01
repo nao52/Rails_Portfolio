@@ -8,6 +8,11 @@ class SessionsController < ApplicationController
   end
 
   def create
+    if params[:session][:guest]
+      params[:session][:email] = "guest_user@example.com"
+      params[:session][:password] = "nagenage"
+    end
+
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       forwarding_url = session[:forwarding_url]

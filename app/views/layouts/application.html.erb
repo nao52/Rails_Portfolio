@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta charset="utf-8">
   <meta name="description" content="教員の働き方をもっとよくするためのSNSアプリケーション">
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Philosopher">
   <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
   <%= render 'layouts/rails_default' %>
 </head>
@@ -13,14 +15,14 @@
 <body>
   <%= render 'layouts/header' %>
 
-  <div class="container">
-    <div class="item">
+  <div class="contants wrapper">
+    <aside>
       <%= render 'layouts/sidebar' %>
-    </div>
-    <div class="item">
+    </aside>
+    <main>
       <%= render 'shared/messages' %>
       <%= yield %>
-    </div>
+    </main>
   </div>
   
   <div class="text-center">
