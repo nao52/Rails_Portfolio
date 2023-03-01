@@ -1,31 +1,50 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, current_user?(@user)? "マイページ" : "#{@user.name}のページ") %>
 
-<h1><%= @user.name %></h1>
-<% if @user.image.attached? %>
-  <%= image_tag @user.image.variant(:display) %>
-  <%= render 'delete_image' %>
-<% end %>
+<div class="user-info">
+  <h2 class="user-name"><%= @user.name %></h2>
+  <div class="user-image">
+    <% if @user.image.attached? %>
+      <%= image_tag @user.image.variant(:display) %>
+      <%= render 'delete_image' %>
+    <% else %>
+      <%= image_tag("default-icon.jpeg") %>
+    <% end %>
+  </div>
 
-<% if logged_in? %>
-  <p>
-    <%= render 'shared/admin_btn' %>
-    <%= render 'follow_form' %>
-  </p>
-<% end %>
+  <div class="following">
+    <%= link_to "フォロー中(#{@user.following.count})", following_user_path(@user) %>
+    <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user) %>
+  </div>
 
-<pre>
-  <strong>プロフィール</strong><br>
-  <%= @user.profile %>
-  校種<br>
-  【<%= link_to @user.kinds_of_school.name, @user.kinds_of_school, style: "color: black;" %>】<br>
-  担当教科<br>
-  【<%= link_to @user.subject.name, @user.subject, style: "color: black;" %>】<br>
-  部活動<br>
-  【<%= link_to "#{@user.club.name}部", @user.club, style: "color: black;" %>】<br>
-  <%= link_to "フォロー(#{@user.following.count})",                         following_user_path(@user) %><br>
-  <%= link_to "フォロワー(#{@user.followers.count})",                       followers_user_path(@user) %><br>
+  <% if logged_in? %>
+    <p>
+      <%= render 'follow_form' %>
+    </p>
+  <% end %>
+
+  <div class="profile">
+    <h2>プロフィール</h2>
+    <%= @user.profile %>
+  </div>
+
+  <div class="status">
+    <div class="kinds-of-school">
+      <%= link_to "校種【#{@user.kinds_of_school.name}】", @user.kinds_of_school %>
+    </div>
+    <div class="subject">
+      <%= link_to "担当教科【#{@user.subject.name}】", @user.subject %>
+    </div>
+    <div class="club">
+      <%= link_to "部活動【#{@user.club.name}部】", @user.club %>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="user-link">
   <%= link_to "所属グループ(#{@user.joining.count})",                       joinings_user_path(@user) %><br>
   <%= link_to "ワークシート(#{@user.worksheets.count})",                    worksheets_user_path(@user) %><br>
   <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",              favorite_books_user_path(@user) %><br>
   <%= link_to "お気に入りワークシート(#{@user.favorite_worksheets.count})", favorite_worksheets_user_path(@user) %><br>
-</pre>
+</div>

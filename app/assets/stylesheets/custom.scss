@@ -12,6 +12,11 @@ body {
 }
 a {
   text-decoration: none;
+  color: #432;
+  padding: 10px;
+  &:hover {
+    color: #0bd;
+  }
 }
 img {
   max-width: 100%;
@@ -97,7 +102,6 @@ input[type="submit"] {
 }
 
 // header
-
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -176,8 +180,59 @@ aside {
   }
 }
 
-
-
+// ユーザー詳細画面
+.user-info {
+  position: relative;
+  padding-top: 4px;
+  margin-bottom: 40px;
+  .user-name {
+    margin-left: 200px;
+    line-height: 150px;
+    font-size: 5rem;
+  }
+  .user-image {
+    position: absolute;
+    top: 0;
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 1px #000 solid;
+      object-fit: cover;
+    }
+  }
+  .profile {
+    padding: 10px;
+    min-height: 150px;
+    margin-bottom: 10px;
+    h2 {
+      font-size: 2rem;
+    }
+  }
+  .following {
+    display: flex;
+    font-size: 1.25rem;
+  }
+  .status {
+    font-size: 1.25rem;
+    display: flex;
+    .kinds-of-school,
+    .subject,
+    .club {
+      padding: 10px;
+    }
+  }
+}
+.user-link {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  text-align: center;
+  a {
+    width: 25%;
+    border-bottom: 1px #000 solid;
+  }
+}
 
 
 .create_seats {
