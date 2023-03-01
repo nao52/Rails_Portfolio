@@ -26,10 +26,10 @@ RSpec.feature "UsersFollows", type: :feature do
     expect(page).to have_link "フォロワー(1)", href: followers_user_path(@other_user)
 
     click_link "マイページ"
-    expect(page).to have_link "フォロー(1)", href: following_user_path(michael)
+    expect(page).to have_link "フォロー中(1)", href: following_user_path(michael)
 
     expect {
-      click_link "フォロー(1)"
+      click_link "フォロー中(1)"
       click_link @other_user.name
 
       expect(page).to have_link "フォロワー(1)", href: followers_user_path(@other_user)
@@ -40,7 +40,7 @@ RSpec.feature "UsersFollows", type: :feature do
     expect(page).to have_link "フォロワー(0)", href: followers_user_path(@other_user)
 
     click_link "マイページ"
-    expect(page).to have_link "フォロー(0)", href: following_user_path(michael)
+    expect(page).to have_link "フォロー中(0)", href: following_user_path(michael)
   end
 
   scenario "show following and followers with pagination" do
@@ -55,7 +55,7 @@ RSpec.feature "UsersFollows", type: :feature do
 
     visit root_path
 
-    click_link "フォロー(#{michael.following.count})"
+    click_link "フォロー中(#{michael.following.count})"
 
     expect(page).to have_selector('ul.pagination')
     michael.following.page(1).per(30).each do |user|

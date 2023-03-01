@@ -11,16 +11,12 @@
     <% end %>
   </div>
 
-  <div class="following">
-    <%= link_to "フォロー中(#{@user.following.count})", following_user_path(@user) %>
-    <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user) %>
-  </div>
+  <%= render 'follow_form' if logged_in? %>
 
-  <% if logged_in? %>
-    <p>
-      <%= render 'follow_form' %>
-    </p>
-  <% end %>
+  <div class="following">
+    <%= link_to "フォロー中(#{@user.following.count})", following_user_path(@user), id: "following" %>
+    <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user), id: "followers" %>
+  </div>
 
   <div class="profile">
     <h2>プロフィール</h2>

@@ -32,7 +32,6 @@ img {
   }
 }
 
-
 // ボタン
 .button {
   color: #fff;
@@ -41,6 +40,7 @@ img {
   display: inline-block;
   border-radius: 5px;
   text-decoration: none;
+  line-height: 1;
   &:hover {
     opacity: .8;
   }
@@ -220,6 +220,27 @@ aside {
     .subject,
     .club {
       padding: 10px;
+    }
+  }
+  #following_form,
+  #unfollow_form {
+    margin: 0;
+    padding: 0;
+    input {
+      width: 50%;
+      margin-left: 0;
+    }
+  }
+  #unfollow_form {
+    input {
+      background: #fff;
+      border: 1px #000 solid;
+      color: #000;
+      &:hover {
+        color: #ff3300;
+        border: 1px#ff3300 solid;
+        opacity: 1;
+      }
     }
   }
 }
