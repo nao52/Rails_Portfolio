@@ -1,4 +1,4 @@
-<%= form_with(model: current_user.worksheet_favorites.build) do |f| %>
-  <div><%= hidden_field_tag :worksheet_id, worksheet.id %></div>
-  <%= f.submit "お気に入り(#{worksheet.worksheet_favorites.count})", class: "btn btn-primary" %>
+<%= form_with model: current_user.worksheet_favorites.build, class: "favorite_form" do |f| %>
+  <%= hidden_field_tag :worksheet_id, worksheet.id %>
+  <%= f.submit "お気に入り(#{worksheet.worksheet_favorites.count})", class: "button" %>
 <% end %>

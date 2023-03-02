@@ -35,7 +35,7 @@
       <%= link_to "担当教科【#{@user.subject.name}】", @user.subject %>
     </div>
     <div class="club">
-      <%= link_to "部活動【#{@user.club.name}部】", @user.club %>
+      <%= link_to "部活動【#{@user.club.name}部】", @user.club, confirm: "Are you OK?" %>
     </div>
   </div>
 

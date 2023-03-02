@@ -358,6 +358,28 @@ aside {
   }
 }
 
+// ワークシート一覧
+.worksheets {
+  list-style: none;
+  margin: 10px 0;
+  li {
+    border-bottom: 1px #ddd solid;
+    padding: 10px 0;
+    .worksheet-title {
+      font-size: 1.2rem;
+    }
+    .worksheet-user,
+    .worksheet-detail {
+      font-size: 1.1rem;
+    }
+    a {
+      display: block;
+      padding: 10px 0;
+      font-size: 1.2rem;
+    }
+  }
+}
+
 .create_seats {
   h3 {
     height: 80px;
