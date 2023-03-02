@@ -16,7 +16,6 @@ class BookFavoritesController < ApplicationController
       format.html { redirect_back(fallback_location: root_url, status: :see_other) }
       format.turbo_stream
     end
-    redirect_back(fallback_location: root_url, status: :see_other)
   end
 
 end

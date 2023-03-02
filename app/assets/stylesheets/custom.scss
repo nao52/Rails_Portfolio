@@ -49,11 +49,12 @@ img {
 }
 .buttons {
   display: flex;
+  height: 36px;
   .edit_button,
   .delete_button {
     width: 200px;
-    line-height: 1;
     font-size: 14px;
+    height: 100%;
   }
   .delete_button {
     margin: 0 10px;
@@ -149,7 +150,12 @@ input[type="submit"] {
   font-size: 14px;
   input {
     width: 100%;
-    margin-left: 0;
+    margin: 0;
+  }
+}
+.favorite_form {
+  input {
+    height: 36px;
   }
 }
 .unfavorite_form {
