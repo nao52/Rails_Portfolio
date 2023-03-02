@@ -292,3 +292,20 @@ reference_book_size = ReferenceBook.all.size
   user.book_reviews.create!( content:           content,
                              reference_book_id: reference_book_id )
 end
+
+# worksheets_tableにテストデータをセット
+100.times do |n|
+  user_id = rand(5) + 2
+  user = User.find(user_id)
+  name = "ワークシート(#{n+1})"
+  worksheet = user.worksheets.build( name: name )
+  worksheet.file.attach(io: File.open(Rails.root.join('app/assets/pdf/test.pdf')), filename: 'test.pdf')
+  worksheet.save
+end
+
+# worksheet_favorites_tableにテストデータをセット
+worksheets = Worksheet.all
+worksheet_favorite_users = users[0..9]
+worksheet_favorite_users.each do |user|
+  worksheets.each { |worksheet| user.favorite_worksheet(worksheet) }
+end
