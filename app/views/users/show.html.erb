@@ -1,55 +1,14 @@
 <% provide(:title, current_user?(@user)? "マイページ" : "#{@user.name}のページ") %>
 
-<div class="user-info">
-  <h2 class="user-name"><%= @user.name %></h2>
-  <div class="user-image">
-    <% if @user.image.attached? %>
-      <%= image_tag @user.image.variant(:display) %>
-      <%= render 'delete_image' %>
-    <% else %>
-      <%= image_tag("default-icon.jpeg") %>
-    <% end %>
-  </div>
-
-  <% if logged_in? %>
-    <% if current_user?(@user) %>
-      <%= link_to "ユーザー情報の編集", edit_user_path(current_user), { class: "button" } if current_user?(@user) %>
-    <% else %>
-      <%= render 'follow_form' %>
-    <% end %>
-  <% end %>
-
-  <div class="following">
-    <%= link_to "フォロー中(#{@user.following.count})", following_user_path(@user), id: "following" %>
-    <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user), id: "followers" %>
-  </div>
-
-  <div class="profile">
-    <h2>プロフィール</h2>
-    <%= @user.profile %>
-  </div>
-
-  <div class="status">
-    <div class="kinds-of-school">
-      <%= link_to "校種【#{@user.kinds_of_school.name}】", @user.kinds_of_school %>
-    </div>
-    <div class="subject">
-      <%= link_to "担当教科【#{@user.subject.name}】", @user.subject %>
-    </div>
-    <div class="club">
-      <%= link_to "部活動【#{@user.club.name}部】", @user.club %>
-    </div>
-  </div>
-
-</div>
+<%= render 'users/user_info' %>
 
 <div class="user-link">
-  <%= link_to "所属グループ(#{@user.joining.count})",                       joinings_user_path(@user) %><br>
-  <%= link_to "ワークシート(#{@user.worksheets.count})",                    worksheets_user_path(@user) %><br>
-  <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",              favorite_books_user_path(@user) %><br>
-  <%= link_to "お気に入りワークシート(#{@user.favorite_worksheets.count})", favorite_worksheets_user_path(@user) %><br>
+  <%= link_to "所属グループ(#{@user.joining.count})",                       user_path(@user), class: "active" %>
+  <%= link_to "ワークシート(#{@user.worksheets.count})",                    worksheets_user_path(@user) %>
+  <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",              favorite_books_user_path(@user) %>
+  <%= link_to "お気に入りワークシート(#{@user.favorite_worksheets.count})", favorite_worksheets_user_path(@user) %>
 </div>
 
 <div class="user-contents">
-  <%= render 'private_groups/private_group' if @private_groups.present? %>
+  <%= render 'private_groups/private_group' %>
 </div>

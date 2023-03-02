@@ -9,7 +9,7 @@ class ReferenceBook < ApplicationRecord
   has_many :book_favorites, dependent: :destroy
   has_many :book_reviews
 
-  default_scope -> { order(likes_count: :desc) }
+  default_scope -> { order(created_at: :desc) }
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 140 }

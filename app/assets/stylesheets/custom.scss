@@ -41,9 +41,30 @@ img {
   border-radius: 5px;
   text-decoration: none;
   line-height: 1;
+  text-align: center;
   &:hover {
     color: #fff;
     opacity: .8;
+  }
+}
+.buttons {
+  display: flex;
+  .edit_button,
+  .delete_button {
+    width: 200px;
+    line-height: 1;
+    font-size: 14px;
+  }
+  .delete_button {
+    margin: 0 10px;
+    background: #fff;
+    border: 1px #000 solid;
+    color: #000;
+    &:hover {
+      color: #ff3300;
+      border: 1px#ff3300 solid;
+      opacity: 1;
+    }
   }
 }
 
@@ -116,6 +137,31 @@ input[type="submit"] {
   }
   .active {
     background-color: #f3f3f3;
+  }
+}
+
+// お気に入りボタン
+.favorite_form,
+.unfavorite_form {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  font-size: 14px;
+  input {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+.unfavorite_form {
+  input {
+    background: #fff;
+    border: 1px #000 solid;
+    color: #000;
+    &:hover {
+      color: #ff3300;
+      border: 1px#ff3300 solid;
+      opacity: 1;
+    }
   }
 }
 
@@ -271,10 +317,29 @@ aside {
     width: 25%;
     border-bottom: 1px #000 solid;
   }
+  .active {
+    font-weight: bold;
+  }
 }
 
 // プライベートグループ一覧
 .private_groups {
+  list-style: none;
+  border-top: 1px #ddd solid;
+  margin: 10px 0;
+  li {
+    border-bottom: 1px #ddd solid;
+    padding: 10px 0;
+    a {
+      display: block;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// 書籍一覧
+.reference_books {
   list-style: none;
   border-top: 1px #ddd solid;
   margin: 10px 0;

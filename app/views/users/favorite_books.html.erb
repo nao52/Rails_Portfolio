@@ -1,4 +1,14 @@
-<% provide(:title, "#{@user.name}のお気に入り書籍一覧") %>
-<h1 class="text-center"><%= yield(:title) %></h1>
+<% provide(:title, current_user?(@user)? "マイページ" : "#{@user.name}のページ") %>
 
-<%= render 'reference_books/reference_book' %>
+<%= render 'users/user_info' %>
+
+<div class="user-link">
+  <%= link_to "所属グループ(#{@user.joining.count})",                       user_path(@user) %>
+  <%= link_to "ワークシート(#{@user.worksheets.count})",                    worksheets_user_path(@user) %>
+  <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",              favorite_books_user_path(@user), class: "active" %>
+  <%= link_to "お気に入りワークシート(#{@user.favorite_worksheets.count})", favorite_worksheets_user_path(@user) %>
+</div>
+
+<div class="user-contents">
+  <%= render 'reference_books/reference_book' %>
+</div>

@@ -17,7 +17,6 @@ RSpec.feature "UsersJoinings", type: :feature do
     visit user_path(@michael)
     click_link "所属グループ(50)"
 
-    expect(page).to have_content("michaelの所属グループ")
     expect(page).to have_selector('ul.pagination')
     @michael.joining.page(1).per(30).each do |group|
       expect(page).to have_link group.name, href: private_group_path(group)

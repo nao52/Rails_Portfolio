@@ -1,27 +1,27 @@
 <%= paginate @reference_books %>
 
-<% @reference_books.each do |book| %>
+<ul class="reference_books">
+  <% @reference_books.each do |book| %>
+    <li>
+      <div>
+        <%= link_to "書籍名:【 #{book.title} 】", book %>
+        <%= "内容:#{book.content}" if book.content.present? %>
+      </div>
 
-  <hr>
+      <% if book.image.attached? %>
+        <%= image_tag book.image.variant(:display) %>
+        <%= render 'reference_books/delete_image', book: book %>
+      <% end %>
 
-  <div>
-    <%= link_to "書籍名:【 #{book.title} 】", book %>
-    <%= "内容:#{book.content}" if book.content.present? %>
-  </div>
-
-  <% if book.image.attached? %>
-    <%= image_tag book.image.variant(:display) %>
-    <%= render 'reference_books/delete_image', book: book %>
+      <div class="buttons">
+        <% if current_user?(book.user) %>
+          <%= link_to "編集", edit_reference_book_path(book), class: "button edit_button" %>
+          <%= link_to "削除", book, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "button delete_button" %>
+        <% end %>
+        <%= render 'users/favorite_book/favorite_form', book: book if logged_in? %>
+      </div>
+    </li>
   <% end %>
-
-  <div>
-    <% if current_user?(book.user) %>
-      <%= link_to "編集", edit_reference_book_path(book), class: "btn btn-primary" %>
-      <%= link_to "削除", book, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-    <% end %>
-    <%= render 'users/favorite_book/favorite_form', book: book if logged_in? %>
-  </div>
-
-<% end %>
+</ul>
 
 <%= paginate @reference_books %>
