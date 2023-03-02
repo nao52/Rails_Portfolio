@@ -1,3 +1,4 @@
+<% book ||= @book %>
 <%= form_with model: current_user.book_favorites.find_by(reference_book: book.id),
               html: { method: :delete }, class: "unfavorite_form" do |f| %>
   <%= f.submit "お気に入り解除(#{book.likes_count})", class: "button" %>
