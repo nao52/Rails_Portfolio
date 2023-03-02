@@ -41,7 +41,6 @@
     </div>
   </div>
 
-
 </div>
 
 <div class="user-link">
@@ -49,4 +48,8 @@
   <%= link_to "ワークシート(#{@user.worksheets.count})",                    worksheets_user_path(@user) %><br>
   <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",              favorite_books_user_path(@user) %><br>
   <%= link_to "お気に入りワークシート(#{@user.favorite_worksheets.count})", favorite_worksheets_user_path(@user) %><br>
+</div>
+
+<div class="user-contents">
+  <%= render 'private_groups/private_group' if @private_groups.present? %>
 </div>

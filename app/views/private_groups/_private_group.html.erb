@@ -1,5 +1,3 @@
-<hr>
-
 <%= paginate @private_groups %>
 
 <ul class="private_groups">
@@ -7,10 +5,8 @@
     <li>
       <%= link_to private_group.name, private_group %>
       <% if private_group.detail.present? %>
-        <div>
-          【グループ説明】
-          <%= private_group.detail %>
-        </div>
+        <p>【グループ説明】</p>
+        <p><%= private_group.detail %></p>
       <% end %>
       <% if current_user?(private_group.user) %>
         <div>

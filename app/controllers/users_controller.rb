@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @private_groups = @user.joining.page(params[:page]).per(30)
   end
 
   def new

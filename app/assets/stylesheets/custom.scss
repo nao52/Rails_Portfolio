@@ -93,13 +93,30 @@ input[type="submit"] {
     margin: 0;
   }
 }
-
 .error_messages {
   color: red;
 }
-
 .success_messages {
   color: limegreen;
+}
+
+// ページネーション
+.pagination {
+  list-style: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10px;
+  .page-item {
+    width: 8%;
+    a {
+      width: 100%;
+      display: block;
+    }
+  }
+  .active {
+    background-color: #f3f3f3;
+  }
 }
 
 // header
@@ -256,6 +273,21 @@ aside {
   }
 }
 
+// プライベートグループ一覧
+.private_groups {
+  list-style: none;
+  border-top: 1px #ddd solid;
+  margin: 10px 0;
+  li {
+    border-bottom: 1px #ddd solid;
+    padding: 10px 0;
+    a {
+      display: block;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+  }
+}
 
 .create_seats {
   h3 {
