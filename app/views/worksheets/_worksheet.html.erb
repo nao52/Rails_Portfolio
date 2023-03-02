@@ -4,7 +4,7 @@
   <% @worksheets.each do |worksheet| %>
     <li>
       <p class="worksheet-title"><%= "ワークシート名:【#{worksheet.name}】" %></p>
-      <p class="worksheet-user"><%= "作成者:【#{worksheet.user.name}】" %></p>
+      <p class="worksheet-user"><%= link_to "作成者:【#{worksheet.user.name}】", user_path(worksheet.user) %></p>
       <p class="worksheet-detail"><%= "ワークシートの説明 : #{worksheet.detail}" if worksheet.detail.present? %></p>
       <%= link_to "【#{worksheet.name}】のダウンロード", rails_blob_path(worksheet.file, disposition: "attachment"), method: :download %>
       
