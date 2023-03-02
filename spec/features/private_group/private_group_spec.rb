@@ -83,7 +83,7 @@ RSpec.feature "PrivateGroups", type: :feature do
 
       visit user_path(michael)
 
-      expect(page).to have_link "所属グループ(1)", href: joinings_user_path(michael)
+      expect(page).to have_link "所属グループ(1)", href: user_path(michael)
 
       visit private_group_path(@private_group)
 
@@ -93,7 +93,7 @@ RSpec.feature "PrivateGroups", type: :feature do
 
       visit user_path(michael)
 
-      expect(page).to have_link "所属グループ(0)", href: joinings_user_path(michael)
+      expect(page).to have_link "所属グループ(0)", href: user_path(michael)
     end
   end
 

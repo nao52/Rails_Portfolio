@@ -12,6 +12,11 @@ body {
 }
 a {
   text-decoration: none;
+  color: #432;
+  padding: 10px;
+  &:hover {
+    color: #0bd;
+  }
 }
 img {
   max-width: 100%;
@@ -27,7 +32,6 @@ img {
   }
 }
 
-
 // ボタン
 .button {
   color: #fff;
@@ -36,8 +40,32 @@ img {
   display: inline-block;
   border-radius: 5px;
   text-decoration: none;
+  line-height: 1;
+  text-align: center;
   &:hover {
+    color: #fff;
     opacity: .8;
+  }
+}
+.buttons {
+  display: flex;
+  height: 36px;
+  .edit_button,
+  .delete_button {
+    width: 200px;
+    font-size: 14px;
+    height: 100%;
+  }
+  .delete_button {
+    margin: 0 10px;
+    background: #fff;
+    border: 1px #000 solid;
+    color: #000;
+    &:hover {
+      color: #ff3300;
+      border: 1px#ff3300 solid;
+      opacity: 1;
+    }
   }
 }
 
@@ -87,17 +115,63 @@ input[type="submit"] {
     margin: 0;
   }
 }
-
 .error_messages {
   color: red;
 }
-
 .success_messages {
   color: limegreen;
 }
 
-// header
+// ページネーション
+.pagination {
+  list-style: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 10px;
+  .page-item {
+    width: 8%;
+    a {
+      width: 100%;
+      display: block;
+    }
+  }
+  .active {
+    background-color: #f3f3f3;
+  }
+}
 
+// お気に入りボタン
+.favorite_form,
+.unfavorite_form {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  font-size: 14px;
+  input {
+    width: 100%;
+    margin: 0;
+  }
+}
+.favorite_form {
+  input {
+    height: 36px;
+  }
+}
+.unfavorite_form {
+  input {
+    background: #fff;
+    border: 1px #000 solid;
+    color: #000;
+    &:hover {
+      color: #ff3300;
+      border: 1px#ff3300 solid;
+      opacity: 1;
+    }
+  }
+}
+
+// header
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -176,9 +250,134 @@ aside {
   }
 }
 
+// ユーザー詳細画面
+.user-info {
+  position: relative;
+  padding-top: 4px;
+  margin-bottom: 40px;
+  .user-name {
+    margin-left: 200px;
+    line-height: 150px;
+    font-size: 5rem;
+  }
+  .user-image {
+    position: absolute;
+    top: 0;
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 1px #000 solid;
+      object-fit: cover;
+    }
+  }
+  .profile {
+    padding: 10px;
+    min-height: 150px;
+    margin-bottom: 10px;
+    h2 {
+      font-size: 2rem;
+    }
+  }
+  .following {
+    display: flex;
+    font-size: 1.25rem;
+  }
+  .status {
+    font-size: 1.25rem;
+    display: flex;
+    .kinds-of-school,
+    .subject,
+    .club {
+      padding: 10px;
+    }
+  }
+  #following_form,
+  #unfollow_form {
+    margin: 0;
+    padding: 0;
+    input {
+      width: 50%;
+      margin-left: 0;
+    }
+  }
+  #unfollow_form {
+    input {
+      background: #fff;
+      border: 1px #000 solid;
+      color: #000;
+      &:hover {
+        color: #ff3300;
+        border: 1px#ff3300 solid;
+        opacity: 1;
+      }
+    }
+  }
+}
+.user-link {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  text-align: center;
+  a {
+    width: 25%;
+    border-bottom: 1px #000 solid;
+  }
+  .active {
+    font-weight: bold;
+  }
+}
 
+// プライベートグループ一覧
+.private_groups {
+  list-style: none;
+  margin: 10px 0;
+  li {
+    border-bottom: 1px #ddd solid;
+    padding: 10px 0;
+    a {
+      display: block;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+  }
+}
 
+// 書籍一覧
+.reference_books {
+  list-style: none;
+  margin: 10px 0;
+  li {
+    border-bottom: 1px #ddd solid;
+    padding: 10px 0;
+    a {
+      display: block;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+  }
+}
 
+// ワークシート一覧
+.worksheets {
+  list-style: none;
+  margin: 10px 0;
+  li {
+    border-bottom: 1px #ddd solid;
+    padding: 10px 0;
+    .worksheet-title {
+      font-size: 1.2rem;
+    }
+    .worksheet-detail {
+      font-size: 1.1rem;
+    }
+    a {
+      display: block;
+      padding: 10px 0;
+      font-size: 1.2rem;
+    }
+  }
+}
 
 .create_seats {
   h3 {

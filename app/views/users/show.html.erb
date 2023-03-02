@@ -1,31 +1,14 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, current_user?(@user)? "マイページ" : "#{@user.name}のページ") %>
 
-<h1><%= @user.name %></h1>
-<% if @user.image.attached? %>
-  <%= image_tag @user.image.variant(:display) %>
-  <%= render 'delete_image' %>
-<% end %>
+<%= render 'users/user_info' %>
 
-<% if logged_in? %>
-  <p>
-    <%= render 'shared/admin_btn' %>
-    <%= render 'follow_form' %>
-  </p>
-<% end %>
+<div class="user-link">
+  <%= link_to "所属グループ(#{@user.joining.count})",                       user_path(@user), class: "active" %>
+  <%= link_to "ワークシート(#{@user.worksheets.count})",                    worksheets_user_path(@user) %>
+  <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",              favorite_books_user_path(@user) %>
+  <%= link_to "お気に入りワークシート(#{@user.favorite_worksheets.count})", favorite_worksheets_user_path(@user) %>
+</div>
 
-<pre>
-  <strong>プロフィール</strong><br>
-  <%= @user.profile %>
-  校種<br>
-  【<%= link_to @user.kinds_of_school.name, @user.kinds_of_school, style: "color: black;" %>】<br>
-  担当教科<br>
-  【<%= link_to @user.subject.name, @user.subject, style: "color: black;" %>】<br>
-  部活動<br>
-  【<%= link_to "#{@user.club.name}部", @user.club, style: "color: black;" %>】<br>
-  <%= link_to "フォロー(#{@user.following.count})",                         following_user_path(@user) %><br>
-  <%= link_to "フォロワー(#{@user.followers.count})",                       followers_user_path(@user) %><br>
-  <%= link_to "所属グループ(#{@user.joining.count})",                       joinings_user_path(@user) %><br>
-  <%= link_to "ワークシート(#{@user.worksheets.count})",                    worksheets_user_path(@user) %><br>
-  <%= link_to "お気に入り書籍(#{@user.favorite_books.count})",              favorite_books_user_path(@user) %><br>
-  <%= link_to "お気に入りワークシート(#{@user.favorite_worksheets.count})", favorite_worksheets_user_path(@user) %><br>
-</pre>
+<div class="user-contents">
+  <%= render 'private_groups/private_group' %>
+</div>

@@ -5,7 +5,7 @@ class Worksheet < ApplicationRecord
   
   has_many :worksheet_favorites, dependent: :destroy
   
-  default_scope -> { order(likes_count: :desc) }
+  default_scope -> { order(created_at: :desc) }
   
   validates :name,   presence: true, length: { maximum: 50 }
   validates :detail, length: { maximum: 140 }

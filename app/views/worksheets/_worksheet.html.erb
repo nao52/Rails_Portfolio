@@ -1,31 +1,24 @@
-<hr>
-
 <%= paginate @worksheets %>
 
-<% @worksheets.each do |worksheet| %>
+<ul class="worksheets">
+  <% @worksheets.each do |worksheet| %>
+    <li>
+      <p class="worksheet-title"><%= "ワークシート名:【#{worksheet.name}】" %></p>
+      <p class="worksheet-user"><%= link_to "作成者:【#{worksheet.user.name}】", user_path(worksheet.user) %></p>
+      <p class="worksheet-detail"><%= "ワークシートの説明 : #{worksheet.detail}" if worksheet.detail.present? %></p>
+      <%= link_to "【#{worksheet.name}】のダウンロード", rails_blob_path(worksheet.file, disposition: "attachment"), method: :download %>
+      
 
-  <%= "ワークシート名:【#{worksheet.name}】" %> <br>
-  <%= "作成者:【#{worksheet.user.name}】" %> <br>
-
-  <% if worksheet.detail.present? %>
-    <div style="padding: 10px 0;">
-      ワークシートの説明 <br>
-      <%= worksheet.detail %>
-    </div>
+      <div class="buttons">
+        <% if current_user?(worksheet.user) %>
+          <%= link_to "編集", edit_worksheet_path(worksheet), class: "button edit_button" %>
+          <%= link_to "削除", worksheet, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "button delete_button" %>
+        <% end %>
+        <%= render 'users/favorite_worksheet/favorite_form', worksheet: worksheet if logged_in? %>
+      </div>
+    </li>
   <% end %>
+</ul>
 
-  <%= link_to "【#{worksheet.name}】のダウンロード", rails_blob_path(worksheet.file, disposition: "attachment") %>
-
-  <div style="margin-top: 10px;">
-    <% if current_user?(worksheet.user) || current_user?(admin_user) %>
-      <%= link_to "編集", edit_worksheet_path(worksheet), class: "btn btn-primary" %>
-      <%= link_to "削除", worksheet, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-    <% end %>
-    <%= render 'users/favorite_worksheet/favorite_form', worksheet: worksheet if logged_in? %>
-  </div>
-
-  <hr>
-
-<% end %>
 
 <%= paginate @worksheets %>

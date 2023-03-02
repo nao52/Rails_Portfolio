@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -33,25 +33,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "book_favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "reference_book_id", null: false
+  create_table "book_favorites", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "reference_book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reference_book_id"], name: "index_book_favorites_on_reference_book_id"
     t.index ["user_id"], name: "index_book_favorites_on_user_id"
   end
 
-  create_table "book_reviews", force: :cascade do |t|
+  create_table "book_reviews", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id", null: false
-    t.integer "reference_book_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "reference_book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reference_book_id"], name: "index_book_reviews_on_reference_book_id"
@@ -59,16 +59,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["user_id"], name: "index_book_reviews_on_user_id"
   end
 
-  create_table "carriculums", force: :cascade do |t|
+  create_table "carriculums", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "club_posts", force: :cascade do |t|
+  create_table "club_posts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id", null: false
-    t.integer "club_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["club_id"], name: "index_club_posts_on_club_id"
@@ -76,16 +76,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["user_id"], name: "index_club_posts_on_user_id"
   end
 
-  create_table "clubs", force: :cascade do |t|
+  create_table "clubs", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "kinds_of_school_posts", force: :cascade do |t|
+  create_table "kinds_of_school_posts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id", null: false
-    t.integer "kinds_of_school_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "kinds_of_school_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["kinds_of_school_id"], name: "index_kinds_of_school_posts_on_kinds_of_school_id"
@@ -93,25 +93,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["user_id"], name: "index_kinds_of_school_posts_on_user_id"
   end
 
-  create_table "kinds_of_schools", force: :cascade do |t|
+  create_table "kinds_of_schools", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "participations", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "private_group_id", null: false
+  create_table "participations", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "private_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["private_group_id"], name: "index_participations_on_private_group_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
-  create_table "private_group_posts", force: :cascade do |t|
+  create_table "private_group_posts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id", null: false
-    t.integer "private_group_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "private_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["private_group_id"], name: "index_private_group_posts_on_private_group_id"
@@ -119,28 +119,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["user_id"], name: "index_private_group_posts_on_user_id"
   end
 
-  create_table "private_groups", force: :cascade do |t|
+  create_table "private_groups", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "detail"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_private_groups_on_user_id"
   end
 
-  create_table "publishers", force: :cascade do |t|
+  create_table "publishers", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_publishers_on_user_id"
   end
 
-  create_table "reference_books", force: :cascade do |t|
+  create_table "reference_books", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "user_id", null: false
-    t.integer "publisher_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "publisher_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0, null: false
@@ -150,7 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["user_id"], name: "index_reference_books_on_user_id"
   end
 
-  create_table "relationships", force: :cascade do |t|
+  create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", null: false
@@ -160,10 +160,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "subject_posts", force: :cascade do |t|
+  create_table "subject_posts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id", null: false
-    t.integer "subject_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "subject_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_subject_posts_on_subject_id"
@@ -171,22 +171,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["user_id"], name: "index_subject_posts_on_user_id"
   end
 
-  create_table "subjects", force: :cascade do |t|
+  create_table "subjects", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
-    t.integer "subject_id", null: false
-    t.integer "club_id", null: false
-    t.integer "kinds_of_school_id", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "club_id", null: false
+    t.bigint "kinds_of_school_id", null: false
     t.string "carriculum_schedule", default: "", null: false
     t.index ["club_id"], name: "index_users_on_club_id"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -194,19 +194,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.index ["subject_id"], name: "index_users_on_subject_id"
   end
 
-  create_table "worksheet_favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "worksheet_id", null: false
+  create_table "worksheet_favorites", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "worksheet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_worksheet_favorites_on_user_id"
     t.index ["worksheet_id"], name: "index_worksheet_favorites_on_worksheet_id"
   end
 
-  create_table "worksheets", force: :cascade do |t|
+  create_table "worksheets", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.text "detail"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0, null: false
