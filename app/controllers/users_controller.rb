@@ -81,7 +81,7 @@ class UsersController < ApplicationController
       if @name.empty?
         @users = User.all.page(params[:page]).per(30)
         flash.now[:danger] = "ユーザー名を入力してください"
-        return render 'index', status: :unprocessable_entity
+        return render 'index'
       end
 
       users = User.where("name LIKE ?", "%#{@name}%")
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
       @users = users.page(params[:page]).per(30)
     end
 
-    render 'index', status: :unprocessable_entity
+    render 'index'
   end
 
   private

@@ -75,6 +75,7 @@ img {
   font-family: 'philosopher', serif;
   text-transform: uppercase;
   font-weight: normal;
+  text-align: center;
 }
 
 // フォーム
@@ -85,12 +86,21 @@ form {
   div {
     margin-bottom: 14px;
   }
+  select {
+    border: 1px #000 solid;
+    border-radius: 5px;
+    padding: 1px;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 }
 label {
   font-size: 1.125rem;
   margin-bottom: 10px;
   display: block;
 }
+input[type="text"],
 input[type="email"],
 input[type="password"] {
   border: 1px #000 solid;
@@ -98,6 +108,9 @@ input[type="password"] {
   padding: 1px;
   display: block;
   width: 100%;
+  &:disabled {
+    background: #ccc;
+  }
 }
 input[type="submit"] {
   cursor: pointer;
@@ -430,6 +443,18 @@ aside {
       padding: 10px 0;
       font-size: 1.2rem;
     }
+  }
+}
+
+// 検索フォーム
+.search_form {
+  border: 1px solid #ddd;
+  margin: 30px auto;
+  .hidden {
+    display: none;
+  }
+  input::placeholder {
+    text-align: center;
   }
 }
 
