@@ -433,35 +433,35 @@ aside {
   li {
     border-bottom: 1px #ddd solid;
     padding: 10px 0;
-    a {
-      display: block;
-      width: 30%;
+  }
+}
+.user-icon {
+  position: relative;
+  font: 1.2rem;
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px #000 solid;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+  }
+  p {
+    padding: 10px;
+  }
+  div {
+    display: flex;
+    div {
       padding: 10px;
-      font-size: 1.2rem;
-      margin-left: 60px;
     }
-    .user-icon {
-      position: relative;
-      font: 1.2rem;
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: 1px #000 solid;
-        object-fit: cover;
-        position: absolute;
-        top: 0;
-      }
-      p {
-        padding: 10px;
-      }
-      div {
-        display: flex;
-        div {
-          padding: 10px;
-        }
-      }
-    }
+  }
+  a {
+    display: block;
+    width: 30%;
+    padding: 10px;
+    font-size: 1.2rem;
+    margin-left: 60px;
   }
 }
 
@@ -531,6 +531,21 @@ aside {
   }
 }
 
+// 投稿一覧
+.posts {
+  list-style: none;
+  margin: 10px 0;
+  font-size: 1.2rem;
+  li {
+    border-bottom: 1px #ddd solid;
+    padding: 10px 0;
+    a {
+      display: block;
+      padding: 10px 0;
+    }
+  }
+}
+
 // 検索フォーム
 .search_form {
   border: 1px solid #ddd;
@@ -540,6 +555,22 @@ aside {
   }
   input::placeholder {
     text-align: center;
+  }
+}
+
+// グループ詳細画面
+.subject_link {
+  display: flex;
+  text-align: center;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  div {
+    width: 100%;
+    padding: 10px;
+  }
+  .active {
+    font-weight: bold;
   }
 }
 
