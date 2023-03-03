@@ -108,6 +108,9 @@ input[type="password"] {
   padding: 1px;
   display: block;
   width: 100%;
+  &:disabled {
+    background: #ccc;
+  }
 }
 input[type="submit"] {
   cursor: pointer;
