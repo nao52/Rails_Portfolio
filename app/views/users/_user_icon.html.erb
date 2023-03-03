@@ -1,0 +1,20 @@
+<div class="user-icon">
+  <% if user.image.attached? %>
+    <%= image_tag(user.image) %>
+  <% else %>
+    <%= image_tag("default-icon.jpeg") %>
+  <% end %>
+  <%= link_to user.name, user, class: "user-name" %>
+  <p><%= user.profile %></p>
+  <div>
+    <div>
+      <%= "校種【#{user.kinds_of_school.name}】" %>
+    </div>
+    <div>
+      <%= "担当教科【#{user.subject.name}】" %>
+    </div>
+    <div>
+      <%= "部活動【#{user.club.name}部】" %>
+    </div>
+  </div>
+</div>

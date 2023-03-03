@@ -251,7 +251,7 @@ aside {
 }
 
 // ユーザー詳細画面
-.user-info {
+.user-profile {
   position: relative;
   padding-top: 4px;
   margin-bottom: 40px;
@@ -325,6 +325,45 @@ aside {
   }
   .active {
     font-weight: bold;
+  }
+}
+
+// ユーザー一覧
+.users {
+  list-style: none;
+  margin: 10px 0;
+  li {
+    border-bottom: 1px #ddd solid;
+    padding: 10px 0;
+    a {
+      display: block;
+      width: 30%;
+      padding: 10px;
+      font-size: 1.2rem;
+      margin-left: 60px;
+    }
+    .user-icon {
+      position: relative;
+      font: 1.2rem;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px #000 solid;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+      }
+      p {
+        padding: 10px;
+      }
+      div {
+        display: flex;
+        div {
+          padding: 10px;
+        }
+      }
+    }
   }
 }
 
