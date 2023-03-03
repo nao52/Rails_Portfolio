@@ -75,6 +75,7 @@ img {
   font-family: 'philosopher', serif;
   text-transform: uppercase;
   font-weight: normal;
+  text-align: center;
 }
 
 // フォーム
@@ -445,6 +446,13 @@ aside {
 // 検索フォーム
 .search_form {
   border: 1px solid #ddd;
+  margin: 30px auto;
+  .hidden {
+    display: none;
+  }
+  input::placeholder {
+    text-align: center;
+  }
 }
 
 .create_seats {
