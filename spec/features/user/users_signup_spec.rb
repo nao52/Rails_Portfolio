@@ -22,7 +22,7 @@ RSpec.feature "UsersSignups", type: :feature do
       }.to change{ User.count }.by(1) && change { current_path }.to(users_path)
 
       expect(page).to have_text("ユーザーの新規登録を行いました！")
-      expect(page).to have_content("テストユーザーでログイン中")
+      expect(page).to have_content("『テストユーザー』でログイン中")
     end
 
     scenario "invlid information" do
