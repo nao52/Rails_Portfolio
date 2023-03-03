@@ -1,8 +1,8 @@
 <%= form_with(model: @publisher) do |f| %>
   <%= render 'shared/error_messages', model: f.object %>
 
-  <%= f.label :name, "出版社名" %> <br>
-  <%= f.text_field :name, class: 'form-control' %> <br>
+  <%= f.label :name, "出版社名" %>
+  <%= f.text_field :name %>
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <%= f.submit yield(:button_text), class: "button" %>
 <% end %>

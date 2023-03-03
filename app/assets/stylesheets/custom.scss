@@ -78,6 +78,22 @@ img {
   text-align: center;
 }
 
+// 新規作成ページの表示
+.open_new_form {
+  display: block;
+  width: 30%;
+  margin-left: auto;
+  text-align: center;
+  justify-content: flex-end;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #432;
+  cursor: pointer;
+  &:hover {
+    color: #0bd;
+  }
+}
+
 // フォーム
 form {
   padding: 20px;
@@ -158,6 +174,45 @@ input[type="submit"] {
   .active {
     background-color: #f3f3f3;
   }
+}
+
+// モーダルウィンドウ
+#close {
+  cursor: pointer;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 0;
+  margin: 16px auto 0;
+}
+#mask {
+  background: rgba(0, 0, 0, .4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+}
+#modal {
+  background: #fff;
+  width: 1000px;
+  padding: 20px;
+  border-radius: 4px;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  transition: transform .4s;
+  z-index: 2;
+}
+#mask.hidden {
+  display: none;
+}
+#modal.hidden {
+  transform: translate(0, -500px);
 }
 
 // お気に入りボタン
