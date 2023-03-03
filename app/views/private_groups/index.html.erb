@@ -1,5 +1,6 @@
 <% provide(:title, "グループ一覧") %>
-<h1 class="text-center">グループ一覧</h1>
-<p class="text-right"><%= link_to "グループの新規作成", new_private_group_path %></p>
+
+<h1 class="page-title"><%= yield(:title) %></h1>
+<%= link_to "グループの新規作成", new_private_group_path, class: "open_new_form" %>
 
 <%= render 'private_group' %>

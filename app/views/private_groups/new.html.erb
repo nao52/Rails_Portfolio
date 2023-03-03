@@ -1,14 +1,6 @@
 <% provide(:title, "新規グループの作成") %>
 <% provide(:button_text, "新規グループの作成") %>
 
-<h1 class="text-center">新規グループの作成</h1>
+<h1 class="page-title"><%= yield(:title) %></h1>
 
 <%= render 'group_form' %>
-
-<div style="border: solid; margin-top: 12px;">
-  <h3 class="text-center">グループ作成の際に気をつけること</h3>
-  <ul>
-    <li>グループ名はわかりやすいものにしてください</li>
-    <li>グループの詳細についてはできる限り記載してください</li>
-  </ul>
-</div>
