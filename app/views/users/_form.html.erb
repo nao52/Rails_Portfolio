@@ -1,35 +1,35 @@
 <%= form_with(model: @user) do |f| %>
   <%= render 'shared/error_messages', model: f.object %>
 
-  <%= f.label :name, "名前" %> <br>
-  <%= f.text_field :name, class: 'form-control' %> <br>
+  <%= f.label :name, "名前" %>
+  <%= f.text_field :name %>
 
-  <%= f.label :email, "メールアドレス" %> <br>
-  <%= f.email_field :email, class: 'form-control' %> <br>
+  <%= f.label :email, "メールアドレス" %>
+  <%= f.email_field :email %>
 
-  <%= f.label :password, "パスワード" %> <br>
-  <%= f.password_field :password, class: 'form-control' %> <br>
+  <%= f.label :password, "パスワード" %>
+  <%= f.password_field :password %>
 
-  <%= f.label :password_confirmation, "確認用パスワード" %> <br>
-  <%= f.password_field :password_confirmation, class: 'form-control' %> <br>
+  <%= f.label :password_confirmation, "確認用パスワード" %>
+  <%= f.password_field :password_confirmation %>
 
-  <%= f.label :subject_id, "担当教科" %> <br>
-  <%= f.select :subject_id, make_select_form(Subject.all),  { include_blank: "選択してください" }, class: 'form-control' %> <br>
+  <%= f.label :subject_id, "担当教科" %>
+  <%= f.select :subject_id, make_select_form(Subject.all),  { include_blank: "選択してください" } %>
   
-  <%= f.label :club_id, "担当部活動" %> <br>
-  <%= f.select :club_id, make_select_form(Club.all), { include_blank: "選択してください" }, class: 'form-control' %> <br>
+  <%= f.label :club_id, "担当部活動" %>
+  <%= f.select :club_id, make_select_form(Club.all), { include_blank: "選択してください" } %>
 
-  <%= f.label :kinds_of_school_id, "校種" %> <br>
-  <%= f.select :kinds_of_school_id, make_select_form(KindsOfSchool.all), { include_blank: "選択してください" }, class: 'form-control' %> <br>
+  <%= f.label :kinds_of_school_id, "校種" %>
+  <%= f.select :kinds_of_school_id, make_select_form(KindsOfSchool.all), { include_blank: "選択してください" } %>
 
-  <%= f.label :profile, "プロフィール(任意)" %> <br>
-  <%= f.text_area :profile, class: 'form-control' %> <br>
+  <%= f.label :profile, "プロフィール(任意)" %>
+  <%= f.text_area :profile %>
 
-  <%= f.label :image, "プロフィール画像(任意)" %> <br>
+  <%= f.label :image, "プロフィール画像(任意)" %>
   <span class="image">
     <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
   </span>
-  <br>
+ 
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <%= f.submit yield(:button_text), class: "button" %>
 <% end %>

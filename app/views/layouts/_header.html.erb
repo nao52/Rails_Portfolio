@@ -1,9 +1,9 @@
 <header class="page-header wrapper">
   <%= link_to image_tag('logo.png'), root_path, class: "logo" %>
   <% if logged_in? %>
-    <%= current_user.name %>でログイン中
     <nav>
       <ul class="main-nav">
+        <li><%= "『#{current_user.name}』でログイン中" %></li>
         <li><%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete } %></li>
       </ul>
     </nav>

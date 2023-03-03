@@ -1,12 +1,6 @@
 <% provide(:title, "ユーザー情報の編集") %>
 <% provide(:button_text, "ユーザー情報を更新") %>
 
-<h1 class="text-center">ユーザー情報の編集</h1>
+<h1 class="page-title"><%= yield(:title) %></h1>
 
-<div class="row">
-  <div>
-
-    <%= render 'form' %>
-
-  </div>
-</div>
+<%= render 'form' %>

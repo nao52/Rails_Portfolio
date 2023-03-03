@@ -20,7 +20,7 @@ RSpec.feature "Logins", type: :feature do
     }.to change { current_path }.to user_path(@user)
 
     expect(page).to have_text("ログインに成功しました！")
-    expect(page).to have_content("#{@user.name}でログイン中")
+    expect(page).to have_content("『#{@user.name}』でログイン中")
 
     expect {
 
