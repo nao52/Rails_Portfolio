@@ -2,8 +2,7 @@
   <h2 class="user-name"><%= @user.name %></h2>
   <div class="user-image">
     <% if @user.image.attached? %>
-      <%= image_tag @user.image.variant(:display) %>
-      <%= render 'delete_image' %>
+      <%= image_tag @user.image %>
     <% else %>
       <%= image_tag("default-icon.jpeg") %>
     <% end %>
@@ -11,7 +10,8 @@
 
   <% if logged_in? %>
     <% if current_user?(@user) %>
-      <%= link_to "ユーザー情報の編集", edit_user_path(current_user), { class: "button" } if current_user?(@user) %>
+      <%= render 'delete_image' if @user.image.attached? %>
+      <%= link_to "ユーザー情報の編集", edit_user_path(current_user), { class: "button" } %>
     <% else %>
       <%= render 'users/follow/follow_form' %>
     <% end %>
