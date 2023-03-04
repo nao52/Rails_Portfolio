@@ -588,6 +588,20 @@ aside {
     }
   }
 }
+#join_form {
+  .leave_form {
+    input {
+      background: #fff;
+      border: 1px #000 solid;
+      color: #000;
+      &:hover {
+        color: #ff3300;
+        border: 1px#ff3300 solid;
+        opacity: 1;
+      }
+    }
+  }
+}
 
 .create_seats {
   h3 {
