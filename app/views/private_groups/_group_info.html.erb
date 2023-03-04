@@ -1,7 +1,8 @@
-<div style="border: solid; padding: 10px;">
-  <h1><%= yield(:title) %></h1>
-  <h3>
-    <%= "グループ詳細:#{@group.detail}" if @group.detail.present? %>
-  </h3>
+<div class="group_info">
+  <h1><%= "グループ名『#{yield(:title)}』" %></h1>
+  <% if @group.detail.present? %>
+    <p><%= "グループ詳細:#{@group.detail}" %></p>
+  <% end %>
+
   <%= render 'users/join/join_form' %>
 </div>

@@ -561,7 +561,8 @@ aside {
 // グループ詳細画面
 .subject_link,
 .club_link,
-.kinds_of_school_link {
+.kinds_of_school_link,
+.private_group_link {
   display: flex;
   text-align: center;
   font-size: 1.3rem;
@@ -573,6 +574,18 @@ aside {
   }
   .active {
     font-weight: bold;
+  }
+}
+.group_info {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 30px;
+  form {
+    padding: 0;
+    margin: 0;
+    input {
+      margin: 10px;
+    }
   }
 }
 
