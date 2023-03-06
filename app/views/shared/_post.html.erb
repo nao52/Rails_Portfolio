@@ -1,14 +1,26 @@
 <%= paginate @posts %>
 
-<% @posts.each do |post| %>
-  <hr>
-  <div style="margin: 5px 0; padding: 10px;">
-    投稿者:<%= post.user.name %><br>
-    <%= post.content %>
-  </div>
-  <% if current_user?(post.user) %>
-    <%= link_to "投稿の削除", post, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, id: "delete_btn#{post.id}", class: "btn btn-danger" %>
+<ul class="posts">
+  <% @posts.each do |post| %>
+    <li>
+      <div class="user-icon">
+        <% if post.user.image.attached? %>
+          <%= image_tag(post.user.image) %>
+        <% else %>
+        <%= image_tag("default-icon.jpeg") %>
+        <% end %>
+        <%= link_to post.user.name, post.user, class: "user-name" %>
+        <p><%= post.content %></p>
+      </div>
+
+      <% if current_user?(post.user) %>
+        <div class="buttons">
+          <%= link_to "投稿の削除", post, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, id: "delete_btn#{post.id}", class: "button delete_button" %>
+        </div>
+      <% end %>
+
+    </li>
   <% end %>
-<% end %>
+</ul>
 
 <%= paginate @posts %>

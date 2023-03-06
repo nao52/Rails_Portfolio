@@ -1,7 +1,12 @@
 <% provide(:title, @group.name) %>
 
-<h1 class="text-center"><%= yield(:title) %></h1>
+<h1 class="page-title"><%= yield(:title) %></h1>
 
-<%= render 'kinds_of_schools/link' %>
+<div class="kinds_of_school_link">
+  <div><%= link_to "投稿一覧", @group, class: "active" %></div>
+  <div><%= link_to "メンバー", members_kinds_of_school_path(@group) %></div>
+</div>
+
 <%= render 'shared/post_form', params_id: "kinds_of_school_id" %>
+
 <%= render 'shared/post' %>

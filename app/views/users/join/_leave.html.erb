@@ -1,6 +1,6 @@
 <% unless current_user?(@group.user) %>
-  <%= form_with(model: current_user.participations.find_by(private_group: @group),
-                html: { method: :delete }) do |f| %>
-    <%= f.submit "グループの退出", class: "btn btn-danger" %>
+  <%= form_with model: current_user.participations.find_by(private_group: @group),
+                html: { method: :delete }, class: "leave_form", data: { "turbo-method": :delete, turbo_confirm: "グループを退出します。よろしいですか？" } do |f| %>
+    <%= f.submit "グループの退出", class: "button" %>
   <% end %>
 <% end %>

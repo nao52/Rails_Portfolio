@@ -1,12 +1,14 @@
 <% if logged_in? %>
-  【新規投稿を作成】
   <%= form_with model: @post, class: 'post_form' do |f| %>
+
     <%= render 'shared/error_messages', model: f.object %>
+
+    <h3>【新規投稿を作成】</h3>
 
     <div><%= f.hidden_field params_id, :value => @group.id %></div>
     <div class="field">
       <%= f.text_area :content, style: "width: 100%;" %>
     </div>
-    <%= f.submit "投稿", class: "btn btn-primary" %>
+    <%= f.submit "投稿", class: "button" %>
   <% end %>
 <% end %>
