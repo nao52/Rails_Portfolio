@@ -604,9 +604,15 @@ aside {
 }
 
 // 座席の自動作成
+section {
+  margin-top: 10px;
+  height: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .prepare-seats {
   width: 500px;
-  margin: 32px auto 0;
   border: 1px double #ddd;
   padding: 50px;
   h2 {
@@ -621,33 +627,43 @@ aside {
       padding: 4px;
     }
   }
-  button {
-    all:unset;
-    width: 100%;
-    background: #08c;
-    border-radius: 8px;
-    color: white;
-    text-align: center;
-    padding: 8px 0;
-    margin-top: 16px;
-    cursor: pointer;
-    &:hover {
-      opacity: .8;
-    }
-    &:active {
-      opacity: .6;
-    }
+}
+.prepare-seats button,
+.seats button {
+  all:unset;
+  width: 100%;
+  background: #08c;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  padding: 8px 0;
+  margin-top: 16px;
+  cursor: pointer;
+  &:hover {
+    opacity: .8;
+  }
+  &:active {
+    opacity: .6;
   }
 }
 .seats {
+  width: 500px;
+  margin: 16px auto 0;
   table {
-    width: 500px;
-    margin: 16px auto 0;
     td {
       border: 1px solid #000;
       text-align: center;
       height: 80px;
+      input {
+        height: 100%;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+      }
     }
+  }
+  .hidden {
+    display: none;
   }
 }
 
