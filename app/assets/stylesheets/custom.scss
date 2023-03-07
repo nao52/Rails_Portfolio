@@ -603,6 +603,54 @@ aside {
   }
 }
 
+// 座席の自動作成
+.prepare-seats {
+  width: 500px;
+  margin: 32px auto 0;
+  border: 1px double #ddd;
+  padding: 50px;
+  h2 {
+    text-align: center;
+  }
+  label {
+    select {
+      width: 100%;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      padding: 4px;
+    }
+  }
+  button {
+    all:unset;
+    width: 100%;
+    background: #08c;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    padding: 8px 0;
+    margin-top: 16px;
+    cursor: pointer;
+    &:hover {
+      opacity: .8;
+    }
+    &:active {
+      opacity: .6;
+    }
+  }
+}
+.seats {
+  table {
+    width: 500px;
+    margin: 16px auto 0;
+    td {
+      border: 1px solid #000;
+      text-align: center;
+      height: 80px;
+    }
+  }
+}
+
 .create_seats {
   h3 {
     height: 80px;

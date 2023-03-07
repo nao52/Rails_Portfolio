@@ -1,5 +1,8 @@
 class CreateSeatsController < ApplicationController
 
+  def test
+  end
+
   def show
     @col = 6
     @row = 6
