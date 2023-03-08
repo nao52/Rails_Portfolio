@@ -7,9 +7,6 @@ Rails.application.routes.draw do
   delete  "/logout",   to: "sessions#destroy"
 
   get     "/seat/show",         to: "create_seats#show"
-  post    "/seat/update",       to: "create_seats#update"
-  post    "/seat/add_data",     to: "create_seats#add_data"
-  post    "/seat/delete_data",  to: "create_seats#delete_data"
 
   get     "/cleaning_duty/show",    to: "cleaning_duties#show"
   post    "/cleaning_duty/update",  to: "cleaning_duties#update"
