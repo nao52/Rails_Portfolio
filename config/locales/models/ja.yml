@@ -40,6 +40,9 @@ ja:
         name: ワークシート名
         file: ワークシート
         detail: ワークシートの詳細
+      seat:
+        seat_no: 座席番号
+        student_name: 生徒名
       
     errors:
       messages:
