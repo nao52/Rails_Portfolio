@@ -2,28 +2,27 @@
 
 <h1 class="page-title"><%= yield(:title) %></h1>
 
-<section>
-  <div class="prepare-seats">
-    <h2>座席数の指定</h2>
-    <label>
-      横列の座席数
-      <%= select_tag "col-number", options_for_select(1..8, 6)  %>
-    </label>
-    <label>
-      縦列の座席数
-      <%= select_tag "row-number", options_for_select(1..8, 6)  %>
-    </label>
+<div class="prepare-seats">
+  <h2>座席数の指定</h2>
+  <label>
+    横列の座席数
+    <%= select_tag "col-number", options_for_select(1..8, 6)  %>
+  </label>
+  <label>
+    縦列の座席数
+    <%= select_tag "row-number", options_for_select(1..8, 6)  %>
+  </label>
 
-    <button id="create-seat-btn">座席を作成する</button>
-  </div>
+  <button id="create-seat-btn">座席を作成する</button>
+</div>
 
-  <div class="seats">
-    <table>
-      <tbody id="seats">
+<div class="seats">
+  <table>
+    <tbody id="seats">
+      <tr>
         
-      </tbody>
-    </table>
-    <button id="shuffle-btn" class="hidden">座席をシャッフルする</button>
-  </div>
-</section>
-
+      </tr>
+    </tbody>
+  </table>
+  <button id="shuffle-btn" class="hidden">座席をシャッフルする</button>
+</div>

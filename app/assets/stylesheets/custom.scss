@@ -604,17 +604,11 @@ aside {
 }
 
 // 座席の自動作成
-section {
-  margin-top: 10px;
-  height: 600px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .prepare-seats {
   width: 500px;
   border: 1px double #ddd;
   padding: 50px;
+  margin: 36px auto 0;
   h2 {
     text-align: center;
   }
@@ -647,16 +641,28 @@ section {
   }
 }
 .seats {
-  width: 500px;
+  width: 100%;
   margin: 16px auto 0;
+  padding: 0 50px;
   table {
+    margin: 0 auto;
     td {
       border: 1px solid #000;
       text-align: center;
-      height: 80px;
-      input {
-        height: 100%;
+      vertical-align: top;
+      height: 100px;
+      label {
+        font-size: 14px;
+        margin: 0;
+        height: 25%;
+        input {
+          margin-left: 4px;
+        }
+      }
+      .student-name {
+        height: 50%;
         border: none;
+        border-bottom: 1px solid #ddd;
         cursor: pointer;
         text-align: center;
       }
