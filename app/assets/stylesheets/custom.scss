@@ -632,7 +632,8 @@ aside {
 .prepare-seats button,
 .seats button,
 .create-groups button,
-.cleaning-duty button {
+.cleaning-duty button,
+.student-list-btn button {
   all:unset;
   width: 100%;
   background: #08c;
@@ -753,9 +754,22 @@ aside {
       background: #FFFFDD;
     }
   }
+  .hidden {
+    display: none;
+  }
 }
 
-
+.student-list-btn {
+  h3 {
+    margin-top: 36px;
+    padding: 16px;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+.hidden {
+  display: none;
+}
 
 
 

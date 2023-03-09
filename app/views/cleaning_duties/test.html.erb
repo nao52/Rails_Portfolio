@@ -18,7 +18,7 @@
       <table>
         <thead>
           <tr>
-            <th colspan="3" class="th-main">グループ(生徒数<span class="num-of-students">32</span>人)</th>
+            <th colspan="3" class="th-main">グループ(生徒数<span class="num-of-students">--</span>人)</th>
           </tr>
           <tr>
             <th class=th-1>掃除担当場所</th>
@@ -27,46 +27,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class=td-1><input type="text" placeholder="掃除担当場所"></td>
-            <td class=td-2>
-              <%= select_tag "boys-1", options_for_select(1..10, 4)  %>
-            </td>
-            <td class=td-3>
-              <%= select_tag "girls-1", options_for_select(1..10, 4)  %>
-            </td>
-          </tr>
-          <tr>
-            <td class=td-1><input type="text" placeholder="掃除担当場所"></td>
-            <td class=td-2>
-              <%= select_tag "boys-2", options_for_select(1..10, 4)  %>
-            </td>
-            <td class=td-3>
-              <%= select_tag "girls-2", options_for_select(1..10, 4)  %>
-            </td>
-          </tr>
-          <tr>
-            <td class=td-1><input type="text" placeholder="掃除担当場所"></td>
-            <td class=td-2>
-              <%= select_tag "boys-3", options_for_select(1..10, 4)  %>
-            </td>
-            <td class=td-3>
-              <%= select_tag "girls-3", options_for_select(1..10, 4)  %>
-            </td>
-          </tr>
-          <tr>
-            <td class=td-1><input type="text" placeholder="掃除担当場所"></td>
-            <td class=td-2>
-              <%= select_tag "boys-4", options_for_select(1..10, 4)  %>
-            </td>
-            <td class=td-3>
-              <%= select_tag "girls-4", options_for_select(1..10, 4)  %>
-            </td>
-          </tr>
         </tbody>
       </table>
 
-      <button id="create-student-list-btn">生徒リストを作成する</button>
+      <button id="create-student-list-btn" class="hidden">生徒リストを作成する</button>
+    </div>
+
+    <div class="student-list-btn hidden">
+      <h3>生徒リストに関する操作</h3>
+      <button id="shuffle-boys">男子生徒のシャッフル</button>
+      <button id="shuffle-girls">女子生徒のシャッフル</button>
+      <button id="clear-names">生徒名のクリア</button>
     </div>
   </section>
 
@@ -74,7 +45,7 @@
     <table>
       <thead>
         <tr>
-          <th colspan="3" class="th-main">生徒リスト(<span class="num-of-students">32</span>人)</th>
+          <th colspan="3" class="th-main">生徒リスト(<span class="num-of-students">--</span>人)</th>
         </tr>
         <tr>
           <th class="th-1">掃除担当場所</th>
@@ -83,20 +54,6 @@
         </tr>
       </thead>
       <tbody>
-        <% 16.times do %>
-          <tr>
-            <td class="td-1"></td>
-            <td class="td-2"><input type="text" placeholder="生徒名"></td>
-            <td class="td-3">男子</td>
-          </tr>
-        <% end %>
-        <% 16.times do %>
-          <tr>
-            <td class="td-1"></td>
-            <td class="td-2"><input type="text" placeholder="生徒名"></td>
-            <td class="td-3">女子</td>
-          </tr>
-        <% end %>
       </tbody>
     </table>
   </div>
