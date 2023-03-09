@@ -631,7 +631,8 @@ aside {
 }
 .prepare-seats button,
 .seats button,
-.create-groups button {
+.create-groups button,
+.cleaning-duty button {
   all:unset;
   width: 100%;
   background: #08c;
@@ -744,6 +745,12 @@ aside {
       font-size: 16px;
       padding: 4px;
       cursor: pointer;
+    }
+    .group-even {
+      background: #FFFFEE	;
+    }
+    .group-odd {
+      background: #FFFFDD;
     }
   }
 }
