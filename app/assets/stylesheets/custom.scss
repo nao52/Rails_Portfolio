@@ -31,6 +31,10 @@ img {
     width: 80%;
   }
 }
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
 
 // ボタン
 .button {
@@ -604,7 +608,9 @@ aside {
 }
 
 // 座席の自動作成
-.prepare-seats {
+// 掃除担当場所の自動作成
+.prepare-seats,
+.create-groups {
   width: 500px;
   border: 1px double #ddd;
   padding: 50px;
@@ -619,11 +625,13 @@ aside {
       border: 1px solid #ddd;
       font-size: 16px;
       padding: 4px;
+      cursor: pointer;
     }
   }
 }
 .prepare-seats button,
-.seats button {
+.seats button,
+.create-groups button {
   all:unset;
   width: 100%;
   background: #08c;
@@ -672,7 +680,6 @@ aside {
     display: none;
   }
 }
-
 .create_seats {
   h3 {
     height: 80px;
@@ -699,6 +706,54 @@ aside {
     margin: 10px 0;
   }
 }
+
+.cleaning-duty,
+.student-list {
+  width: 500px;
+  margin: 36px auto 0;
+  table {
+    width: 100%;
+    border-spacing: 0;
+    th, td {
+      border: 1px solid #000;
+      height: 60px;
+      width: calc(100% / 3);
+      text-align: center;
+    }
+    .th-main {
+      border-bottom: none;
+    }
+    .th-1, .th-2 {
+      border-right: none;
+    }
+    .td-1, .td-2 {
+      border-right: none;
+    }
+    .td-1, .td-2, .td-3 {
+      border-top: none;
+    }
+    input {
+      padding: 4px;
+      text-align: center;
+    }
+    select {
+      display: block;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      padding: 4px;
+      cursor: pointer;
+    }
+  }
+}
+
+
+
+
+
+
+
 
 .cleaning_duty {
   table {

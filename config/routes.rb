@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   post    "/login",    to: "sessions#create"
   delete  "/logout",   to: "sessions#destroy"
 
-  get     "/seat/show",         to: "create_seats#show"
+  get     "/seat/show",           to: "create_seats#show"
+  get     "/cleaning_duty/test",  to: "cleaning_duties#test"
 
   get     "/cleaning_duty/show",    to: "cleaning_duties#show"
   post    "/cleaning_duty/update",  to: "cleaning_duties#update"

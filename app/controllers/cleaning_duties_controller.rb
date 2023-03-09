@@ -1,6 +1,9 @@
 class CleaningDutiesController < ApplicationController
   before_action :set_hash
 
+  def test
+  end
+
   def show
     boys_size  = 4
     girls_size = 4
