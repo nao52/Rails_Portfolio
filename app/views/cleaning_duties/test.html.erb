@@ -8,17 +8,17 @@
       <h2>グループ(掃除担当場所)の作成</h2>
       <label>
         グループ数
-        <%= select_tag "", options_for_select(1..10, 6)  %>
+        <%= select_tag "number-of-group", options_for_select(1..10, 6)  %>
       </label>
 
-      <button id="create-seat-btn">グループを作成する</button>
+      <button id="create-group-btn">グループを作成する</button>
     </div>
 
     <div class="cleaning-duty">
       <table>
         <thead>
           <tr>
-            <th colspan="3" class="th-main">グループ(生徒数32人)</th>
+            <th colspan="3" class="th-main">グループ(生徒数<span class="num-of-students">32</span>人)</th>
           </tr>
           <tr>
             <th class=th-1>掃除担当場所</th>
