@@ -1,112 +1,34 @@
 class CalcAbsentsController < ApplicationController
-  before_action :preparation_show
-  before_action :set_curriculums, only: [:schedule, :set_test_schedule, :calc_absent]
-  before_action :set_schedules,   only: [:set_curriculum, :calc_absent]
-  before_action :logged_in_user,  only: [:save_schedule]
+  before_action :logged_in_user, only: :save_schedule
 
   def show
-  end
-
-  def set_curriculum
-    @carriculum_size.times do |n|
-      @carriculums << params["carriculums#{n+1}"] if params["carriculums#{n+1}"].present?
-    end
-    render 'show', status: :unprocessable_entity
-  end
-
-  def set_test_carriculum
-    @carriculums = ["英語1", "芸術", "国語1", "理科基礎1", "数学1", "数学A", "体育", "総合的な学習の時間", "LHR", "現代社会", "地理A", "家庭科基礎"]
-    render 'show', status: :unprocessable_entity
-  end
-
-  def schedule
-    @schedules = []
-    30.times do |n|
-      @schedules << params["suchedule#{n+1}"]
-    end
-    render 'show', status: :unprocessable_entity
-  end
-
-  def set_test_schedule
-    @schedules = []
-    30.times do |n|
-      carriculum = @carriculums.shuffle[0]
-      @schedules << carriculum
-    end
-    render 'show', status: :unprocessable_entity
+    set_carriculum_show
+    @carriculum_schedule = current_user.carriculum_schedule.split(',') if logged_in?
   end
 
   def save_schedule
-    schedules = user_params[:schedules]
-    if current_user.update(carriculum_schedule: user_params[:schedules])
-      flash[:success] = "日課表の保存に成功しました！！"
-      redirect_to calc_absent_show_url
+    if user_params[:carriculum_schedule].split(',').length == 30
+      current_user.update(carriculum_schedule: user_params[:carriculum_schedule])
+      flash[:success] = "日課表の保存に成功しました！"
+      redirect_to calc_absent_test_url
     else
-      @schedules = schedules.split
-      @error_messages = "日課表の保存に失敗しました"
-      render 'show', status: :unprocessable_entity
+      flash.now[:danger] = "日課表の保存に失敗しました..."
+      set_carriculum_show
+      render 'show'
     end
-  end
-
-  def calc_absent
-
-    # 日課表から重複を取り除く
-    courses = @schedules.uniq
-
-    # 科目ごとの欠席数を初期化
-    courses.each do |course|
-      @absents["#{course}"] = 0
-    end
-
-    # 各曜日の欠席数を計算
-    @schedules[0..5].each do |carriculum|
-      @absents["#{carriculum}"] += params[:monday].to_i
-    end
-    @schedules[6..11].each do |carriculum|
-      @absents["#{carriculum}"] += params[:tuesday].to_i
-    end
-    @schedules[12..17].each do |carriculum|
-      @absents["#{carriculum}"] += params[:wednesday].to_i
-    end
-    @schedules[18..23].each do |carriculum|
-      @absents["#{carriculum}"] += params[:thursday].to_i
-    end
-    @schedules[24..29].each do |carriculum|
-      @absents["#{carriculum}"] += params[:friday].to_i
-    end
-
-    render 'show', status: :unprocessable_entity
   end
 
   private
 
     def user_params
-      params.require(:user).permit(:schedules)
+      params.require(:user).permit(:carriculum_schedule)
     end
 
-    # beforeフィルタ
-
-    # ページを表示するために必要な要素をセットする
-    def preparation_show
-      @carriculum_size = 15
-      @carriculums = Carriculum.all.map(&:name)
-      @absents = {}
-
-      if logged_in?
-        @schedules = current_user.carriculum_schedule.split
-      else
-        @schedules = []
-      end
-
-    end
-
-    def set_curriculums
-      @carriculums = params[:carriculums].split if params[:carriculums].present?
-    end
-
-    def set_schedules
-      30.times do |n|
-        @schedules << params["schedule#{n+1}"]
+    def set_carriculum_show
+      @user = User.new
+      @carriculums = [["科目を設定", ""]]
+      Carriculum.all.each_with_index do |carriculum, index|
+        @carriculums << [carriculum.name, index]
       end
     end
 

@@ -609,6 +609,7 @@ aside {
 
 // 座席の自動作成
 // 掃除担当場所の自動作成
+// 欠時の自動計算
 .prepare-seats,
 .create-groups {
   width: 500px;
@@ -633,7 +634,8 @@ aside {
 .seats button,
 .create-groups button,
 .cleaning-duty button,
-.student-list-btn button {
+.student-list-btn button,
+.class-schedule .button {
   all:unset;
   width: 100%;
   background: #08c;
@@ -708,7 +710,6 @@ aside {
     margin: 10px 0;
   }
 }
-
 .cleaning-duty,
 .student-list {
   width: 500px;
@@ -758,7 +759,6 @@ aside {
     display: none;
   }
 }
-
 .student-list-btn {
   h3 {
     margin-top: 36px;
@@ -767,9 +767,58 @@ aside {
     font-size: 1.5rem;
   }
 }
+.class-schedule {
+  width: 800px;
+  margin: 36px auto 0;
+  table {
+    width: 100%;
+    border-spacing: 0;
+    th, td {
+      border: 1px solid #000;
+      height: 60px;
+      width: calc(100% / 5);
+      text-align: center;
+    }
+    .th-main {
+      border-bottom: none;
+    }
+    .th-1, .th-2, .th-3, .th-4 {
+      border-right: none;
+    }
+    .td-1, .td-2, .td-3, .td-4 {
+      border-right: none;
+    }
+    .td-1, .td-2, .td-3, .td-4, .td-5 {
+      border-top: none;
+    }
+    input {
+      padding: 4px;
+      text-align: center;
+    }
+    select {
+      display: block;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      padding: 4px;
+      cursor: pointer;
+    }
+    .group-even {
+      background: #FFFFEE	;
+    }
+    .group-odd {
+      background: #FFFFDD;
+    }
+  }
+  .hidden {
+    display: none;
+  }
+}
 .hidden {
   display: none;
 }
+
 
 
 
