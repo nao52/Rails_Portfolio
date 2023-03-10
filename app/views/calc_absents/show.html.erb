@@ -5,47 +5,49 @@
 <div class="wrapper">
   <section>
     <div class="class-schedule">
-    <table>
-      <thead>
-        <tr>
-          <th colspan="5" class="th-main">日課表</th>
-        </tr>
-        <tr>
-          <th class="th-1">月</th>
-          <th class="th-2">火</th>
-          <th class="th-3">水</th>
-          <th class="th-4">木</th>
-          <th class="th-5">金</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% 6.times do |period| %>
+      <table>
+        <thead>
           <tr>
-            <% 5.times do |day| %>
-              <td class="td-<%= day+1 %>">
-                <% if logged_in? %>
-                  <%= select_tag "schedule#{day+1}-#{period+1}", options_for_select(@carriculums, @carriculum_schedule[day+(period*5)]), class: "schedules"  %>
-                <% else %>
-                  <%= select_tag "schedule#{day+1}-#{period+1}", options_for_select(@carriculums), class: "schedules"  %>
-                <% end %>
-              </td>
-            <% end %>
+            <th colspan="5" class="th-main">日課表</th>
           </tr>
+          <tr>
+            <th class="th-1">月</th>
+            <th class="th-2">火</th>
+            <th class="th-3">水</th>
+            <th class="th-4">木</th>
+            <th class="th-5">金</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% 6.times do |period| %>
+            <tr>
+              <% 5.times do |day| %>
+                <td class="td-<%= day+1 %>">
+                  <% if logged_in? %>
+                    <%= select_tag "schedule#{day+1}-#{period+1}", options_for_select(@carriculums, @carriculum_schedule[day+(period*5)]), class: "schedules"  %>
+                  <% else %>
+                    <%= select_tag "schedule#{day+1}-#{period+1}", options_for_select(@carriculums), class: "schedules"  %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <button id="clear-schdule-btn">日課表をクリア</button>
+
+      <% if logged_in? %>
+        <%= form_with model: @user, url: calc_absent_save_schedule_path do |f| %>
+          <%= f.hidden_field :carriculum_schedule, value: "" %>
+
+          <%= f.submit "日課表のデータを保存(更新)する", id: "save-schedule", class: "button hidden" %>
         <% end %>
-      </tbody>
-    </table>
-
-    <% if logged_in? %>
-      <%= form_with model: @user, url: calc_absent_save_schedule_path do |f| %>
-        <%= f.hidden_field :carriculum_schedule, value: "" %>
-
-        <%= f.submit "日課表のデータを保存する", id: "save-schedule", class: "button hidden" %>
       <% end %>
-    <% end %>
 
     </div>
 
-    <div class="calc-absent">
+    <div class="calc-absent hidden">
       <table>
         <thead>
           <tr>
@@ -74,7 +76,7 @@
     </div>
   </section>
 
-  <div class="absent-table">
+  <div class="absent-table hidden">
   <% if logged_in? && @carriculum_schedule.length == 30 %>
     <table>
       <thead>

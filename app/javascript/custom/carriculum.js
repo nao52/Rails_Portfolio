@@ -15,8 +15,12 @@
       // 全て入力済みなら、ボタンを表示
       if (scheduleList.length === 30) {
         saveScheduleBtn.classList.remove('hidden');
+        calcAbsentForm.classList.remove('hidden');
+        absentTable.classList.remove('hidden');
       } else {
         saveScheduleBtn.classList.add('hidden');
+        calcAbsentForm.classList.add('hidden');
+        absentTable.classList.add('hidden');
       }
     }
 
@@ -39,10 +43,32 @@
       return absentsOfCarriculm;
     }
 
+    // 科目別の欠時数をセットする
+    function setCarriculumAbsent(absentsOfCarriculm) {
+      for (let i = 1; i <= Object.keys(absentsOfCarriculm).length; i++) {
+        const absentNum = document.querySelector(`#absent${i}`);
+        const carriculumName = document.querySelector(`#carriculum-name${i}`).innerText;
+        absentNum.textContent = absentsOfCarriculm[carriculumName];
+      }
+    }
+
+    // 日課表の値をリセットする
+    function clearSchedule() {
+      document.querySelectorAll(`.class-schedule select`).forEach(select => {
+        select.value = '';
+        saveScheduleBtn.classList.add('hidden');
+        calcAbsentForm.classList.add('hidden');
+        absentTable.classList.add('hidden');
+      });
+    }
+
     const carriculumSchedule = document.querySelector('#user_carriculum_schedule');
     const schedules = document.querySelectorAll('.schedules');
     const saveScheduleBtn = document.querySelector('#save-schedule');
     const calcAbsentBtn = document.querySelector('#calc-absent-btn');
+    const calcAbsentForm = document.querySelector('.calc-absent');
+    const clearScheduleBtn = document.querySelector('#clear-schdule-btn');
+    const absentTable = document.querySelector('.absent-table');
 
     setCarriculumSchedule();
 
@@ -55,11 +81,11 @@
     calcAbsentBtn.addEventListener('click', () => {
       const absentsOfCarriculm = calcAbsent();
 
-      for (let i = 1; i <= Object.keys(absentsOfCarriculm).length; i++) {
-        const absentNum = document.querySelector(`#absent${i}`);
-        const carriculumName = document.querySelector(`#carriculum-name${i}`).innerText;
-        absentNum.textContent = absentsOfCarriculm[carriculumName];
-      }
+      setCarriculumAbsent(absentsOfCarriculm)
+    });
+
+    clearScheduleBtn.addEventListener('click', () => {
+      clearSchedule();
     });
   });
 }
