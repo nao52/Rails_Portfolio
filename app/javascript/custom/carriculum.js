@@ -4,16 +4,19 @@
   document.addEventListener("turbo:load", () => {
     // params[carriculum_schedule]をセット
     function setCarriculumSchedule() {
-      let scheduleList = [];
+      let carriculumScheduleValue = [];
+      let carriculumScheduleNames = [];
       schedules.forEach (schedule => {
         if (schedule.value) {
-          scheduleList.push(schedule.value);
+          carriculumScheduleValue.push(schedule.value);
+          const index = schedule.selectedIndex;
+          carriculumScheduleNames.push(schedule[index].textContent);
         }
       });
-      carriculumSchedule.value = scheduleList;
+      carriculumSchedule.value = carriculumScheduleValue;
 
       // 全て入力済みなら、ボタンを表示
-      if (scheduleList.length === 30) {
+      if (carriculumScheduleValue.length === 30) {
         saveScheduleBtn.classList.remove('hidden');
         calcAbsentForm.classList.remove('hidden');
         absentTable.classList.remove('hidden');
@@ -22,6 +25,9 @@
         calcAbsentForm.classList.add('hidden');
         absentTable.classList.add('hidden');
       }
+
+      // 作成したカリキュラムリストを返す
+      return carriculumScheduleNames;
     }
 
     // 欠時数を計算して返す
@@ -62,6 +68,39 @@
       });
     }
 
+    // absent-tableを作成する
+    function makeAbsentTable(carriculumList) {
+      const absentTableBody = document.querySelector('.absent-table tbody');
+
+      // 既存の科目リストを削除
+      document.querySelectorAll('.absent-table tbody tr').forEach(tr => {
+        tr.remove();
+      });
+
+
+      // 科目リストを作成およびセット
+      for (let i = 0; i < carriculumList.length; i++) {
+        const tr = document.createElement('tr');
+
+        const td1 = document.createElement('td');
+        td1.setAttribute('id', `carriculum-name${i+1}`);
+        td1.classList.add('td-1');
+        td1.textContent = carriculumList[i];
+
+        console.log(td1);
+
+        const td2 = document.createElement('td');
+        td2.setAttribute('id', `absent${i+1}`);
+        td2.classList.add('td-2', 'absent-count');
+
+        console.log(td2);
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        absentTableBody.appendChild(tr);
+      }
+    }
+
     const carriculumSchedule = document.querySelector('#user_carriculum_schedule');
     const schedules = document.querySelectorAll('.schedules');
     const saveScheduleBtn = document.querySelector('#save-schedule');
@@ -74,18 +113,26 @@
 
     schedules.forEach (schedule => {
       schedule.addEventListener('input', () => {
-        setCarriculumSchedule();
+        const carriculumScheduleNames = setCarriculumSchedule();
+        if (carriculumScheduleNames.length === 30) {
+          // 重複なしの科目リストを作成
+          const carriculumList = Array.from(new Set(carriculumScheduleNames));
+          makeAbsentTable(carriculumList);
+        }
       });
     });
 
     calcAbsentBtn.addEventListener('click', () => {
       const absentsOfCarriculm = calcAbsent();
 
-      setCarriculumAbsent(absentsOfCarriculm)
+      setCarriculumAbsent(absentsOfCarriculm);
     });
 
     clearScheduleBtn.addEventListener('click', () => {
       clearSchedule();
     });
+
+    // makeAbsentTable();
+
   });
 }
