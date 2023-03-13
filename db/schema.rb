@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -63,6 +63,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cleaning_places", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.integer "boys_num"
+    t.integer "girls_num"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cleaning_places_on_user_id"
   end
 
   create_table "club_posts", charset: "utf8mb3", force: :cascade do |t|
@@ -221,6 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_042337) do
   add_foreign_key "book_favorites", "users"
   add_foreign_key "book_reviews", "reference_books"
   add_foreign_key "book_reviews", "users"
+  add_foreign_key "cleaning_places", "users"
   add_foreign_key "club_posts", "clubs"
   add_foreign_key "club_posts", "users"
   add_foreign_key "kinds_of_school_posts", "kinds_of_schools"

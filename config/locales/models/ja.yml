@@ -40,12 +40,14 @@ ja:
         name: ワークシート名
         file: ワークシート
         detail: ワークシートの詳細
-      seat:
-        seat_no: 座席番号
-        student_name: 生徒名
+      cleaning_place:
+        name: 掃除担当場所
+        boys_num: 男子生徒数
+        girls_num: 女子生徒数
       
     errors:
       messages:
         blank: は必須項目です
         required: を選択してください
         invalid: の形式が不正です
+        in: は%{count}の範囲で入力してください
