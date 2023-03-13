@@ -14,7 +14,7 @@
         }
       });
       carriculumSchedule.value = carriculumScheduleValue;
-
+      
       // 全て入力済みなら、ボタンを表示
       if (carriculumScheduleValue.length === 30) {
         saveScheduleBtn.classList.remove('hidden');
@@ -25,7 +25,7 @@
         calcAbsentForm.classList.add('hidden');
         absentTable.classList.add('hidden');
       }
-
+      
       // 作成したカリキュラムリストを返す
       return carriculumScheduleNames;
     }
@@ -87,13 +87,9 @@
         td1.classList.add('td-1');
         td1.textContent = carriculumList[i];
 
-        console.log(td1);
-
         const td2 = document.createElement('td');
         td2.setAttribute('id', `absent${i+1}`);
         td2.classList.add('td-2', 'absent-count');
-
-        console.log(td2);
 
         tr.appendChild(td1);
         tr.appendChild(td2);

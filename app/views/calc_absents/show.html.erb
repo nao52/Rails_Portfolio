@@ -37,12 +37,10 @@
 
       <button id="clear-schdule-btn">日課表をクリア</button>
 
-      <% if logged_in? %>
-        <%= form_with model: @user, url: calc_absent_save_schedule_path do |f| %>
-          <%= f.hidden_field :carriculum_schedule, value: "" %>
+      <%= form_with model: @user, url: calc_absent_save_schedule_path do |f| %>
+        <%= f.hidden_field :carriculum_schedule, value: "" %>
 
-          <%= f.submit "日課表のデータを保存(更新)する", id: "save-schedule", class: "button hidden" %>
-        <% end %>
+        <%= f.submit "日課表のデータを保存する (ログイン時のみ有効) ", id: "save-schedule", class: "button hidden" %>
       <% end %>
 
     </div>
@@ -77,17 +75,17 @@
   </section>
 
   <div class="absent-table hidden">
-  <% if logged_in? && @carriculum_schedule.length == 30 %>
-    <table>
-      <thead>
-        <tr>
-          <th colspan="2" class="th-main">科目別欠時数</th>
-        </tr>
-        <tr>
-          <th class="th-1">科目名</th>
-          <th class="th-2">欠時数</th>
-        </tr>
-      </thead>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2" class="th-main">科目別欠時数</th>
+      </tr>
+      <tr>
+        <th class="th-1">科目名</th>
+        <th class="th-2">欠時数</th>
+      </tr>
+    </thead>
+    <% if logged_in? && @carriculum_schedule.length == 30 %>
       <tbody>
         <% @user_carriculums.length.times do |n| %>
           <tr>
@@ -98,7 +96,10 @@
           </tr>
         <% end %>
       </tbody>
-    </table>
-  <% end %>
+    <% else %>
+      <tbody>
+      </tbody>
+    <% end %>
+  </table>
   </div>
 </div>
