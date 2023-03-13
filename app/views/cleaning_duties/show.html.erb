@@ -8,7 +8,8 @@
       <h2>グループ(掃除担当場所)の作成</h2>
       <label>
         グループ数
-        <%= select_tag "number-of-group", options_for_select(1..10, 4)  %>
+        <% @group_size = logged_in? ? @cleaning_places.length : 4 %>
+        <%= select_tag "number-of-group", options_for_select(1..10, @group_size)  %>
       </label>
 
       <button id="create-group-btn">グループを作成する</button>
@@ -27,12 +28,28 @@
           </tr>
         </thead>
         <tbody>
+          <% if logged_in? && @cleaning_places.length > 0 %>
+            <% @cleaning_places.length.times do |n| %>
+              <tr>
+                <td class="td-1">
+                  <%= text_field_tag "cleaning-place#{n+1}", @cleaning_places[n].name, placeholder: "掃除担当場所" %>
+                </td>
+                <td class="td-2">
+                  <%= select_tag "num-of-boys#{n+1}", options_for_select(0..10, @cleaning_places[n].boys_num) %>
+                </td>
+                <td class="td-3">
+                  <%= select_tag "num-of-girls#{n+1}", options_for_select(0..10, @cleaning_places[n].girls_num) %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
         </tbody>
       </table>
 
       <button id="create-student-list-btn" class="hidden">生徒リストを作成する</button>
 
       <%= form_with model: @cleaning_place, url: cleaning_duty_save_place_path do |f| %>
+        <%= f.hidden_field :group_size, value: "" %>
         <%= f.hidden_field :name, value: "" %>
         <%= f.hidden_field :boys_num, value: "" %>
         <%= f.hidden_field :girls_num, value: "" %>

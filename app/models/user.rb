@@ -29,6 +29,7 @@ class User < ApplicationRecord
   has_many :worksheet_favorites, dependent: :destroy
   has_many :favorite_worksheets, through: :worksheet_favorites, source: :worksheet
   has_many :book_reviews
+  has_many :cleaning_places
   
   before_save { email.downcase! }
   

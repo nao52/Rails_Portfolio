@@ -61,17 +61,27 @@ document.addEventListener("turbo:load", function() {
     return shuffledArray;
   }
 
+  // params[group_size]
+  function setGroupSize() {
+    const numberOfGroup = document.querySelector('#number-of-group');
+    groupSize.value = numberOfGroup.value;
+  }
+
   // params[name]をセット
-  function setCleaningPlaceName(cleaningPlaceInput) {
+  function setCleaningPlaceName() {
+    const cleaningPlaceInput = document.querySelectorAll('.cleaning-duty .td-1 input');
     let nameValue = [];
     cleaningPlaceInput.forEach(input => {
-      nameValue.push(input.value);
+      if (input.value) {
+        nameValue.push(input.value);
+      }
     });
     cleaningPlaceName.value = nameValue;
   }
 
   // params[boys_num]をセット
-  function setBoysNum(boysNumSelect) {
+  function setBoysNum() {
+    const boysNumSelect = document.querySelectorAll('.cleaning-duty .td-2 select');
     let numValue = [];
     boysNumSelect.forEach(select => {
       numValue.push(select.value);
@@ -80,12 +90,22 @@ document.addEventListener("turbo:load", function() {
   }
 
   // params[girls_num]をセット
-  function setGirlsNum(girlsNumSelect) {
+  function setGirlsNum() {
+    const girlsNumSelect = document.querySelectorAll('.cleaning-duty .td-3 select');
     let numValue = [];
     girlsNumSelect.forEach(select => {
       numValue.push(select.value);
     });
     girlsNum.value = numValue;
+  }
+
+  // 掃除担当場所の情報を保存するボタンの表示
+  function showSaveCleaningPlaceBtn() {
+    if (cleaningPlaceName.value.split(',').length === Number(groupSize.value)) {
+      saveCleaningPlaceBtn.classList.remove('hidden');
+    } else {
+      saveCleaningPlaceBtn.classList.add('hidden');
+    }
   }
 
   const createGroupBtn = document.querySelector('#create-group-btn');
@@ -95,9 +115,46 @@ document.addEventListener("turbo:load", function() {
   const shuffleGirlsBtn = document.querySelector('#shuffle-girls');
   const clearNamesBtn = document.querySelector('#clear-names');
   const saveCleaningPlaceBtn = document.querySelector('#save-cleaning-place');
+  const groupSize = document.querySelector('#cleaning_place_group_size');
   const cleaningPlaceName = document.querySelector('#cleaning_place_name');
   const boysNum = document.querySelector('#cleaning_place_boys_num');
   const girlsNum = document.querySelector('#cleaning_place_girls_num');
+
+  // データベースから値を取ってきた際の画面表示
+  setGroupSize()
+  setCleaningPlaceName();
+  setBoysNum();
+  setGirlsNum();
+  updateNumOfStudents()
+  showSaveCleaningPlaceBtn();
+
+  // グループ数が変更されたら、parmams[group-size]の値を変更する
+  document.querySelector('#number-of-group').addEventListener('input', () => {
+    setGroupSize();
+    showSaveCleaningPlaceBtn();
+  });
+
+  // 掃除場所が入力されたら、params[name]の値を変更する
+  document.querySelectorAll('.cleaning-duty .td-1 input').forEach(input => {
+    input.addEventListener('input', () => {
+      setCleaningPlaceName();
+      showSaveCleaningPlaceBtn();
+    });
+  });
+
+  // 男子の数が変更されたら、params[boys_num]の値を変更する
+  document.querySelectorAll('.cleaning-duty .td-2 select').forEach(select => {
+    select.addEventListener('input', () => {
+      setBoysNum();
+    });
+  });
+
+  // 女子の数が変更されたら、params[girls_num]の値を変更する
+  document.querySelectorAll('.cleaning-duty .td-3 select').forEach(select => {
+    select.addEventListener('input', () => {
+      setGirlsNum();
+    });
+  });
 
   createGroupBtn.addEventListener('click', () => {
     // table内容の削除
@@ -144,15 +201,24 @@ document.addEventListener("turbo:load", function() {
     // 生徒数の表示を変更
     updateNumOfStudents();
 
+    // params[name]の値をリセット
+    cleaningPlaceName.value = "";
+
+    // その他のparamsの値をセット
+    setBoysNum();
+    setGirlsNum();
+
     // 生徒リスト作成ボタンの表示
     // グループ情報保存ボタンの表示
     createStudentListBtn.classList.remove('hidden');
-    saveCleaningPlaceBtn.classList.remove('hidden');
+    saveCleaningPlaceBtn.classList.add('hidden');
 
     // 生徒数を変換した際のイベントを追加
     selectList.forEach(select => {
       select.addEventListener('input', () => {
         updateNumOfStudents();
+        setBoysNum();
+        setGirlsNum();
       });
     });
 
@@ -160,25 +226,13 @@ document.addEventListener("turbo:load", function() {
     const cleaningPlaceInput = document.querySelectorAll('.cleaning-duty .td-1 input');
     cleaningPlaceInput.forEach(input => {
       input.addEventListener('input', () => {
-        setCleaningPlaceName(cleaningPlaceInput);
-      });
-    });
-
-    // 男子の人数をセット
-    const boysNumSelect = document.querySelectorAll('.cleaning-duty .td-2 select');
-    setBoysNum(boysNumSelect);
-    boysNumSelect.forEach(select => {
-      select.addEventListener('input', () => {
-        setBoysNum(boysNumSelect);
-      });
-    });
-
-    // 女子の人数をセット
-    const girlsNumSelect = document.querySelectorAll('.cleaning-duty .td-3 select');
-    setGirlsNum(girlsNumSelect);
-    girlsNumSelect.forEach(select => {
-      select.addEventListener('input', () => {
-        setGirlsNum(girlsNumSelect);
+        setCleaningPlaceName();
+        // グループ数と担当掃除場所の数が一致したら、ボタンを表示する
+        if (cleaningPlaceName.value.split(',').length === Number(groupSize.value)) {
+          saveCleaningPlaceBtn.classList.remove('hidden');
+        } else {
+          saveCleaningPlaceBtn.classList.add('hidden');
+        }
       });
     });
 
