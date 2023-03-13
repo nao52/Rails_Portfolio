@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   delete  "/logout",   to: "sessions#destroy"
 
   get     "/seat/show",                   to: "static_pages#create_seats"
-  get     "/cleaning_duty/show",          to: "static_pages#cleaning_duties"
+  get     "/cleaning_duty/show",          to: "cleaning_duties#show"
+  post    "/cleaning_duty/save_place",    to: "cleaning_duties#save_cleaning_place"
   get     "/calc_absent/show",            to: "calc_absents#show"
   post    "/calc_absent/save_schedule",   to: "calc_absents#save_schedule"
 

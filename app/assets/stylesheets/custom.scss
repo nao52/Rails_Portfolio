@@ -637,7 +637,9 @@ aside {
 .student-list-btn button,
 .class-schedule .button,
 .calc-absent button,
-.class-schedule button {
+.class-schedule button,
+.cleaning-duty .button
+ {
   all:unset;
   width: 100%;
   background: #08c;
@@ -755,6 +757,15 @@ aside {
     }
     .group-odd {
       background: #FFFFDD;
+    }
+  }
+  form {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    input {
+      margin: 20px 0 0;
+      width: 100%;
     }
   }
   .hidden {

@@ -19,9 +19,9 @@ document.addEventListener("turbo:load", function() {
       return select;
   }
 
-  // tableの内容を削除する
-  function clearTableContents(tableContent) {
-    tableContent.forEach(tr => {
+  // 掃除担当場所一覧テーブルを削除する
+  function clearCleaningGroups() {
+    document.querySelectorAll('.cleaning-duty tbody tr').forEach(tr => {
       tr.remove();
     });
   }
@@ -61,17 +61,47 @@ document.addEventListener("turbo:load", function() {
     return shuffledArray;
   }
 
+  // params[name]をセット
+  function setCleaningPlaceName(cleaningPlaceInput) {
+    let nameValue = [];
+    cleaningPlaceInput.forEach(input => {
+      nameValue.push(input.value);
+    });
+    cleaningPlaceName.value = nameValue;
+  }
+
+  // params[boys_num]をセット
+  function setBoysNum(boysNumSelect) {
+    let numValue = [];
+    boysNumSelect.forEach(select => {
+      numValue.push(select.value);
+    });
+    boysNum.value = numValue;
+  }
+
+  // params[girls_num]をセット
+  function setGirlsNum(girlsNumSelect) {
+    let numValue = [];
+    girlsNumSelect.forEach(select => {
+      numValue.push(select.value);
+    });
+    girlsNum.value = numValue;
+  }
+
   const createGroupBtn = document.querySelector('#create-group-btn');
   const numOfStudentsList = document.querySelectorAll('.num-of-students');
   const createStudentListBtn = document.querySelector('#create-student-list-btn');
   const shuffleBoysBtn = document.querySelector('#shuffle-boys');
   const shuffleGirlsBtn = document.querySelector('#shuffle-girls');
   const clearNamesBtn = document.querySelector('#clear-names');
+  const saveCleaningPlaceBtn = document.querySelector('#save-cleaning-place');
+  const cleaningPlaceName = document.querySelector('#cleaning_place_name');
+  const boysNum = document.querySelector('#cleaning_place_boys_num');
+  const girlsNum = document.querySelector('#cleaning_place_girls_num');
 
   createGroupBtn.addEventListener('click', () => {
     // table内容の削除
-    const tableContent = document.querySelectorAll('.cleaning-duty tbody tr');
-    clearTableContents(tableContent);
+    clearCleaningGroups();
     
     // tableの内容を新しく作成する
     const numberOfGroup = document.querySelector('#number-of-group');
@@ -115,12 +145,40 @@ document.addEventListener("turbo:load", function() {
     updateNumOfStudents();
 
     // 生徒リスト作成ボタンの表示
+    // グループ情報保存ボタンの表示
     createStudentListBtn.classList.remove('hidden');
+    saveCleaningPlaceBtn.classList.remove('hidden');
 
     // 生徒数を変換した際のイベントを追加
     selectList.forEach(select => {
       select.addEventListener('input', () => {
         updateNumOfStudents();
+      });
+    });
+
+    // 掃除担当場所一覧の値をセット
+    const cleaningPlaceInput = document.querySelectorAll('.cleaning-duty .td-1 input');
+    cleaningPlaceInput.forEach(input => {
+      input.addEventListener('input', () => {
+        setCleaningPlaceName(cleaningPlaceInput);
+      });
+    });
+
+    // 男子の人数をセット
+    const boysNumSelect = document.querySelectorAll('.cleaning-duty .td-2 select');
+    setBoysNum(boysNumSelect);
+    boysNumSelect.forEach(select => {
+      select.addEventListener('input', () => {
+        setBoysNum(boysNumSelect);
+      });
+    });
+
+    // 女子の人数をセット
+    const girlsNumSelect = document.querySelectorAll('.cleaning-duty .td-3 select');
+    setGirlsNum(girlsNumSelect);
+    girlsNumSelect.forEach(select => {
+      select.addEventListener('input', () => {
+        setGirlsNum(girlsNumSelect);
       });
     });
 
