@@ -1,25 +1,105 @@
 <% provide(:title, "欠時の自動計算") %>
-<h1 class="text-center"><%= yield(:title) %></h1>
 
-<div class="calc_absent">
+<h1 class="page-title"><%= yield(:title) %></h1>
 
-  <% if Rails.env.development? %>
+<div class="wrapper">
+  <section>
+    <div class="class-schedule">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="5" class="th-main">日課表</th>
+          </tr>
+          <tr>
+            <th class="th-1">月</th>
+            <th class="th-2">火</th>
+            <th class="th-3">水</th>
+            <th class="th-4">木</th>
+            <th class="th-5">金</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% 6.times do |period| %>
+            <tr>
+              <% 5.times do |day| %>
+                <td class="td-<%= day+1 %>">
+                  <% if logged_in? %>
+                    <%= select_tag "schedule#{day+1}-#{period+1}", options_for_select(@carriculums, @carriculum_schedule[day+(period*5)]), class: "schedules"  %>
+                  <% else %>
+                    <%= select_tag "schedule#{day+1}-#{period+1}", options_for_select(@carriculums), class: "schedules"  %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-    <div class="debug">
-      <%= "科目リスト = #{@carriculums}" %> <br>
-      <%= "日課表 = #{@schedules}" %> <br>
-      <%= "日課表(サイズ) = #{@schedules.size}" %> <br>
-      <%= "各科目の欠時数 = #{@absents}" %> <br>
+      <button id="clear-schdule-btn">日課表をクリア</button>
+
+      <%= form_with model: @user, url: calc_absent_save_schedule_path do |f| %>
+        <%= f.hidden_field :carriculum_schedule, value: "" %>
+
+        <%= f.submit "日課表のデータを保存する (ログイン時のみ有効) ", id: "save-schedule", class: "button hidden" %>
+      <% end %>
+
     </div>
 
-  <% end %>
+    <div class="calc-absent hidden">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2" class="th-main">欠時数の計算</th>
+          </tr>
+          <tr>
+            <th class="th-1">曜日</th>
+            <th class="th-2">欠席数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ["月", "火", "水", "木", "金"].each_with_index do |day, i| %>
+            <tr>
+              <td class="td-1">
+                <%= "#{day}曜日" %>
+              </td>
+              <td class="td-2">
+                <%= select_tag "absent-count#{i+1}", options_for_select(0..35), class: "absent-counts" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-  <%= render 'manual' %>
+      <button id="calc-absent-btn">欠時数を計算する</button>
+    </div>
+  </section>
 
-  <%= render 'schedule' %>
-
-  <%= render 'calc_absent' %>
-
-  <%= render 'show_absent' %>
-
+  <div class="absent-table hidden">
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2" class="th-main">科目別欠時数</th>
+      </tr>
+      <tr>
+        <th class="th-1">科目名</th>
+        <th class="th-2">欠時数</th>
+      </tr>
+    </thead>
+    <% if logged_in? && @carriculum_schedule.length == 30 %>
+      <tbody>
+        <% @user_carriculums.length.times do |n| %>
+          <tr>
+            <td id="carriculum-name<%= n+1 %>" class="td-1">
+              <%= @user_carriculums[n] %>
+            </td>
+            <td id="absent<%= n+1 %>" class="td-2 absent-count"></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% else %>
+      <tbody>
+      </tbody>
+    <% end %>
+  </table>
+  </div>
 </div>

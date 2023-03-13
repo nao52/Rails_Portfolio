@@ -6,15 +6,9 @@ Rails.application.routes.draw do
   post    "/login",    to: "sessions#create"
   delete  "/logout",   to: "sessions#destroy"
 
-  get     "/seat/show",           to: "static_pages#create_seats"
-  get     "/cleaning_duty/show",  to: "static_pages#cleaning_duties"
-
+  get     "/seat/show",                   to: "static_pages#create_seats"
+  get     "/cleaning_duty/show",          to: "static_pages#cleaning_duties"
   get     "/calc_absent/show",            to: "calc_absents#show"
-  post    "/calc_absent/carriculum",      to: "calc_absents#set_curriculum"
-  post    "/calc_absent/add_carriculum",  to: "calc_absents#set_test_carriculum"
-  post    "/calc_absent/schedule",        to: "calc_absents#schedule"
-  post    "/calc_absent/add_schedule",    to: "calc_absents#set_test_schedule"
-  post    "/calc_absent/calc_absent",     to: "calc_absents#calc_absent"
   post    "/calc_absent/save_schedule",   to: "calc_absents#save_schedule"
 
   resources :users do
