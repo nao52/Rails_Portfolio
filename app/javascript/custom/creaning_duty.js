@@ -6,7 +6,7 @@ document.addEventListener("turbo:load", function() {
       const select = document.createElement('select');
 
       // optionの作成
-      for (let j = 1; j <= numOfOption; j++) {
+      for (let j = 0; j <= numOfOption; j++) {
         const option = document.createElement('option');
         option.value = j;
         option.textContent = j;
@@ -22,6 +22,13 @@ document.addEventListener("turbo:load", function() {
   // 掃除担当場所一覧テーブルを削除する
   function clearCleaningGroups() {
     document.querySelectorAll('.cleaning-duty tbody tr').forEach(tr => {
+      tr.remove();
+    });
+  }
+
+  // 生徒一覧テーブルを削除する
+  function clearStudentListTable() {
+    document.querySelectorAll('.student-list tbody tr').forEach(tr => {
       tr.remove();
     });
   }
@@ -108,6 +115,56 @@ document.addEventListener("turbo:load", function() {
     }
   }
 
+  // 生徒リストテーブルの作成
+  function createStudentsList() {
+    const tbody = document.querySelector('.student-list tbody');
+    const numberOfStudents = calcNumOfStudents();
+    for (let studentNum = 1; studentNum <= numberOfStudents; studentNum++) {
+      const tr = document.createElement('tr');
+
+      const cleaningPlace = document.createElement('td');
+      cleaningPlace.classList.add('td-1');
+      tr.appendChild(cleaningPlace);
+
+      const studentName = document.createElement('td');
+      studentName.classList.add('td-2');
+      const input = document.createElement('input');
+      input.setAttribute('type', 'text');
+      input.setAttribute('value', `生徒${studentNum}`);
+      input.setAttribute('placeholder', '生徒名');
+      studentName.appendChild(input);
+      tr.appendChild(studentName);
+
+      const sex = document.createElement('td');
+      sex.classList.add('td-3');
+      tr.appendChild(sex);
+
+      tbody.appendChild(tr);
+    }
+  }
+
+  // 生徒リストテーブルに値をセット
+  function setStudentsList() {
+    const cleaningPlacesValue = document.querySelectorAll('.cleaning-duty .td-1 input');
+    const boys = document.querySelectorAll('.cleaning-duty .td-2 select');
+    const girls = document.querySelectorAll('.cleaning-duty .td-3 select');
+    const cleaningPlaces = document.querySelectorAll('.student-list .td-1');
+    const sexes = document.querySelectorAll('.student-list .td-3');
+    let tableIndex = 0;
+    for (let placeNum = 0; placeNum < cleaningPlacesValue.length; placeNum++) {
+      for (let i = 0; i < boys[placeNum].value; i++) {
+        cleaningPlaces[tableIndex].textContent = cleaningPlacesValue[placeNum].value;
+        sexes[tableIndex].textContent = '男子';
+        tableIndex++;
+      }
+      for (let i = 0; i < girls[placeNum].value; i++) {
+        cleaningPlaces[tableIndex].textContent = cleaningPlacesValue[placeNum].value;
+        sexes[tableIndex].textContent = '女子';
+        tableIndex++;
+      }
+    }
+  }
+
   const createGroupBtn = document.querySelector('#create-group-btn');
   const numOfStudentsList = document.querySelectorAll('.num-of-students');
   const createStudentListBtn = document.querySelector('#create-student-list-btn');
@@ -127,6 +184,9 @@ document.addEventListener("turbo:load", function() {
   setGirlsNum();
   updateNumOfStudents()
   showSaveCleaningPlaceBtn();
+  if (boysNum.value) {
+    createStudentListBtn.classList.remove('hidden');
+  }
 
   // グループ数が変更されたら、parmams[group-size]の値を変更する
   document.querySelector('#number-of-group').addEventListener('input', () => {
@@ -154,6 +214,17 @@ document.addEventListener("turbo:load", function() {
     select.addEventListener('input', () => {
       setGirlsNum();
     });
+  });
+
+  createStudentListBtn.addEventListener('click', () => {
+    // 生徒リストテーブルを削除
+    clearStudentListTable();
+
+    // 生徒リストテーブルの作成
+    createStudentsList();
+
+    // 生徒リストテーブルに値をセット
+    setStudentsList();
   });
 
   createGroupBtn.addEventListener('click', () => {
@@ -237,154 +308,154 @@ document.addEventListener("turbo:load", function() {
     });
 
     // 生徒リストの作成
-    createStudentListBtn.addEventListener('click', () => {
-      // 生徒名情報の格納
-      const boysName = [];
-      const girlsName = [];
-      document.querySelectorAll('.boysName').forEach( input => {
-        boysName.push(input.value);
-      });
-      document.querySelectorAll('.girlsName').forEach( input => {
-        girlsName.push(input.value);
-      });
+    // createStudentListBtn.addEventListener('click', () => {
+    //   // 生徒名情報の格納
+    //   const boysName = [];
+    //   const girlsName = [];
+    //   document.querySelectorAll('.boysName').forEach( input => {
+    //     boysName.push(input.value);
+    //   });
+    //   document.querySelectorAll('.girlsName').forEach( input => {
+    //     girlsName.push(input.value);
+    //   });
 
-      // table内容の削除
-      const tableContent = document.querySelectorAll('.student-list tbody tr');
-      clearTableContents(tableContent);
+    //   // table内容の削除
+    //   const tableContent = document.querySelectorAll('.student-list tbody tr');
+    //   clearTableContents(tableContent);
 
-      // tableの内容を新しく作成する
-      const numberOfGroup = document.querySelector('#number-of-group');
-      const tbody = document.querySelector('.student-list tbody');
-      let boysIndex = 0;
-      let girlsIndex = 0;
+    //   // tableの内容を新しく作成する
+    //   const numberOfGroup = document.querySelector('#number-of-group');
+    //   const tbody = document.querySelector('.student-list tbody');
+    //   let boysIndex = 0;
+    //   let girlsIndex = 0;
 
-      for (let groupI = 1; groupI <= numberOfGroup.value; groupI++) {
-        const cleaningPlace = document.querySelector(`#cleaning-place${groupI}`);
-        const numOfBoys = document.querySelector(`#num-of-boys${groupI}`);
-        const numOfGirls = document.querySelector(`#num-of-girls${groupI}`);
+    //   for (let groupI = 1; groupI <= numberOfGroup.value; groupI++) {
+    //     const cleaningPlace = document.querySelector(`#cleaning-place${groupI}`);
+    //     const numOfBoys = document.querySelector(`#num-of-boys${groupI}`);
+    //     const numOfGirls = document.querySelector(`#num-of-girls${groupI}`);
 
-        for (let boyI = 1; boyI <= numOfBoys.value; boyI++) {
-          // trの作成
-          const tr = document.createElement('tr');
+    //     for (let boyI = 1; boyI <= numOfBoys.value; boyI++) {
+    //       // trの作成
+    //       const tr = document.createElement('tr');
 
-          // 担当場所によるクラス名の追加
-          if (groupI % 2 === 0) {
-            tr.classList.add('group-even');
-          } else {
-            tr.classList.add('group-odd');
-          }
+    //       // 担当場所によるクラス名の追加
+    //       if (groupI % 2 === 0) {
+    //         tr.classList.add('group-even');
+    //       } else {
+    //         tr.classList.add('group-odd');
+    //       }
 
-          // inputの作成
-          const input = document.createElement('input');
-          input.classList.add('boysName');
-          input.setAttribute('type', 'text');
-          input.setAttribute('placeholder', '生徒名');
+    //       // inputの作成
+    //       const input = document.createElement('input');
+    //       input.classList.add('boysName');
+    //       input.setAttribute('type', 'text');
+    //       input.setAttribute('placeholder', '生徒名');
 
-          // 名前が入力されていた場合はセット
-          if (boysName[boysIndex]) {
-            input.setAttribute('value', boysName[boysIndex]);
-          } else {
-            input.setAttribute('value', `男子生徒${boysIndex+1}`);
-          }
-          boysIndex++;
+    //       // 名前が入力されていた場合はセット
+    //       if (boysName[boysIndex]) {
+    //         input.setAttribute('value', boysName[boysIndex]);
+    //       } else {
+    //         input.setAttribute('value', `男子生徒${boysIndex+1}`);
+    //       }
+    //       boysIndex++;
 
-          // tdの作成、trへの追加
-          const td1 = document.createElement('td');
-          td1.classList.add('td-1');
-          td1.textContent = cleaningPlace.value;
-          tr.appendChild(td1);
-          const td2 = document.createElement('td');
-          td2.classList.add('td-2');
-          td2.appendChild(input);
-          tr.appendChild(td2);
-          const td3 = document.createElement('td');
-          td3.classList.add('td-3');
-          td3.textContent = '男子';
-          tr.appendChild(td3);
+    //       // tdの作成、trへの追加
+    //       const td1 = document.createElement('td');
+    //       td1.classList.add('td-1');
+    //       td1.textContent = cleaningPlace.value;
+    //       tr.appendChild(td1);
+    //       const td2 = document.createElement('td');
+    //       td2.classList.add('td-2');
+    //       td2.appendChild(input);
+    //       tr.appendChild(td2);
+    //       const td3 = document.createElement('td');
+    //       td3.classList.add('td-3');
+    //       td3.textContent = '男子';
+    //       tr.appendChild(td3);
 
-          tbody.appendChild(tr);
-        }
+    //       tbody.appendChild(tr);
+    //     }
 
-        for (let girlI = 1; girlI <= numOfGirls.value; girlI++) {
-          // trの作成
-          const tr = document.createElement('tr');
+    //     for (let girlI = 1; girlI <= numOfGirls.value; girlI++) {
+    //       // trの作成
+    //       const tr = document.createElement('tr');
 
-          // 担当場所によるクラス名の追加
-          if (groupI % 2 === 0) {
-            tr.classList.add('group-even');
-          } else {
-            tr.classList.add('group-odd');
-          }
+    //       // 担当場所によるクラス名の追加
+    //       if (groupI % 2 === 0) {
+    //         tr.classList.add('group-even');
+    //       } else {
+    //         tr.classList.add('group-odd');
+    //       }
 
-          // inputの作成
-          const input = document.createElement('input');
-          input.classList.add('girlsName');
-          input.setAttribute('type', 'text');
-          input.setAttribute('placeholder', '生徒名');
+    //       // inputの作成
+    //       const input = document.createElement('input');
+    //       input.classList.add('girlsName');
+    //       input.setAttribute('type', 'text');
+    //       input.setAttribute('placeholder', '生徒名');
 
-          // 名前が入力されていた場合はセット
-          if (girlsName[girlsIndex]) {
-            input.setAttribute('value', girlsName[girlsIndex]);
-          } else {
-            input.setAttribute('value', `女子生徒${girlsIndex+1}`);
-          }
-          girlsIndex++;
+    //       // 名前が入力されていた場合はセット
+    //       if (girlsName[girlsIndex]) {
+    //         input.setAttribute('value', girlsName[girlsIndex]);
+    //       } else {
+    //         input.setAttribute('value', `女子生徒${girlsIndex+1}`);
+    //       }
+    //       girlsIndex++;
 
-          // tdの作成、trへの追加
-          const td1 = document.createElement('td');
-          td1.classList.add('td-1');
-          td1.textContent = cleaningPlace.value;
-          tr.appendChild(td1);
-          const td2 = document.createElement('td');
-          td2.classList.add('td-2');
-          td2.appendChild(input);
-          tr.appendChild(td2);
-          const td3 = document.createElement('td');
-          td3.classList.add('td-3');
-          td3.textContent = '女子';
-          tr.appendChild(td3);
+    //       // tdの作成、trへの追加
+    //       const td1 = document.createElement('td');
+    //       td1.classList.add('td-1');
+    //       td1.textContent = cleaningPlace.value;
+    //       tr.appendChild(td1);
+    //       const td2 = document.createElement('td');
+    //       td2.classList.add('td-2');
+    //       td2.appendChild(input);
+    //       tr.appendChild(td2);
+    //       const td3 = document.createElement('td');
+    //       td3.classList.add('td-3');
+    //       td3.textContent = '女子';
+    //       tr.appendChild(td3);
 
-          tbody.appendChild(tr);
-        }
-      }
+    //       tbody.appendChild(tr);
+    //     }
+    //   }
 
-      // シャッフルボタンの表示
-      document.querySelector('.student-list-btn').classList.remove('hidden');
+    //   // シャッフルボタンの表示
+    //   document.querySelector('.student-list-btn').classList.remove('hidden');
 
-      // 男子生徒のシャッフル
-      shuffleBoysBtn.addEventListener('click', () => {
-        const boysNameArray = [];
-        const boysInput = document.querySelectorAll('.boysName');
-        boysInput.forEach(input => {
-          boysNameArray.push(input.value);
-        });
-        const shuffledNamesArray = shuffle(boysNameArray);
-        for (let i = 0; i < boysInput.length; i++) {
-          boysInput[i].value = shuffledNamesArray[i];
-        }
-      });
+    //   // 男子生徒のシャッフル
+    //   shuffleBoysBtn.addEventListener('click', () => {
+    //     const boysNameArray = [];
+    //     const boysInput = document.querySelectorAll('.boysName');
+    //     boysInput.forEach(input => {
+    //       boysNameArray.push(input.value);
+    //     });
+    //     const shuffledNamesArray = shuffle(boysNameArray);
+    //     for (let i = 0; i < boysInput.length; i++) {
+    //       boysInput[i].value = shuffledNamesArray[i];
+    //     }
+    //   });
 
-      // 女子生徒のシャッフル
-      shuffleGirlsBtn.addEventListener('click', () => {
-        const girlsNameArray = [];
-        const girlsInput = document.querySelectorAll('.girlsName');
-        girlsInput.forEach(input => {
-          girlsNameArray.push(input.value);
-        });
-        const shuffledNamesArray = shuffle(girlsNameArray);
-        for (let i = 0; i < girlsInput.length; i++) {
-          girlsInput[i].value = shuffledNamesArray[i];
-        }
-      });
+    //   // 女子生徒のシャッフル
+    //   shuffleGirlsBtn.addEventListener('click', () => {
+    //     const girlsNameArray = [];
+    //     const girlsInput = document.querySelectorAll('.girlsName');
+    //     girlsInput.forEach(input => {
+    //       girlsNameArray.push(input.value);
+    //     });
+    //     const shuffledNamesArray = shuffle(girlsNameArray);
+    //     for (let i = 0; i < girlsInput.length; i++) {
+    //       girlsInput[i].value = shuffledNamesArray[i];
+    //     }
+    //   });
 
-      // 生徒名のクリア
-      clearNamesBtn.addEventListener('click', () => {
-        const studentNames = document.querySelectorAll('.student-list tbody input');
-        for (let i = 0; i < studentNames.length; i++) {
-          studentNames[i].value = '';
-        }
-      });
-    });
+    //   // 生徒名のクリア
+    //   clearNamesBtn.addEventListener('click', () => {
+    //     const studentNames = document.querySelectorAll('.student-list tbody input');
+    //     for (let i = 0; i < studentNames.length; i++) {
+    //       studentNames[i].value = '';
+    //     }
+    //   });
+    // });
 
   });
 
