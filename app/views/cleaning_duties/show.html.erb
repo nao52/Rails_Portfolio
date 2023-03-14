@@ -20,6 +20,7 @@
       <button id="shuffle-boys">男子生徒のシャッフル</button>
       <button id="shuffle-girls">女子生徒のシャッフル</button>
       <button id="clear-names">生徒名のクリア</button>
+
     </div>
 
     <div class="cleaning-duty">
@@ -55,14 +56,7 @@
 
       <button id="create-student-list-btn" class="hidden">生徒リストを作成する</button>
 
-      <%= form_with model: @cleaning_place, url: cleaning_duty_save_place_path do |f| %>
-        <%= f.hidden_field :group_size, value: "" %>
-        <%= f.hidden_field :name, value: "" %>
-        <%= f.hidden_field :boys_num, value: "" %>
-        <%= f.hidden_field :girls_num, value: "" %>
-
-        <%= f.submit "グループ情報を保存する (ログイン時のみ有効) ", id: "save-cleaning-place", class: "button hidden" %>
-      <% end %>
+      <%= render 'save_cleaning_duty' %>
     </div>
 
   </section>

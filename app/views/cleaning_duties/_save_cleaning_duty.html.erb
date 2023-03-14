@@ -1,0 +1,8 @@
+<%= form_with model: @cleaning_place, url: cleaning_duty_save_place_path do |f| %>
+  <%= f.hidden_field :group_size, value: "" %>
+  <%= f.hidden_field :name, value: "" %>
+  <%= f.hidden_field :boys_num, value: "" %>
+  <%= f.hidden_field :girls_num, value: "" %>
+
+  <%= f.submit "グループ情報を保存する (ログイン時のみ有効) ", id: "save-cleaning-place", class: "button hidden" %>
+<% end %>
