@@ -637,7 +637,9 @@ aside {
 .student-list-btn button,
 .class-schedule .button,
 .calc-absent button,
-.class-schedule button {
+.class-schedule button,
+.cleaning-duty .button
+ {
   all:unset;
   width: 100%;
   background: #08c;
@@ -757,11 +759,23 @@ aside {
       background: #FFFFDD;
     }
   }
+  form {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    input {
+      margin: 20px 0 0;
+      width: 100%;
+    }
+  }
   .hidden {
     display: none;
   }
 }
 .student-list-btn {
+  border: 1px solid #ddd;
+  margin-top: 30px;
+  padding: 0 10px 10px;
   h3 {
     margin-top: 36px;
     padding: 16px;
@@ -855,6 +869,7 @@ aside {
     }
   }
 }
+
 .hidden {
   display: none;
 }

@@ -8,10 +8,19 @@
       <h2>グループ(掃除担当場所)の作成</h2>
       <label>
         グループ数
-        <%= select_tag "number-of-group", options_for_select(1..10, 4)  %>
+        <% @group_size = logged_in? ? @cleaning_places.length : 4 %>
+        <%= select_tag "number-of-group", options_for_select(1..10, @group_size)  %>
       </label>
 
       <button id="create-group-btn">グループを作成する</button>
+    </div>
+
+    <div class="student-list-btn hidden">
+      <h3>生徒リストに関する操作</h3>
+      <button id="shuffle-boys">男子生徒のシャッフル</button>
+      <button id="shuffle-girls">女子生徒のシャッフル</button>
+      <button id="clear-names">生徒名のクリア</button>
+
     </div>
 
     <div class="cleaning-duty">
@@ -27,18 +36,29 @@
           </tr>
         </thead>
         <tbody>
+          <% if logged_in? && @cleaning_places.length > 0 %>
+            <% @cleaning_places.length.times do |n| %>
+              <tr>
+                <td class="td-1">
+                  <%= text_field_tag "cleaning-place#{n+1}", @cleaning_places[n].name, placeholder: "掃除担当場所" %>
+                </td>
+                <td class="td-2">
+                  <%= select_tag "num-of-boys#{n+1}", options_for_select(0..10, @cleaning_places[n].boys_num) %>
+                </td>
+                <td class="td-3">
+                  <%= select_tag "num-of-girls#{n+1}", options_for_select(0..10, @cleaning_places[n].girls_num) %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
         </tbody>
       </table>
 
       <button id="create-student-list-btn" class="hidden">生徒リストを作成する</button>
+
+      <%= render 'save_cleaning_duty' %>
     </div>
 
-    <div class="student-list-btn hidden">
-      <h3>生徒リストに関する操作</h3>
-      <button id="shuffle-boys">男子生徒のシャッフル</button>
-      <button id="shuffle-girls">女子生徒のシャッフル</button>
-      <button id="clear-names">生徒名のクリア</button>
-    </div>
   </section>
 
   <div class="student-list">
