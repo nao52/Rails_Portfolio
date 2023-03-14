@@ -773,6 +773,9 @@ aside {
   }
 }
 .student-list-btn {
+  border: 1px solid #ddd;
+  margin-top: 30px;
+  padding: 0 10px 10px;
   h3 {
     margin-top: 36px;
     padding: 16px;
@@ -866,6 +869,7 @@ aside {
     }
   }
 }
+
 .hidden {
   display: none;
 }

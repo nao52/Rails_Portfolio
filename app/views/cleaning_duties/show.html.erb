@@ -15,6 +15,13 @@
       <button id="create-group-btn">グループを作成する</button>
     </div>
 
+    <div class="student-list-btn hidden">
+      <h3>生徒リストに関する操作</h3>
+      <button id="shuffle-boys">男子生徒のシャッフル</button>
+      <button id="shuffle-girls">女子生徒のシャッフル</button>
+      <button id="clear-names">生徒名のクリア</button>
+    </div>
+
     <div class="cleaning-duty">
       <table>
         <thead>
@@ -56,15 +63,8 @@
 
         <%= f.submit "グループ情報を保存する (ログイン時のみ有効) ", id: "save-cleaning-place", class: "button hidden" %>
       <% end %>
-      
     </div>
 
-    <div class="student-list-btn hidden">
-      <h3>生徒リストに関する操作</h3>
-      <button id="shuffle-boys">男子生徒のシャッフル</button>
-      <button id="shuffle-girls">女子生徒のシャッフル</button>
-      <button id="clear-names">生徒名のクリア</button>
-    </div>
   </section>
 
   <div class="student-list">
