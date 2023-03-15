@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
-  create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -33,13 +33,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb3", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "book_favorites", charset: "utf8mb3", force: :cascade do |t|
+  create_table "book_favorites", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "reference_book_id", null: false
     t.datetime "created_at", null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_book_favorites_on_user_id"
   end
 
-  create_table "book_reviews", charset: "utf8mb3", force: :cascade do |t|
+  create_table "book_reviews", charset: "utf8", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
     t.bigint "reference_book_id", null: false
@@ -59,13 +59,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_book_reviews_on_user_id"
   end
 
-  create_table "carriculums", charset: "utf8mb3", force: :cascade do |t|
+  create_table "carriculums", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cleaning_places", charset: "utf8mb3", force: :cascade do |t|
+  create_table "cleaning_places", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.integer "boys_num"
     t.integer "girls_num"
@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_cleaning_places_on_user_id"
   end
 
-  create_table "club_posts", charset: "utf8mb3", force: :cascade do |t|
+  create_table "club_posts", charset: "utf8", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
     t.bigint "club_id", null: false
@@ -86,13 +86,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_club_posts_on_user_id"
   end
 
-  create_table "clubs", charset: "utf8mb3", force: :cascade do |t|
+  create_table "clubs", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "kinds_of_school_posts", charset: "utf8mb3", force: :cascade do |t|
+  create_table "kinds_of_school_posts", charset: "utf8", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
     t.bigint "kinds_of_school_id", null: false
@@ -103,13 +103,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_kinds_of_school_posts_on_user_id"
   end
 
-  create_table "kinds_of_schools", charset: "utf8mb3", force: :cascade do |t|
+  create_table "kinds_of_schools", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "participations", charset: "utf8mb3", force: :cascade do |t|
+  create_table "participations", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "private_group_id", null: false
     t.datetime "created_at", null: false
@@ -118,7 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
-  create_table "private_group_posts", charset: "utf8mb3", force: :cascade do |t|
+  create_table "private_group_posts", charset: "utf8", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
     t.bigint "private_group_id", null: false
@@ -129,7 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_private_group_posts_on_user_id"
   end
 
-  create_table "private_groups", charset: "utf8mb3", force: :cascade do |t|
+  create_table "private_groups", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "detail"
     t.bigint "user_id", null: false
@@ -138,7 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_private_groups_on_user_id"
   end
 
-  create_table "publishers", charset: "utf8mb3", force: :cascade do |t|
+  create_table "publishers", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -146,7 +146,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_publishers_on_user_id"
   end
 
-  create_table "reference_books", charset: "utf8mb3", force: :cascade do |t|
+  create_table "reference_books", charset: "utf8", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.bigint "user_id", null: false
@@ -160,7 +160,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_reference_books_on_user_id"
   end
 
-  create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
+  create_table "relationships", charset: "utf8", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", null: false
@@ -170,7 +170,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "subject_posts", charset: "utf8mb3", force: :cascade do |t|
+  create_table "subject_posts", charset: "utf8", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
     t.bigint "subject_id", null: false
@@ -181,13 +181,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["user_id"], name: "index_subject_posts_on_user_id"
   end
 
-  create_table "subjects", charset: "utf8mb3", force: :cascade do |t|
+  create_table "subjects", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", charset: "utf8mb3", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "profile"
@@ -204,7 +204,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["subject_id"], name: "index_users_on_subject_id"
   end
 
-  create_table "worksheet_favorites", charset: "utf8mb3", force: :cascade do |t|
+  create_table "worksheet_favorites", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "worksheet_id", null: false
     t.datetime "created_at", null: false
@@ -213,7 +213,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_011701) do
     t.index ["worksheet_id"], name: "index_worksheet_favorites_on_worksheet_id"
   end
 
-  create_table "worksheets", charset: "utf8mb3", force: :cascade do |t|
+  create_table "worksheets", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.text "detail"
     t.bigint "user_id", null: false
