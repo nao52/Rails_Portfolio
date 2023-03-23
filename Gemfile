@@ -6,8 +6,9 @@ gem "image_processing",           "1.12.2"
 gem "active_storage_validations", "0.9.8"
 gem "bcrypt",                     "3.1.18"
 gem "kaminari"
-gem "bootstrap-sass",             "3.4.1"
-gem "sassc-rails",                "2.1.2"
+gem 'sass-rails',                 '>= 3.2'
+gem 'bootstrap-sass',             '~> 3.3.6'
+gem 'sassc',                      '2.1.0'
 gem "sprockets-rails",            "3.4.2"
 gem "importmap-rails",            "1.1.0"
 gem "turbo-rails",                "1.1.1"
@@ -46,5 +47,6 @@ group :test do
 end
 
 group :production do
-  gem "pg", "1.3.5"
+  gem "mysql2"
+  gem 'unicorn'
 end
