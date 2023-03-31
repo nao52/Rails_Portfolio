@@ -1,0 +1,22 @@
+name: Deploy with Capistrano
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: deploy
+        uses: miloserdow/capistrano-deploy@v3
+        with:
+          target: development
+          deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
