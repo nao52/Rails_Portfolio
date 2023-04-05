@@ -18,5 +18,5 @@ jobs:
       - name: deploy
         uses: miloserdow/capistrano-deploy@v3
         with:
-          target: development
+          target: production
           deploy_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
