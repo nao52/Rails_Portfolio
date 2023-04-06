@@ -52,4 +52,5 @@ group :production do
   gem 'capistrano-rbenv', '~> 2.2'
   gem 'capistrano-rbenv-vars', '~> 0.1'
   gem 'capistrano3-puma'
+  gem "aws-sdk-s3", "1.114.0", require: false
 end
