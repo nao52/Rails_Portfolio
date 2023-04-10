@@ -1,4 +1,4 @@
-FROM nginx:1.23
+FROM nginx:latest
 
 # デフォルトで用意されている個別設定ファイルを削除
 RUN rm -f /etc/nginx/conf.d/*
