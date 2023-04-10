@@ -3,12 +3,14 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: <%= Rails.application.credentials.db[:password] %>
+  password: password
 
 development:
   <<: *default
-  database: mysql_development
-  host: localhost
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  database: development
+  host: db
 
 test:
   adapter: sqlite3
