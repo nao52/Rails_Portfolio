@@ -5,6 +5,7 @@ ENV APP_ROOT /app
 ENV BUNDLE_JOBS 4
 ENV BUNDLER_VERSION 2.3.26
 # ENV BUNDLER_VERSION 2.2.25
+ENV RAILS_ENV=production
 
 RUN mkdir $APP_ROOT
 WORKDIR $APP_ROOT
@@ -24,6 +25,9 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 # EXPOSE 3000
+
+VOLUME $APP_ROOT/public
+VOLUME $APP_ROOT/tmp
 
 # 起動の度にデフォルトでrails sする（entrypoint.shに持たせても良い）
 CMD ["sh", "./docker/web/start-server.sh"]
